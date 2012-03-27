@@ -4,9 +4,6 @@ def get_panel_section(request):
 	path = request.path.strip('/').split('/')
 	
 	if len(path) > 0 and path[0] == 'panel':
-		if not request.user.is_superuser:
-			return ["login-page"]
-			
 		if len(path) == 1:
 			return ["index"]
 		else:
