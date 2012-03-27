@@ -1,0 +1,36 @@
+/* ADMIN PANEL CSS GLOBAL TEMPLATE */
+
+{% include "css-reset.css" %}
+
+/* GLOBAL */
+
+	body {
+	}
+
+	#page-container {
+		width: 960px;
+		margin-left: auto;
+		margin-right: auto;
+		
+		border-left: 10px solid rgb
+	}
+	
+	#header {
+		background-color: rgb(39, 78, 98);
+		padding: 20px;
+		overflow: hidden;
+	}
+	
+	#header .title1,
+	#header .title2 {
+		color: white;
+		font-size: 24px;
+		font-family: sans-serif;
+		float: left;
+		width: 400px
+	}
+	
+	#header .title2 {
+		float: right;
+		text-align: right;
+	}
