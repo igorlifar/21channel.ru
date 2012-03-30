@@ -11,8 +11,8 @@ from urllib import quote, unquote
 
 def create_episode(request):
 	try:
-		values = []
-		errors = []
+		values = {}
+		errors = {}
 		data = {}
 		evaluate_char_field(request, "title", 1000, data, values, errors)
 		evaluate_char_field(request, "description", 10000, data, values, errors)
@@ -60,8 +60,8 @@ def update_episode(request):
 			episodes = Episode.objects.filter(id = episodeid)
 			if episodes.count() != 0:
 				episode = episodes[0]
-				values = []
-				errors = []
+				values = {}
+				errors = {}
 				data = {}
 				evaluate_char_field(request, "title", 1000, data, values, errors)
 				evaluate_char_field(request, "description", 10000, data, values, errors)
@@ -89,6 +89,6 @@ def update_episode(request):
 						episode.save()
 						return redirect(request.POST["redirect_good_url"])
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
-		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : [], "errors" : ["episodeid"]})))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"episodeid" : True}})))
 	except:
 		return redirect("/")

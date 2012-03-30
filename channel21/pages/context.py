@@ -28,11 +28,11 @@ def get_panel_context(s, request):
 				
 				if s[1] == 'edit':
 					res["news_item"] = NewsItem.objects.get(id=s[2])
-					
+				'''	
 				if 'formstate' in request.GET:
 					try:
 						f = json.loads(request.GET["formstate"])
-						
+				'''		
 			
 		if s[0] == 'episodes':
 			if len(s) >= 2:

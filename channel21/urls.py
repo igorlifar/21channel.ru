@@ -20,6 +20,9 @@ urlpatterns = patterns('',
 	url(r'^panel/shows/edit/send/$', 'shows.views.update_show'),
 	
 	url(r'^panel/archive/delete/$', 'archive.views.delete_archive'),
+	url(r'^panel/archive/edit/edit-archive/$', 'archive.views.update_archive'),
+	url(r'^panel/archive/edit/delete-episode/$', 'archive.views.delete_episode_from_archive'),
+	url(r'^panel/archive/edit/add-episode/$', 'archive.views.add_episode_to_archive'),
 	
 	url(r'^styles/', include('styles.urls')),
 	url(r'^scripts/', include('scripts.urls')),

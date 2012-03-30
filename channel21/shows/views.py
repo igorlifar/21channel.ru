@@ -12,8 +12,8 @@ from urllib import quote, unquote
 
 def create_show(request):
 	try:
-		values = []
-		errors = []
+		values = {}
+		errors = {}
 		data = {}
 		evaluate_char_field(request, "title", 1000, data, values, errors)
 		evaluate_char_field(request, "schedule", 1000, data, values, errors)
@@ -52,8 +52,8 @@ def update_show(request):
 			shows = Show.objects.filter(id = showid)
 			if shows.count() != 0:
 				show = shows[0]
-				values = []
-				errors = []
+				values = {}
+				errors = {}
 				data = {}
 				evaluate_char_field(request, "title", 1000, data, values, errors)
 				evaluate_char_field(request, "schedule", 1000, data, values, errors)
@@ -68,9 +68,14 @@ def update_show(request):
 						if background_change == "delete" and show.background.__nonzero__():
 							show.background.delete()
 						if background_change == "new_background" and "new_background" in request.FILES:
-							show.load_image(request.FILES["new_background"])
+							try:
+								show.load_image(request.FILES["new_background"])
+								errors["new_background"] = False
+							except:
+								errors["new_background"] = True
+								return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 					return redirect(request.POST["redirect_good_url"])
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
-		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : [], "errors" : ["showid"]})))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"showid" : True}})))
 	except:
 		return redirect("/")
