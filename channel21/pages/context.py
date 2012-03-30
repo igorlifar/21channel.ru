@@ -4,8 +4,10 @@ from shows.models import Show
 from archive.models import Archive
 from urllib import unquote
 import json
+from django.http import Http404
 
 def get_panel_context(s, request):
+
 	res = {
 		"static": "/static_files/"
 	}
@@ -29,9 +31,14 @@ def get_panel_context(s, request):
 				if s[1] == 'edit':
 					res["news_item"] = NewsItem.objects.get(id=s[2])
 					
-				if 'formstate' in request.GET:
-					try:
-						f = json.loads(request.GET["formstate"])
+				if s[1] == 'add':
+					if 'formstate' in request.GET:
+						try:
+							res["er"] = True
+							res["fs"] = json.loads(unquote(request.GET['formstate']))
+						except:
+							raise Http404
+					
 						
 			
 		if s[0] == 'episodes':
