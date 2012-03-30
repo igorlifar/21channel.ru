@@ -20,14 +20,14 @@ def create_show(request):
 		evaluate_char_field(request, "description", 10000, data, values, errors)
 		if len(data) == 3:
 			newshow = Show.objects.create(title = data["title"], schedule = data["schedule"], description = data["description"])
-			newshow.save()
 			values["background"] = False
+			errors["background"] = False
 			if "background" in request.FILES:
 				values["background"] = True
 				try:
 					newshow.load_image(request.FILES["background"])
-					errors["background"] = False
 				except:
+					newshow.delete()
 					errors["background"] = True
 					return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 			return redirect(request.POST["redirect_good_url"])
@@ -70,17 +70,23 @@ def update_show(request):
 					show.schedule = data["schedule"]
 					show.description = data["description"]
 					show.save()
+					errors["background_change"] = False
 					if "background_change" in request.POST:
 						background_change = request.POST["background_change"]
+						values["background_change"] = background_change
 						if background_change == "delete" and show.background.__nonzero__():
 							show.background.delete()
+						values["new_background"] = False
+						errors["new_background"] = False
 						if background_change == "new_background" and "new_background" in request.FILES:
+							values["new_background"] = True
 							try:
 								show.load_image(request.FILES["new_background"])
-								errors["new_background"] = False
 							except:
 								errors["new_background"] = True
 								return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
+					else:
+						errors["background_change"] = True
 					return redirect(request.POST["redirect_good_url"])
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"showid" : True}})))
