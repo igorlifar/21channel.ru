@@ -2,9 +2,13 @@
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/news-list.html' %}
 	{% endif %}
+	
 	{% if s.1 == 'edit' %}
 		{% include 'panel/content/news-edit.html' %}
 	{% endif %}
+	
+	{% if s.1 == 'add' %}
+		{% include 'panel/content/news-add.html' %}
 {%  endif %}
 
 {% if s.0 == 'episodes' %}
