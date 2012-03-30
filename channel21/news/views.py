@@ -19,8 +19,8 @@ def create_news_item(request):
 		evaluate_char_field(request, "text", 10000, data, values, errors)
 		errors["image"] = False
 		values["image_change"] = "no"
-		if "image" in request.FILES:
-			values["image_change"] = "image"
+		if "image_change" in request.POST:
+			values["image_change"] = request.POST["image_change"]
 		if len(data) == 3:
 			newItem = NewsItem.objects.create(title = data["title"], preview = data["preview"], text = data["text"])
 			if "image" in request.FILES:

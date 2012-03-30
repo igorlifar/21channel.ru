@@ -19,8 +19,8 @@ def create_show(request):
 		evaluate_char_field(request, "schedule", 1000, data, values, errors)
 		evaluate_char_field(request, "description", 10000, data, values, errors)
 		values["background_change"] = "no"
-		if "background" in request.FILES:
-			values["background_change"] = "background"
+		if "background_change" in request.POST:
+			values["background_change"] = request.POST["background_change"]
 		errors["background"] = False	
 		if len(data) == 3:
 			newshow = Show.objects.create(title = data["title"], schedule = data["schedule"], description = data["description"])
