@@ -1,7 +1,7 @@
 <form class="form-horizontal" action="/panel/episodes/edit/send/" method="POST">
 	{% csrf_token %}
+	<legend>Редактирование эпизода</legend>
 	<fieldset>
-		<legend>Редактирование эпизода</legend>
 		{% csrf_token %}
 		<input type="hidden" name="episodeid" value="{{ episode.id }}">
 		<input type="hidden" name="redirect_good_url" value="/panel/episodes/edit/{{ episode.id }}/">

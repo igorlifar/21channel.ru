@@ -1,0 +1,53 @@
+<form class="form-horizontal" action="/panel/news/add/send/" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+	<legend>Добавление новости</legend>
+	<fieldset>
+		{% csrf_token %}
+		<div class="control-group">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Анонс</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="preview" style="height: 80px;"></textarea>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">Полный текст</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="text" style="height:190px;"></textarea>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Изображение</label>
+			<div class="controls">
+				<label class="radio"><input type="radio" name="image_change" value="no" checked>Не добавлять изображение</label>
+				<label class="radio"><input type="radio" name="image_change" value="new_image">Добавить изображение</label>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("input[type=radio]").change(function() {
+					if ($(this).val() == "new_image") {
+						$("#new-image").fadeIn();
+					} else {
+						$("#new-image").fadeOut();
+					}
+				});
+			});
+		</script>
+		<div class="control-group" id="new-image" style="display: none;">
+			<label class="control-label">Новое изображение</label>
+			<div class="controls">
+				<input type="file" name="new_image">
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Добавить</button>
+	</div>
+</form>
