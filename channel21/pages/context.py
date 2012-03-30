@@ -2,6 +2,8 @@ from news.models import NewsItem
 from episodes.models import Episode
 from shows.models import Show
 from archive.models import Archive
+from urllib import unquote
+import json
 
 def get_panel_context(s, request):
 	res = {
@@ -26,6 +28,11 @@ def get_panel_context(s, request):
 				
 				if s[1] == 'edit':
 					res["news_item"] = NewsItem.objects.get(id=s[2])
+					
+				if 'formstate' in request.GET:
+					try:
+						f = json.loads(request.GET["formstate"])
+						
 			
 		if s[0] == 'episodes':
 			if len(s) >= 2:
