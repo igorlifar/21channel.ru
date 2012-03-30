@@ -123,7 +123,7 @@ INSTALLED_APPS = (
     'news',
     'archive',
     'shows',
-    'episodes'
+    'episodes',
     'styles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
