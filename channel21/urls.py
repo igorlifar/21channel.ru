@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 	
 	url(r'^panel/shows/delete/$', 'shows.views.delete_show'),
 	url(r'^panel/shows/edit/send/$', 'shows.views.update_show'),
+	url(r'^panel/shows/add/send/$', 'shows.views.create_show'),
 	
 	url(r'^panel/archive/delete/$', 'archive.views.delete_archive'),
 	url(r'^panel/archive/edit/edit-archive/$', 'archive.views.update_archive'),

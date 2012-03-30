@@ -1,0 +1,55 @@
+<form class="form-horizontal" action="/panel/shows/add/send/" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Добавление шоу</legend>
+		<input type="hidden" name="redirect_good_url" value="/panel/shows/list/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/shows/add/">
+		<div class="control-group">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Описание</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="description" style="height: 80px;"></textarea>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">Расписание</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="schedule">
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">Задний фон</label>
+			<div class="controls">
+				<label class="radio"><input type="radio" name="background_change" value="no" checked>Не добавлять фон</label>
+				<label class="radio"><input type="radio" name="background_change" value="background">Загрузить фон</label>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("input[type=radio]").change(function() {
+					if ($(this).val() == "background") {
+						$("#background").fadeIn();
+					} else {
+						$("#background").fadeOut();
+					}
+				});
+			});
+		</script>
+		<div class="control-group" id="background" style="display: none;">
+			<label class="control-label">Фон</label>
+			<div class="controls">
+				<input type="file" name="background">
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Редактировать</button>
+	</div>
+</form>
