@@ -1,7 +1,7 @@
 <form class="form-horizontal" action="/panel/news/edit/send/" method="POST" enctype="multipart/form-data">
 	{% csrf_token %}
+	<legend>Редактирование новости</legend>
 	<fieldset>
-		<legend>Редактирование новости</legend>
 		{% csrf_token %}
 		<input type="hidden" name="newsid" value="{{ news_item.id }}">
 		<input type="hidden" name="redirect_good_url" value="/panel/news/edit/{{ news_item.id }}/">
@@ -30,7 +30,7 @@
 		<div class="control-group">
 			<label class="control-label">Изображение</label>
 			<div class="controls">
-				<div class="thumbnail"><img src="/media_files/{{ news_item.image }}"></div>
+				<div class="thumbnail" style="display: inline-block;"><img src="/media_files/{{ news_item.image }}"></div>
 			</div>
 		</div>
 		<div class="control-group">
