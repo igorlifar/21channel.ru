@@ -49,6 +49,11 @@ def get_panel_context(s, request):
 				if s[1] == 'list':
 					res["archives"] = Archive.objects.all()
 					
+				if s[1] == 'edit':
+					res["archive"] = Archive.objects.get(id = s[2])
+					res["episodesinarchive"] = res["archive"].episodes.all()
+					res["episodes"] = Episode.objects.all()
+					
 	return res
 	
 def get_site_context(section, request):
