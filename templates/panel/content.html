@@ -19,6 +19,9 @@
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/shows-list.html' %}
 	{% endif %}
+	{% if s.1 == 'edit' %}
+		{% include 'panel/content/shows-edit.html' %}
+	{% endif %}
 {% endif %}
 {% if s.0 == 'archive' %}
 	{% if s.1 == 'list' %}
