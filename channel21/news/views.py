@@ -19,14 +19,14 @@ def create_news_item(request):
 		evaluate_char_field(request, "text", 10000, data, values, errors)
 		if len(data) == 3:
 			newItem = NewsItem.objects.create(title = data["title"], preview = data["preview"], text = data["text"])
-			newItem.save()
 			values["image"] = False
+			errors["image"] = False
 			if "image" in request.FILES:
 				values["image"] = True
 				try:
 					newItem.load_image(request.FILES["image"])
-					errors["image"] = False
 				except:
+					newItem.delete()
 					errors["image"] = True
 					return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 			return redirect(request.POST["redirect_good_url"])
