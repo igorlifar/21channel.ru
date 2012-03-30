@@ -18,12 +18,12 @@ def create_show(request):
 		evaluate_char_field(request, "title", 1000, data, values, errors)
 		evaluate_char_field(request, "schedule", 1000, data, values, errors)
 		evaluate_char_field(request, "description", 10000, data, values, errors)
+		values["background_change"] = "no"
+		errors["background"] = False	
 		if len(data) == 3:
 			newshow = Show.objects.create(title = data["title"], schedule = data["schedule"], description = data["description"])
-			values["background"] = False
-			errors["background"] = False
 			if "background" in request.FILES:
-				values["background"] = True
+				values["background"] = "background"
 				try:
 					newshow.load_image(request.FILES["background"])
 				except:
@@ -65,21 +65,19 @@ def update_show(request):
 				evaluate_char_field(request, "title", 1000, data, values, errors)
 				evaluate_char_field(request, "schedule", 1000, data, values, errors)
 				evaluate_char_field(request, "description", 10000, data, values, errors)
+				values["background_change"] = "no"
+				errors["new_background"] = False
 				if len(data) == 3:
 					show.title = data["title"]
 					show.schedule = data["schedule"]
 					show.description = data["description"]
 					show.save()
-					errors["background_change"] = False
 					if "background_change" in request.POST:
 						background_change = request.POST["background_change"]
 						values["background_change"] = background_change
 						if background_change == "delete" and show.background.__nonzero__():
 							show.background.delete()
-						values["new_background"] = False
-						errors["new_background"] = False
 						if background_change == "new_background" and "new_background" in request.FILES:
-							values["new_background"] = True
 							try:
 								show.load_image(request.FILES["new_background"])
 							except:
