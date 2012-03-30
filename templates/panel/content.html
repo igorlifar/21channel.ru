@@ -2,7 +2,11 @@
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/news-list.html' %}
 	{% endif %}
+	{% if s.1 == 'edit' %}
+		{% include 'panel/content/news-edit.html' %}
+	{% endif %}
 {%  endif %}
+
 {% if s.0 == 'episodes' %}
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/episodes-list.html' %}

@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 	url(r'^panel/logout/', 'profiles.views.logout_panel'),
 	
 	url(r'^panel/news/delete/$', 'news.views.delete_news_item'),
+	url(r'^panel/news/edit/send/$', 'news.views.edit_news_item'),
 	
 	url(r'^panel/episodes/delete/$', 'episodes.views.delete_episode'),
 	
@@ -17,12 +18,12 @@ urlpatterns = patterns('',
 	
 	url(r'^panel/archive/delete/$', 'archive.views.delete_archive'),
 	
-    url(r'^styles/', include('styles.urls')),
-    url(r'^scripts/', include('scripts.urls')),
+	url(r'^styles/', include('styles.urls')),
+	url(r'^scripts/', include('scripts.urls')),
     
-    url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': '/home/sankear/work/21channel.ru-2/21channel.ru/static/' }),
-    url(r'^media_files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/home/sankear/work/21channel.ru-2/21channel.ru/media/' }),
+	url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': '/home/gasya/Documents/21channel.ru/static/' }),
+	url(r'^media_files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/home/gasya/Documents/21channel.ru/media/' }),
     
-    url(r'^django-admin/', include(admin.site.urls)),
-    url(r'', include('pages.urls')),
+	url(r'^django-admin/', include(admin.site.urls)),
+	url(r'', include('pages.urls')),
 )

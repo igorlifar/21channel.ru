@@ -23,6 +23,9 @@ def get_panel_context(s, request):
 			if len(s) >= 2:
 				if s[1] == 'list':
 					res["news"] = NewsItem.objects.all()
+				
+				if s[1] == 'edit':
+					res["news_item"] = NewsItem.objects.get(id=s[2])
 			
 		if s[0] == 'episodes':
 			if len(s) >= 2:
