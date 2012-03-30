@@ -1,0 +1,34 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Заголовок</th>
+			<th>Описание</th>
+			<th>Шоу</th>
+			<th>Действия</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for m in episodes %}
+			<tr>
+				<td>{{ m.title }}</td>
+				<td>{{ m.description }}</td>
+				<td>
+					{% if m.show != None %}
+						<a href="/panel/shows/edit/{{ m.show.id }}/">{{ m.show.title }}</a>
+					{% else %}
+						-
+					{% endif %}
+				</td>
+				<td style="width: 200px;">
+					<a href="/panel/episodes/edit/{{ m.id }}/" class="btn">Редактировать</a>
+					<form style="display: inline-block;" action="/panel/episodes/delete/" method="POST">
+						{% csrf_token %}
+						<input type="hidden" name="episodeid" value="{{ m.id }}">
+						<input type="hidden" name="redirect_url" value="/panel/episodes/list/">
+						<button type="submit" class="btn btn-danger">Удалить</button>
+					</form>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

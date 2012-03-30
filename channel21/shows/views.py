@@ -1,4 +1,5 @@
 from shows.models import *
+from episodes.models import *
 from utils.views import *
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -32,10 +33,13 @@ def delete_show(request):
 			showid = int(request.POST["showid"])
 			shows = Show.objects.filter(id = showid)
 			if shows.count() != 0:
-				show = shows[0]
-				if show.background.__nonzero__():
-					show.background.delete()
-				show.delete()
+				cshow = shows[0]
+				for episode in Episode.objects.filter(show = cshow):
+					episode.show = None
+					episode.save()
+				if cshow.background.__nonzero__():
+					cshow.background.delete()
+				cshow.delete()
 		return redirect(request.POST["redirect_url"])
 	except:
 		return redirect("/")

@@ -26,14 +26,13 @@ def create_archive(request):
 def delete_archive(request):
 	try:
 		if "archiveid" in request.POST:
-			archiveid = int(requst.POST["archiveid"])
+			archiveid = int(request.POST["archiveid"])
 			archives = Archive.objects.filter(id = archiveid)
 			if archives.count() != 0:
 				archive = archives[0]
 				archive.episodes.clear()
 				archive.delete()
-				return redirect(request.POST["redirect_good_url"])
-		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"archive" : [], "errors" : ["archiveid"]}))
+		return redirect(request.POST["redirect_url"])
 	except:
 		return redirect("/")
 	
@@ -92,6 +91,6 @@ def delete_episode_from_archive(request):
 							archive.episodes.remove(episode)
 						return redirect(request.POST["redirect_good_url"])
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : [], "errors" : ["episodeid"]}))
-		return rediret(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : [], "errors" : ["archiveid"]}))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : [], "errors" : ["archiveid"]}))
 	except:
 		return redirect("/")

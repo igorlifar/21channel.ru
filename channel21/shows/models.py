@@ -18,7 +18,6 @@ class Show(models.Model):
 		content = ContentFile(img.read())
 		content.seek(0)
 		current = Image.open(content)
-		current.thumbnail((300, 300), Image.ANTIALIAS)
 		tmp = StringIO.StringIO()
 		name = hex(randint(1, 10**50)) + ".jpg"
 		current.save(tmp, "JPEG")
