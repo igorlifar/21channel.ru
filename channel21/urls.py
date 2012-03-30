@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 	url(r'^panel/logout/', 'profiles.views.logout_panel'),
 	
 	url(r'^panel/news/delete/$', 'news.views.delete_news_item'),
-	url(r'^panel/news/edit/send/$', 'news.views.edit_news_item'),
+	url(r'^panel/news/edit/send/$', 'news.views.update_news_item'),
 	
 	url(r'^panel/episodes/delete/$', 'episodes.views.delete_episode'),
 	

@@ -13,7 +13,7 @@ class NewsItem(models.Model):
 	preview = models.CharField(max_length = 1000, blank = True)
 	text = models.CharField(max_length = 10000, blank = True)
 	date = models.DateTimeField(auto_now = True)
-	image = models.ImageField(upload_to = "news/")
+	image = models.ImageField(upload_to = "news/", blank = True)
   
 	def load_image(self, img):
 		content = ContentFile(img.read())

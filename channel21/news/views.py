@@ -59,8 +59,12 @@ def update_news_item(request):
 					item.preview = data["preview"]
 					item.text = data["text"]
 					item.save()
-					if "image" in request.FILES:
-						item.load_image(request.FILES["image"])
+					if "image_change" in request.POST:
+						image_change = request.POST["image_change"]
+						if image_change == "delete" and item.image.__nonzero__():
+							item.image.delete()
+						if image_change == "new_image" and "new_image" in request.FILES:
+							item.load_image(request.FILES["new_image"])
 					return redirect(request.POST["redirect_good_url"])
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : values, "errors" : errors}))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : [], "errors" : ["newsid"]}))

@@ -1,12 +1,15 @@
-<form class="form-horizontal" action="/panel/news/edit/send/" method="POST">
+<form class="form-horizontal" action="/panel/news/edit/send/" method="POST" enctype="multipart/form-data">
 	{% csrf_token %}
 	<fieldset>
 		<legend>Редактирование новости</legend>
 		{% csrf_token %}
+		<input type="hidden" name="newsid" value="{{ news_item.id }}">
+		<input type="hidden" name="redirect_good_url" value="/panel/news/edit/{{ news_item.id }}/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/news/edit/{{ news_item.id }}">
 		<div class="control-group">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="title" value="{{ news_item.title}}">
+				<input type="text" class="input-xlarge" name="title" value="{{ news_item.title }}">
 			</div>
 		</div>
 		<div class="control-group">
@@ -56,6 +59,6 @@
 		</div>
 	</fieldset>
 	<div class="form-actions">
-		<button type="submit" class="btn btn-primary">Добавить</button>
+		<button type="submit" class="btn btn-primary">Редактировать</button>
 	</div>
 </form>
