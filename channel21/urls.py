@@ -6,6 +6,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+	url(r'^panel/login/send', 'profiles.views.login_panel'),
+	url(r'^panel/logout/', 'profiles.views.logout_panel'),
     url(r'^styles/', include('styles.urls')),
     url(r'^scripts/', include('scripts.urls')),
     url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': '/home/gasya/Documents/21channel.ru/static/' }),

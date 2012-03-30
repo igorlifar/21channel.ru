@@ -1,0 +1,23 @@
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand">21channel.ru</a>
+			{% if not user.anonymous %}
+				<ul class="nav">
+					<li{% if s.0 == 'episodes' %} class="active"{% endif %}><a href="/panel/episodes/">Эпизоды</a></li>
+					<li{% if s.0 == 'shows' %} class="active"{% endif %}><a href="/panel/shows/">Шоу</a></li>
+					<li{% if s.0 == 'archive' %} class="active"{% endif %}><a href="/panel/archive/">Видеоархив</a></li>
+					<li{% if s.0 == 'news' %} class="active"{% endif %}><a href="/panel/news/">Новости</a></li>
+					<li{% if s.0 == 'schedule' %} class="active"{% endif %}><a href="/panel/schedule/">Расписание</a></li>
+				</ul>
+				<ul class="nav pull-right">
+					<li><a href="/panel/logout/">Выход ({{ user.name }})</a></li>
+				</ul>
+			{% else %}
+				<ul class="nav">
+					<li class="active"><a href="/panel/login/">Вход</li></a>
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+</div>

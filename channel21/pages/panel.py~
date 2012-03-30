@@ -10,7 +10,7 @@ def index(request):
 	if not request.user.is_superuser and request.path != '/panel/login/':
 		return redirect("/panel/login/")
 		
-	if request.user.is_superuser and request.path == '/panel/login/':
+	if request.user.is_superuser and request.path == '/pane/login/':
 		return redirect("/panel/")
 	
 	section = get_panel_section(request)

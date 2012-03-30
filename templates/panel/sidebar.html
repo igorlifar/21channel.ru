@@ -1,0 +1,23 @@
+<div class="well" style="padding: 8px 0;">
+	<ul class="nav nav-list">
+		<li class="nav-header">Действия</li>
+		
+		{% if s.0 == "news" or s.0 == 'episodes' or s.0 == 'archive' or s.0 == 'shows'%}
+			{% if s.1 == "list" or s.1 == 'add'%}
+				<li{% if s.1 == 'list' %} class="active" {% endif %}><a href="/panel/{{ s.0 }}/list/"><i class="{% if s.1 == 'list' %}icon-white {% endif %}icon-list"></i>Список
+					{% if s.0 == 'news' %}новостей{% endif %}
+					{% if s.0 == 'archive' %}категорий{% endif %}
+					{% if s.0 == 'shows' %}шоу{% endif %}
+					{% if s.0 == 'episodes' %}эпизодов{% endif %}
+					</a></li>
+				<li{% if s.1 == 'add' %} class="active" {% endif %}><a href="/panel/{{ s.0 }}/add/"><i class="{% if s.1 == 'add' %}icon-white {% endif %}icon-file"></i>Добавить
+					{% if s.0 == 'news' %}новость{% endif %}
+					{% if s.0 == 'archive' %}категорию{% endif %}
+					{% if s.0 == 'shows' %}шоу{% endif %}
+					{% if s.0 == 'episodes' %}эпизод{% endif %}
+					</a></li>
+			{% endif %}
+		{% endif %}
+	
+	</ul>
+</div>

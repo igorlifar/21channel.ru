@@ -1,0 +1,38 @@
+<ul class="breadcrumb">
+	<li><a href="/panel/">[21channel.ru] Panel</a> <span class="divider">/</span></li>
+	{% if s.0 == 'news'%}
+		<li><a href="/panel/news/">Новости</a> <span class="divider">/</span></li>
+		{% if s.1 == 'list' %}
+			<li class="active">Список новостей</li>
+		{% else %}
+			<li class="active">Добавить новость</li>
+		{% endif %}
+	{% endif %}
+	
+	{% if s.0 == 'episodes'%}
+		<li><a href="/panel/episodes/">Эпизоды</a> <span class="divider">/</span></li>
+		{% if s.1 == 'list' %}
+			<li class="active">Список эпизодов</li>
+		{% else %}
+			<li class="active">Добавить эпизод</li>
+		{% endif %}
+	{% endif %}
+	
+	{% if s.0 == 'archive'%}
+		<li><a href="/panel/archive/">Видеоархив</a> <span class="divider">/</span></li>
+		{% if s.1 == 'list' %}
+			<li class="active">Список категорий</li>
+		{% else %}
+			<li class="active">Добавить категорию</li>
+		{% endif %}
+	{% endif %}
+	
+	{% if s.0 == 'shows'%}
+		<li><a href="/panel/shows/">Шоу</a> <span class="divider">/</span></li>
+		{% if s.1 == 'list' %}
+			<li class="active">Список шоу</li>
+		{% else %}
+			<li class="active">Добавить шоу</li>
+		{% endif %}
+	{% endif %}
+</ul>
