@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf
 from django.http import HttpResponse
 from django.shortcuts import redirect, render_to_response
+from urllib import quote, unquote
 
 # Create your views here.
 
@@ -23,7 +24,7 @@ def create_show(request):
 			if "background" in request.FILES:
 				newshow.load_image(request.FILES["background"])
 			return redirect(request.POST["redirect_good_url"])
-		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : values, "errors" : errors}))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 	except:
 		return redirect("/")
 	
@@ -65,7 +66,7 @@ def update_show(request):
 					if "background" in request.FILES:
 						show.load_image(request.FILES["background"])
 					return redirect(request.POST["redirect_good_url"])
-				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : values, "errors" : errors}))
-		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : [], "errors" : ["showid"]}))
+				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : [], "errors" : ["showid"]})))
 	except:
 		return redirect("/")

@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf
 from django.http import HttpResponse
 from django.shortcuts import redirect, render_to_response
+from urllib import quote, unquote
 
 # Create your views here.
 
@@ -34,7 +35,7 @@ def create_episode(request):
 					episode = Episode.objects.create(title = data["title"], description = data["description"], video = newvideo, show = data["show"])
 				episode.save()
 				return redirect(request.POST["redirect_good_url"])
-		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : values, "errors" : errors}))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 	except:
 		return redirect("/")
 
@@ -87,7 +88,7 @@ def update_episode(request):
 							episode.show = data["show"]
 						episode.save()
 						return redirect(request.POST["redirect_good_url"])
-				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : values, "errors" : errors}))
-		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : [], "errors" : ["episodeid"]}))
+				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : [], "errors" : ["episodeid"]})))
 	except:
 		return redirect("/")

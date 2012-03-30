@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf
 from django.http import HttpResponse
 from django.shortcuts import redirect, render_to_response
+from urllib import quote, unquote
 
 # Create your views here.
 
@@ -23,7 +24,7 @@ def create_news_item(request):
 				newItem.load_image(request.FILES["image"])
 			return redirect(request.POST["redirect_good_url"])
 		else:
-			return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : values, "errors" : errors}))
+			return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 	except:
 		return redirect("/")
 
@@ -66,7 +67,7 @@ def update_news_item(request):
 						if image_change == "new_image" and "new_image" in request.FILES:
 							item.load_image(request.FILES["new_image"])
 					return redirect(request.POST["redirect_good_url"])
-				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : values, "errors" : errors}))
-		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + json.dumps({"values" : [], "errors" : ["newsid"]}))
+				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : [], "errors" : ["newsid"]})))
 	except:
 		return redirect("/")
