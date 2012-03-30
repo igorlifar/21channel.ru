@@ -1,5 +1,6 @@
 from django.http import Http404
 from news.models import NewsItem
+from episodes.models import Episode
 
 def get_panel_section(request):
 	path = request.path.strip('/').split('/')
@@ -48,7 +49,11 @@ def get_panel_section(request):
 			if path[2] == 'add':
 				return ['episodes', 'add']
 		
+			if path[2] == 'edit':
+				if len(path) == 3 or Episode.objects.filter(id = path[3]).count() == 0:
+					raise Http404
 				
+				return ['episodes', 'edit', path[3]]
 		
 				
 			
