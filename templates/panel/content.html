@@ -11,6 +11,9 @@
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/episodes-list.html' %}
 	{% endif %}
+	{% if s.1 == 'edit' %}
+		{% include 'panel/content/episodes-edit.html' %}
+	{% endif %}
 {% endif %}
 {% if s.0 == 'shows' %}
 	{% if s.1 == 'list' %}
