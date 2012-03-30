@@ -1,0 +1,17 @@
+<form class="form-horizontal" action="/panel/archive/add/send/" method="POST">
+{% csrf_token %}
+	<legend>Добавление архива</legend>
+	<fieldset>
+		<input type="hidden" name="redirect_good_url" value="/panel/archive/list/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/archive/add/">
+		<div class="control-group">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title">
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Добавить</button>
+	</div>
+</form>

@@ -24,6 +24,7 @@ urlpatterns = patterns('',
 	url(r'^panel/archive/edit/edit-archive/$', 'archive.views.update_archive'),
 	url(r'^panel/archive/edit/delete-episode/$', 'archive.views.delete_episode_from_archive'),
 	url(r'^panel/archive/edit/add-episode/$', 'archive.views.add_episode_to_archive'),
+	url(r'^panel/archive/add/send/$', 'archive.views.create_archive'),
 	
 	url(r'^styles/', include('styles.urls')),
 	url(r'^scripts/', include('scripts.urls')),

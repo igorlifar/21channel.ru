@@ -67,7 +67,10 @@ def get_panel_context(s, request):
 				if s[1] == 'edit':
 					res["archive"] = Archive.objects.get(id = s[2])
 					res["episodesinarchive"] = res["archive"].episodes.all()
-					res["episodes"] = Episode.objects.all()
+					res["episodes"] = []
+					for episode in Episode.objects.all():
+						if res["episodesinarchive"].filter(id = episode.id).count() == 0:
+							res["episodes"].append(episode)
 					
 	return res
 	
