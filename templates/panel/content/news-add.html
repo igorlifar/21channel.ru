@@ -3,6 +3,8 @@
 	<legend>Добавление новости</legend>
 	<fieldset>
 		{% csrf_token %}
+		<input type="hidden" name="redirect_good_url" value="/panel/news/list/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/news/add/">
 		<div class="control-group">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">

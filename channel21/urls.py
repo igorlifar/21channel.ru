@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 	
 	url(r'^panel/news/delete/$', 'news.views.delete_news_item'),
 	url(r'^panel/news/edit/send/$', 'news.views.update_news_item'),
+	url(r'^panel/news/add/send/$', 'news.views.create_news_item'),
 	
 	url(r'^panel/episodes/delete/$', 'episodes.views.delete_episode'),
 	url(r'^panel/episodes/edit/send/$', 'episodes.views.update_episode'),
