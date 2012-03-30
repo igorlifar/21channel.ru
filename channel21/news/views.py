@@ -17,12 +17,12 @@ def create_news_item(request):
 		evaluate_char_field(request, "title", 1000, data, values, errors)
 		evaluate_char_field(request, "preview", 1000, data, values, errors)
 		evaluate_char_field(request, "text", 10000, data, values, errors)
+		errors["image"] = False
+		values["image_change"] = "no"
 		if len(data) == 3:
 			newItem = NewsItem.objects.create(title = data["title"], preview = data["preview"], text = data["text"])
-			values["image"] = False
-			errors["image"] = False
 			if "image" in request.FILES:
-				values["image"] = True
+				values["image_change"] = "image"
 				try:
 					newItem.load_image(request.FILES["image"])
 				except:
@@ -62,6 +62,8 @@ def update_news_item(request):
 				evaluate_char_field(request, "title", 1000, data, values, errors)
 				evaluate_char_field(request, "preview", 1000, data, values, errors)
 				evaluate_char_field(request, "text", 10000, data, values, errors)
+				errors["new_image"] = False
+				values["image_change"] = "no"
 				if len(data) == 3:
 					item.title = data["title"]
 					item.preview = data["preview"]
@@ -69,12 +71,12 @@ def update_news_item(request):
 					item.save()
 					if "image_change" in request.POST:
 						image_change = request.POST["image_change"]
+						values["image_change"] = image_change
 						if image_change == "delete" and item.image.__nonzero__():
 							item.image.delete()
 						if image_change == "new_image" and "new_image" in request.FILES:
 							try:
 								item.load_image(request.FILES["new_image"])
-								errors["new_image"] = False
 							except:
 								errors["new_image"] = True
 								return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
