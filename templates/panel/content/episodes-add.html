@@ -1,0 +1,50 @@
+<form class="form-horizontal" action="/panel/episodes/add/send/" method="POST">
+{% csrf_token %}
+	<legend>Добавление эпизода</legend>
+	<fieldset>
+		<input type="hidden" name="redirect_good_url" value="/panel/episodes/list/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/episodes/add/">
+		<div class="control-group">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Описание</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="description" style="height: 80px;"></textarea>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">Шоу</label>
+			<div class="controls">
+				<select name="showid">
+					<option value="-1"></option>
+					{% for show in shows %}
+						<option value="{{ show.id }}">{{ show.title }}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Тип видео</label>
+			<div class="controls">
+				<select name="source">
+					<option value=""></option>
+					<option value="YouTube">YouTube</option>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Код видео</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="code">
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Добавить</button>
+	</div>
+</form>

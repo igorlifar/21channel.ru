@@ -38,8 +38,6 @@ def get_panel_context(s, request):
 							res["fs"] = json.loads(unquote(request.GET['formstate']))
 						except:
 							raise Http404
-					
-						
 			
 		if s[0] == 'episodes':
 			if len(s) >= 2:
@@ -48,6 +46,9 @@ def get_panel_context(s, request):
 					
 				if s[1] == 'edit':
 					res["episode"] = Episode.objects.get(id = s[2])
+					res["shows"] = Show.objects.all()
+				
+				if s[1] == 'add':
 					res["shows"] = Show.objects.all()
 		
 		if s[0] == 'shows':
@@ -62,6 +63,11 @@ def get_panel_context(s, request):
 			if len(s) >= 2:
 				if s[1] == 'list':
 					res["archives"] = Archive.objects.all()
+					
+				if s[1] == 'edit':
+					res["archive"] = Archive.objects.get(id = s[2])
+					res["episodesinarchive"] = res["archive"].episodes.all()
+					res["episodes"] = Episode.objects.all()
 					
 	return res
 	
