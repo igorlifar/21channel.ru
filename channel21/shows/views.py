@@ -63,8 +63,12 @@ def update_show(request):
 					show.schedule = data["schedule"]
 					show.description = data["description"]
 					show.save()
-					if "background" in request.FILES:
-						show.load_image(request.FILES["background"])
+					if "background_change" in request.POST:
+						background_change = request.POST["background_change"]
+						if background_change == "delete" and show.background.__nonzero__():
+							show.background.delete()
+						if background_change == "new_background" and "new_background" in request.FILES:
+							show.load_image(request.FILES["new_background"])
 					return redirect(request.POST["redirect_good_url"])
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : [], "errors" : ["showid"]})))

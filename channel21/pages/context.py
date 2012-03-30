@@ -48,6 +48,9 @@ def get_panel_context(s, request):
 				if s[1] == 'list':
 					res["shows"] = Show.objects.all()
 					
+				if s[1] == 'edit':
+					res["show"] = Show.objects.get(id = s[2])
+					
 		if s[0] == 'archive':
 			if len(s) >= 2:
 				if s[1] == 'list':
