@@ -2,10 +2,9 @@
 	{% csrf_token %}
 	<legend>Редактирование эпизода</legend>
 	<fieldset>
-		{% csrf_token %}
 		<input type="hidden" name="episodeid" value="{{ episode.id }}">
 		<input type="hidden" name="redirect_good_url" value="/panel/episodes/edit/{{ episode.id }}/">
-		<input type="hidden" name="redirect_bad_url" value="/panel/episodes/edit/{{ episode.id }}">
+		<input type="hidden" name="redirect_bad_url" value="/panel/episodes/edit/{{ episode.id }}/">
 		<div class="control-group">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">

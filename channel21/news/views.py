@@ -20,7 +20,9 @@ def create_news_item(request):
 		if len(data) == 3:
 			newItem = NewsItem.objects.create(title = data["title"], preview = data["preview"], text = data["text"])
 			newItem.save()
+			values["image"] = False
 			if "image" in request.FILES:
+				values["image"] = True
 				try:
 					newItem.load_image(request.FILES["image"])
 					errors["image"] = False

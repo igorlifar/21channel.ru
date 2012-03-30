@@ -21,7 +21,9 @@ def create_show(request):
 		if len(data) == 3:
 			newshow = Show.objects.create(title = data["title"], schedule = data["schedule"], description = data["description"])
 			newshow.save()
+			values["background"] = False
 			if "background" in request.FILES:
+				values["background"] = True
 				try:
 					newshow.load_image(request.FILES["background"])
 					errors["background"] = False
