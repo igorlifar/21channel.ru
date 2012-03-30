@@ -24,7 +24,7 @@ def create_episode(request):
 			if len(data) == 5:
 				if "showid" in request.POST:
 					showid = int(request.POST["showid"])
-					shows = Show.objects.filter(id = shoid)
+					shows = Show.objects.filter(id = showid)
 					if shows.count() != 0:
 						data["show"] = shows[0]
 				newvideo = Video.objects.create(source = data["source_value"], code = data["code"])

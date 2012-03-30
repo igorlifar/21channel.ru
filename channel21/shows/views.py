@@ -22,7 +22,12 @@ def create_show(request):
 			newshow = Show.objects.create(title = data["title"], schedule = data["schedule"], description = data["description"])
 			newshow.save()
 			if "background" in request.FILES:
-				newshow.load_image(request.FILES["background"])
+				try:
+					newshow.load_image(request.FILES["background"])
+					errors["background"] = False
+				except:
+					errors["background"] = True
+					return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 			return redirect(request.POST["redirect_good_url"])
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 	except:

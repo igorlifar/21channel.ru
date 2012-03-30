@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 	
 	url(r'^panel/episodes/delete/$', 'episodes.views.delete_episode'),
 	url(r'^panel/episodes/edit/send/$', 'episodes.views.update_episode'),
+	url(r'^panel/episodes/add/send/$', 'episodes.views.create_episode'),
 	
 	url(r'^panel/shows/delete/$', 'shows.views.delete_show'),
 	url(r'^panel/shows/edit/send/$', 'shows.views.update_show'),
