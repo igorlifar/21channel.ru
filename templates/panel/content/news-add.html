@@ -27,8 +27,8 @@
 		<div class="control-group">
 			<label class="control-label">Изображение</label>
 			<div class="controls">
-				<label class="radio"><input type="radio" name="image_change" value="no" checked>Не добавлять изображение</label>
-				<label class="radio"><input type="radio" name="image_change" value="image">Добавить изображение</label>
+				<label class="radio"><input type="radio" name="image_change" value="no"{% if fs.values.image_change == 'no' or fs == None %} checked{% endif %}>Не добавлять изображение</label>
+				<label class="radio"><input type="radio" name="image_change" value="image"{% if fs.values.image_change == 'image' %} checked{% endif %}>Добавить изображение</label>
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -42,7 +42,7 @@
 				});
 			});
 		</script>
-		<div class="control-group" id="image" style="display: none;">
+		<div class="control-group{% if fs.errors.image %} error{% endif %}" id="image"{% if fs.image_change == 'no' %} style="display: none;"{% endif %}>
 			<label class="control-label">Изображение</label>
 			<div class="controls">
 				<input type="file" name="image">

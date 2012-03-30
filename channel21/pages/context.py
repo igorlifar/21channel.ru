@@ -31,6 +31,12 @@ def get_panel_context(s, request):
 				if s[1] == 'edit':
 					res["news_item"] = NewsItem.objects.get(id=s[2])
 					
+					if 'formstate' in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET['formstate']))
+						except:
+							raise Http404
+					
 				if s[1] == 'add':
 					if 'formstate' in request.GET:
 						try:
