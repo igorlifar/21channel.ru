@@ -14,7 +14,7 @@
 				<td>{{ m.title }}</td>
 				<td>{{ m.preview }}</td>
 				<td>{{ m.text }}</td>
-				<td style="width: 100px;"><div class="thumbnail"><img style="width: 90px;" src="/media_files/{{ m.image.url }}"></div></td>
+				<td style="width: 100px;"><div class="thumbnail"><img style="width: 90px;" src="/media_files/{{ m.image }}"></div></td>
 				<td style="width: 200px;">
 					<a href="/panel/news/edit/{{ m.id }}/" class="btn">Редактировать</a>
 					<form style="display: inline-block;" action="/panel/news/delete/" method="POST">
