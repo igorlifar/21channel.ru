@@ -28,24 +28,24 @@
 			<label class="control-label">Изображение</label>
 			<div class="controls">
 				<label class="radio"><input type="radio" name="image_change" value="no" checked>Не добавлять изображение</label>
-				<label class="radio"><input type="radio" name="image_change" value="new_image">Добавить изображение</label>
+				<label class="radio"><input type="radio" name="image_change" value="image">Добавить изображение</label>
 			</div>
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("input[type=radio]").change(function() {
-					if ($(this).val() == "new_image") {
-						$("#new-image").fadeIn();
+					if ($(this).val() == "image") {
+						$("#image").fadeIn();
 					} else {
-						$("#new-image").fadeOut();
+						$("#image").fadeOut();
 					}
 				});
 			});
 		</script>
-		<div class="control-group" id="new-image" style="display: none;">
-			<label class="control-label">Новое изображение</label>
+		<div class="control-group" id="image" style="display: none;">
+			<label class="control-label">Изображение</label>
 			<div class="controls">
-				<input type="file" name="new_image">
+				<input type="file" name="image">
 			</div>
 		</div>
 	</fieldset>
