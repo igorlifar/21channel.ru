@@ -1,4 +1,7 @@
 from news.models import NewsItem
+from episodes.models import Episode
+from shows.models import Show
+from archive.models import Archive
 
 def get_panel_context(s, request):
 	res = {
@@ -21,7 +24,21 @@ def get_panel_context(s, request):
 				if s[1] == 'list':
 					res["news"] = NewsItem.objects.all()
 			
-			
+		if s[0] == 'episodes':
+			if len(s) >= 2:
+				if s[1] == 'list':
+					res["episodes"] = Episode.objects.all()
+		
+		if s[0] == 'shows':
+			if len(s) >= 2:
+				if s[1] == 'list':
+					res["shows"] = Show.objects.all()
+					
+		if s[0] == 'archive':
+			if len(s) >= 2:
+				if s[1] == 'list':
+					res["archives"] = Archive.objects.all()
+					
 	return res
 	
 def get_site_context(section, request):
