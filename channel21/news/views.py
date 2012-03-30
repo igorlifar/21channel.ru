@@ -29,8 +29,8 @@ def create_news_item(request):
 
 def delete_news_item(request):
 	try:
-		if "newsid" in request.POST:
-			newsid = int(request.POST["newsid"])
+		if "id" in request.POST:
+			newsid = int(request.POST["id"])
 			items = NewsItem.objects.filter(id = newsid)
 			if items.count() != 0:
 				item = items[0]
