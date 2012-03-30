@@ -31,6 +31,10 @@ def get_panel_context(s, request):
 			if len(s) >= 2:
 				if s[1] == 'list':
 					res["episodes"] = Episode.objects.all()
+					
+				if s[1] == 'edit':
+					res["episode"] = Episode.objects.get(id = s[2])
+					res["shows"] = Show.objects.all()
 		
 		if s[0] == 'shows':
 			if len(s) >= 2:
