@@ -1,34 +1,34 @@
+{{ fs }}
 <form class="form-horizontal" action="/panel/news/add/send/" method="POST" enctype="multipart/form-data">
 {% csrf_token %}
 	<legend>Добавление новости</legend>
 	<fieldset>
-		{% csrf_token %}
 		<input type="hidden" name="redirect_good_url" value="/panel/news/list/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/news/add/">
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="title">
+				<input type="text" class="input-xlarge" name="title" value="{{ fs.values.title }}">
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.preview %} error{% endif %}">
 			<label class="control-label">Анонс</label>
 			<div class="controls">
-				<textarea class="input-xlarge" name="preview" style="height: 80px;"></textarea>
+				<textarea class="input-xlarge" name="preview" style="height: 80px;">{{ fs.values.preview }}</textarea>
 			</div>
 		</div>
 		
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.text %} error{% endif %}">
 			<label class="control-label">Полный текст</label>
 			<div class="controls">
-				<textarea class="input-xlarge" name="text" style="height:190px;"></textarea>
+				<textarea class="input-xlarge" name="text" style="height:190px;">{{ fs.values.text }}</textarea>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">Изображение</label>
 			<div class="controls">
-				<label class="radio"><input type="radio" name="image_change" value="no" checked>Не добавлять изображение</label>
-				<label class="radio"><input type="radio" name="image_change" value="image">Добавить изображение</label>
+				<label class="radio"><input type="radio" name="image_change" value="no"{% if fs.values.image_change == 'no' or fs == None %} checked{% endif %}>Не добавлять изображение</label>
+				<label class="radio"><input type="radio" name="image_change" value="image"{% if fs.values.image_change == 'image' %} checked{% endif %}>Добавить изображение</label>
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -42,7 +42,7 @@
 				});
 			});
 		</script>
-		<div class="control-group" id="image" style="display: none;">
+		<div class="control-group{% if fs.errors.image %} error{% endif %}" id="image"{% if fs.image_change == 'no' %} style="display: none;"{% endif %}>
 			<label class="control-label">Изображение</label>
 			<div class="controls">
 				<input type="file" name="image">

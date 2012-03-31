@@ -1,3 +1,4 @@
+{{ fs }}
 <form class="form-horizontal" action="/panel/news/edit/send/" method="POST" enctype="multipart/form-data">
 	{% csrf_token %}
 	<legend>Редактирование новости</legend>
@@ -5,23 +6,23 @@
 		<input type="hidden" name="newsid" value="{{ news_item.id }}">
 		<input type="hidden" name="redirect_good_url" value="/panel/news/edit/{{ news_item.id }}/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/news/edit/{{ news_item.id }}/">
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="title" value="{{ news_item.title }}">
+				<input type="text" class="input-xlarge" name="title" value="{% if fs == None %}{{ news_item.title }}{% else %}{{ fs.values.title }}{% endif %}">
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.preview %} error{% endif %}">
 			<label class="control-label">Анонс</label>
 			<div class="controls">
-				<textarea class="input-xlarge" name="preview" style="height: 80px;">{{ news_item.preview }}</textarea>
+				<textarea class="input-xlarge" name="preview" style="height: 80px;">{% if fs == None %}{{ news_item.preview }}{% else %}{{ fs.values.preview }}{% endif %}</textarea>
 			</div>
 		</div>
 		
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.text %} error{% endif %}">
 			<label class="control-label">Полный текст</label>
 			<div class="controls">
-				<textarea class="input-xlarge" name="text" style="height:190px;">{{ news_item.text }}</textarea>
+				<textarea class="input-xlarge" name="text" style="height:190px;">{% if fs == None %}{{ news_item.text }}{% else %}{{ fs.values.text }}{% endif %}</textarea>
 			</div>
 		</div>
 		
@@ -34,9 +35,9 @@
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<label class="radio"><input type="radio" name="image_change" value="no" checked>Оставить прежнее</label>
-				<label class="radio"><input type="radio" name="image_change" value="delete">Удалить</label>
-				<label class="radio"><input type="radio" name="image_change" value="new_image">Загрузить новое</label>
+				<label class="radio"><input type="radio" name="image_change" value="no"{% if fs == None or fs.values.image_change == 'no' %} checked{% endif %}>Оставить прежнее</label>
+				<label class="radio"><input type="radio" name="image_change" value="delete"{% if fs.values.image_change == 'delete' %} checked{% endif %}>Удалить</label>
+				<label class="radio"><input type="radio" name="image_change" value="new_image"{% if fs.values.image_change == 'new_image' %} checked{% endif %}>Загрузить новое</label>
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -50,7 +51,7 @@
 				});
 			});
 		</script>
-		<div class="control-group" id="new-image" style="display: none;">
+		<div class="control-group{% if fs.errors.new_image %} error{% endif %}" id="new-image"{% if fs == None or not fs.values.image_change == 'new_image' %} style="display: none;"{% endif %}>
 			<label class="control-label">Новое изображение</label>
 			<div class="controls">
 				<input type="file" name="new_image">
