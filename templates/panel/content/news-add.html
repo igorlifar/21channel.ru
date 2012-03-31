@@ -42,7 +42,7 @@
 				});
 			});
 		</script>
-		<div class="control-group{% if fs.errors.image %} error{% endif %}" id="image"{% if fs.image_change == 'no' %} style="display: none;"{% endif %}>
+		<div class="control-group{% if fs.errors.image %} error{% endif %}" id="image"{% if fs == None or fs.values.image_change == 'no' %} style="display: none;"{% endif %}>
 			<label class="control-label">Изображение</label>
 			<div class="controls">
 				<input type="file" name="image">

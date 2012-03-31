@@ -18,7 +18,6 @@ def create_archive(request):
 		evaluate_char_field(request, "title", 1000, data, values, errors)
 		if len(data) == 1:
 			archive = Archive.objects.create(title = data["title"])
-			archive.save()
 			return redirect(request.POST["redirect_good_url"])
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 	except:
@@ -52,6 +51,7 @@ def update_archive(request):
 					archive.title = data["title"]
 					archive.save()
 					return redirect(request.POST["redirect_good_url"])
+				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"archiveid" : True}})))
 	except:
 		return redirect("/")

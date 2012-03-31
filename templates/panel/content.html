@@ -45,3 +45,14 @@
 		{% include 'panel/content/archives-add.html' %}
 	{% endif %}
 {% endif %}
+{% if s.0 == 'schedule' %}
+	{% if s.1 == 'list' %}
+		{% include 'panel/content/schedule-list.html' %}
+	{% endif %}
+	{% if s.1 == 'add' %}
+		{% include 'panel/content/schedule-add.html' %}
+	{% endif %}
+	{% if s.1 == 'edit' %}
+		{% include 'panel/content/schedule-edit.html' %}
+	{% endif %}
+{% endif %}

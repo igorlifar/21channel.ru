@@ -27,6 +27,10 @@ urlpatterns = patterns('',
 	url(r'^panel/archive/edit/add-episode/$', 'archive.views.add_episode_to_archive'),
 	url(r'^panel/archive/add/send/$', 'archive.views.create_archive'),
 	
+	url(r'^panel/schedule/add/send/$', 'schedule.views.create_program'),
+	url(r'^panel/schedule/delete/$', 'schedule.views.delete_program'),
+	url(r'^panel/schedule/edit/send/$', 'schedule.views.update_program'),
+	
 	url(r'^styles/', include('styles.urls')),
 	url(r'^scripts/', include('scripts.urls')),
     

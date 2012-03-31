@@ -4,8 +4,12 @@
 		<li><a href="/panel/news/">Новости</a> <span class="divider">/</span></li>
 		{% if s.1 == 'list' %}
 			<li class="active">Список новостей</li>
-		{% else %}
+		{% endif %}
+		{% if s.1 == 'add' %}
 			<li class="active">Добавить новость</li>
+		{% endif %}
+		{% if s.1 == 'edit' %}
+			<li class="active">Редактировать новость</li>
 		{% endif %}
 	{% endif %}
 	
@@ -13,8 +17,12 @@
 		<li><a href="/panel/episodes/">Эпизоды</a> <span class="divider">/</span></li>
 		{% if s.1 == 'list' %}
 			<li class="active">Список эпизодов</li>
-		{% else %}
+		{% endif %}
+		{% if s.1 == 'add' %}
 			<li class="active">Добавить эпизод</li>
+		{% endif %}
+		{% if s.1 == 'edit' %}
+			<li class="active">Редактировать эпизод</li>
 		{% endif %}
 	{% endif %}
 	
@@ -22,8 +30,12 @@
 		<li><a href="/panel/archive/">Видеоархив</a> <span class="divider">/</span></li>
 		{% if s.1 == 'list' %}
 			<li class="active">Список категорий</li>
-		{% else %}
+		{% endif %}
+		{% if s.1 == 'add' %}
 			<li class="active">Добавить категорию</li>
+		{% endif %}
+		{% if s.1 == 'edit' %}
+			<li class="active">Редактировать категорию</li>
 		{% endif %}
 	{% endif %}
 	
@@ -31,8 +43,26 @@
 		<li><a href="/panel/shows/">Шоу</a> <span class="divider">/</span></li>
 		{% if s.1 == 'list' %}
 			<li class="active">Список шоу</li>
-		{% else %}
+		{% endif %}
+		{% if s.1 == 'add' %}
 			<li class="active">Добавить шоу</li>
 		{% endif %}
+		{% if s.1 == 'edit' %}
+			<li class="active">Редактировать шоу</li>
+		{% endif %}
 	{% endif %}
+	
+	{% if s.0 == 'schedule' %}
+		<li><a href="/panel/schedule/">Расписание</a> <span class="divider">/</span></li>
+		{% if s.1 == 'list' %}
+			<li class="active">Список программ</li>
+		{% endif %}
+		{% if s.1 == 'add' %}
+			<li class="active">Добавить программу</li>
+		{% endif %}
+		{% if s.1 == 'edit' %}
+			<li class="active">Редактировать программу</li>
+		{% endif %}
+	{% endif %}
+	
 </ul>

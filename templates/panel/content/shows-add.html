@@ -4,31 +4,31 @@
 		<legend>Добавление шоу</legend>
 		<input type="hidden" name="redirect_good_url" value="/panel/shows/list/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/shows/add/">
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="title">
+				<input type="text" class="input-xlarge" name="title" value="{{ fs.values.title }}">
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.description %} error{% endif %}">
 			<label class="control-label">Описание</label>
 			<div class="controls">
-				<textarea class="input-xlarge" name="description" style="height: 80px;"></textarea>
+				<textarea class="input-xlarge" name="description" style="height: 80px;">{{ fs.values.description }}</textarea>
 			</div>
 		</div>
 		
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.schedule %} error{% endif %}">
 			<label class="control-label">Расписание</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="schedule">
+				<input type="text" class="input-xlarge" name="schedule" value="{{ fs.values.schedule }}">
 			</div>
 		</div>
 		
 		<div class="control-group">
 			<label class="control-label">Задний фон</label>
 			<div class="controls">
-				<label class="radio"><input type="radio" name="background_change" value="no" checked>Не добавлять фон</label>
-				<label class="radio"><input type="radio" name="background_change" value="background">Загрузить фон</label>
+				<label class="radio"><input type="radio" name="background_change" value="no"{% if fs == None or fs.values.background_change == "no" %} checked{% endif %}>Не добавлять фон</label>
+				<label class="radio"><input type="radio" name="background_change" value="background"{% if fs.values.background_change == "background" %} checked{% endif %}>Загрузить фон</label>
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -42,7 +42,7 @@
 				});
 			});
 		</script>
-		<div class="control-group" id="background" style="display: none;">
+		<div class="control-group{% if fs.errors.background %} error{% endif %}" id="background"{% if fs == None or fs.values.background_change == "no" %} style="display: none;"{% endif %}>
 			<label class="control-label">Фон</label>
 			<div class="controls">
 				<input type="file" name="background">

@@ -4,10 +4,10 @@
 	<fieldset>
 		<input type="hidden" name="redirect_good_url" value="/panel/archive/list/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/archive/add/">
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="title">
+				<input type="text" class="input-xlarge" name="title" value="{{ fs.values.title }}">
 			</div>
 		</div>
 	</fieldset>

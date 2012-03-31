@@ -7,4 +7,5 @@ urlpatterns = patterns('pages',
 	url(r'^panel/shows/', 'panel.index'),
 	url(r'^panel/archive/', 'panel.index'),
 	url(r'^panel/episodes/', 'panel.index'),
+	url(r'^panel/schedule/', 'panel.index'),
 )

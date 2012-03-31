@@ -6,10 +6,10 @@
 		<input type="hidden" name="archiveid" value="{{ archive.id }}">
 		<input type="hidden" name="redirect_good_url" value="/panel/archive/edit/{{ archive.id }}/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/archive/edit/{{ archive.id }}/">
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="title" value="{{ archive.title }}">
+				<input type="text" class="input-xlarge" name="title" value="{% if fs == None %}{{ archive.title }}{% else %}{{ fs.values.title }}{% endif %}">
 			</div>
 		</div>
 	</fieldset>
@@ -54,7 +54,7 @@
 </table>
 <form class="form-horizontal" action="/panel/archive/edit/add-episode/" method="POST">
 	{% csrf_token %}
-	<legend>Добавление эпизода </legend>
+	<legend>Добавление эпизода</legend>
 	<fieldset>
 		<input type="hidden" name="archiveid" value="{{ archive.id }}">
 		<input type="hidden" name="redirect_good_url" value="/panel/archive/edit/{{ archive.id }}/">

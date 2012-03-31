@@ -4,16 +4,16 @@
 	<fieldset>
 		<input type="hidden" name="redirect_good_url" value="/panel/episodes/list/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/episodes/add/">
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="title">
+				<input type="text" class="input-xlarge" name="title" value="{{ fs.values.title }}">
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.description %} error{% endif %}">
 			<label class="control-label">Описание</label>
 			<div class="controls">
-				<textarea class="input-xlarge" name="description" style="height: 80px;"></textarea>
+				<textarea class="input-xlarge" name="description" style="height: 80px;">{{ fs.values.description }}</textarea>
 			</div>
 		</div>
 		
@@ -28,19 +28,19 @@
 				</select>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.source %} error{% endif %}">
 			<label class="control-label">Тип видео</label>
 			<div class="controls">
 				<select name="source">
-					<option value=""></option>
-					<option value="YouTube">YouTube</option>
+					<option value=""{% if fs == None or fs.values.source == "" %} selected="selected"{% endif %}></option>
+					<option value="YouTube"{% if fs.values.source == "YouTube" %} selected="selected"{% endif %}>YouTube</option>
 				</select>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.code %} error{% endif %}">
 			<label class="control-label">Код видео</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="code">
+				<input type="text" class="input-xlarge" name="code" value="{{ fs.values.code }}">
 			</div>
 		</div>
 	</fieldset>
