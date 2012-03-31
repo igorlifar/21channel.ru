@@ -8,4 +8,5 @@ urlpatterns = patterns('pages',
 	url(r'^panel/archive/', 'panel.index'),
 	url(r'^panel/episodes/', 'panel.index'),
 	url(r'^panel/schedule/', 'panel.index'),
+	url(r'^panel/settings/', 'panel.index'),
 )

@@ -1,5 +1,14 @@
 <ul class="breadcrumb">
 	<li><a href="/panel/">[21channel.ru] Panel</a> <span class="divider">/</span></li>
+	{% if s.0 == 'settings' %}
+		<li><a href="/panel/settings/">Общие настройки</a> <span class="divider">/</span></li>
+		{% if s.1 == 'list' %}
+			<li class="active">Список настроек</li>
+		{% endif %}
+		{% if s.1 == 'edit' %}
+			<li class="active">Редактировать настройки</li>
+		{% endif %}
+	{% endif %}
 	{% if s.0 == 'news'%}
 		<li><a href="/panel/news/">Новости</a> <span class="divider">/</span></li>
 		{% if s.1 == 'list' %}

@@ -1,3 +1,11 @@
+{% if s.0 == 'settings' %}
+	{% if s.1 == 'list' %}
+		{% include 'panel/content/settings-list.html' %}
+	{% endif %}
+	{% if s.1 == 'edit' %}
+		{% include 'panel/content/settings-edit.html' %}
+	{% endif %}
+{% endif %}
 {% if s.0 == 'news' %}
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/news-list.html' %}

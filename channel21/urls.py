@@ -9,6 +9,8 @@ urlpatterns = patterns('',
 	url(r'^panel/login/send', 'profiles.views.login_panel'),
 	url(r'^panel/logout/', 'profiles.views.logout_panel'),
 	
+	url(r'^panel/settings/edit/send/$', 'mainsettings.views.update_settings'),
+	
 	url(r'^panel/news/delete/$', 'news.views.delete_news_item'),
 	url(r'^panel/news/edit/send/$', 'news.views.update_news_item'),
 	url(r'^panel/news/add/send/$', 'news.views.create_news_item'),

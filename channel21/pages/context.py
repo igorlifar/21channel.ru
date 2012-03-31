@@ -5,6 +5,7 @@ from episodes.models import Episode
 from shows.models import Show
 from archive.models import Archive
 from schedule.models import Program
+from mainsettings.models import MainSettings
 from urllib import unquote
 import json
 from django.http import Http404
@@ -26,6 +27,22 @@ def get_panel_context(s, request):
 		}
 		
 	if len(s) >= 1:
+		
+		if s[0] == 'settings':
+			if len(s) >= 2:
+				if s[1] == 'list':
+					res["settings"] = MainSettings.objects.get(id = 1)
+				
+				if s[1] == 'edit':
+					res["settings"] = MainSettings.objects.get(id = 1)
+					res["shows"] = Show.objects.all()
+					
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Http404
+		
 		if s[0] == 'news':
 			if len(s) >= 2:
 				if s[1] == 'list':
