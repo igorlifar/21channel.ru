@@ -1,11 +1,15 @@
 <ul class="breadcrumb">
-	<li><a href="/panel/">[21channel.ru] Panel</a> <span class="divider">/</span></li>
+	<li><a href="/panel/">Панель управления 21channel.ru</a> <span class="divider">/</span></li>
 	{% if s.0 == 'news'%}
 		<li><a href="/panel/news/">Новости</a> <span class="divider">/</span></li>
 		{% if s.1 == 'list' %}
 			<li class="active">Список новостей</li>
-		{% else %}
+		{% endif %}
+		{% if s.1 == 'add' %}
 			<li class="active">Добавить новость</li>
+		{% endif %}
+		{% if s.1 == 'edit' %}
+			<li class="active">Редактирование новости</li>
 		{% endif %}
 	{% endif %}
 	
