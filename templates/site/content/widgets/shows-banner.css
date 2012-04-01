@@ -1,0 +1,70 @@
+.central-slider {
+	position: relative;
+	overflow : hidden;
+}
+
+.slider-content {
+        margin-right : 200px;
+        float : left;
+}
+
+.slider-image {
+        width : 497px;
+        height : 300px;
+		float : left;
+		z-index : 1;
+}
+
+.slider-text {
+		padding-left : 497px;
+        height : 300px;
+		width : 100%;
+}
+
+.slider-show {
+        padding-bottom : 5px;
+        width : 200px;
+}
+
+.slider-show img {
+        padding-left : 5px;
+        width : 93px;
+        height : 56px;
+}
+
+.slider-show-title {
+        color : rgb(255, 255, 255);
+        width : 97px;
+        height : 56px;
+		float : right;
+        padding-left : 5px;
+}
+
+.slider-list {
+		background : rgb(255, 255, 255);
+        position: absolute;
+		right: 0;
+		top: 0;
+		z-index : 1;
+}
+
+.slider-title {
+        color : rgb(255, 255, 255);
+        font-size : 23px;
+        padding-top : 5px;
+        padding-left : 5px;
+}
+
+.slider-schedule {
+        color : rgb(178, 14, 14);
+        font-size : 16px;
+        padding-top : 5px;
+        font-weight : bold;
+        padding-left : 5px;
+}
+
+.slider-description {
+        color : rgb(255, 255, 255);
+        padding-top : 5px;
+        padding-left : 5px;
+}
