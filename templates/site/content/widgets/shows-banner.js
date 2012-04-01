@@ -9,13 +9,16 @@ $(document).ready(function(){
                 html += "</div>";
         }
         
-        $(".slider-list").html(html);
-        $(".slider-image").css("background", "url(" + shows[0].image + ") no-repeat");
-        $(".slider-text").css("background", "none repeat scroll 0% 0% " + background_color[0]);
-        $(".slider-title").html(shows[0].title);
-        $(".slider-schedule").html(shows[0].schedule);
-        $(".slider-description").html(shows[0].description);
+        var set_cont = function(i) {
+			$(".slider-list").html(html);
+			$(".slider-content").css("background", background_color[i] + " url(" + shows[i].image + ") no-repeat");
+			$(".slider-title").html(shows[i].title);
+			$(".slider-schedule").html(shows[i].schedule);
+			$(".slider-description").html(shows[i].description);
+		};
         
+		set_cont(0);
+		
         var current = $(".slider-list").children().eq(0);
         current.children().eq(0).css("padding-left", "0px");
         current.children().eq(1).css("width", "102px");
@@ -30,8 +33,7 @@ $(document).ready(function(){
                 current = container;
                 current.children().eq(0).css("padding-left", "0px");
                 current.children().eq(1).css("width", "102px");
-                $(".slider-image").css("background", "url(" + current.children().eq(0).attr("src") + ") no-repeat");
-                $(".slider-text").css("background", "none repeat scroll 0% 0% " + current.children().eq(1).css("background-color")); 
+                $(".slider-content").css("background", current.children().eq(1).css("background-color") + " url(" + current.children().eq(0).attr("src") + ") no-repeat"); 
                 $(".slider-title").html(shows[current.attr("num")].title);
                 $(".slider-schedule").html(shows[current.attr("num")].schedule);
                 $(".slider-description").html(shows[current.attr("num")].description);

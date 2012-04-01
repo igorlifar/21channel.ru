@@ -4,8 +4,9 @@
 }
 
 .slider-content {
+		height: 300px;
         margin-right : 200px;
-        float : left;
+		padding-left: 497px;
 }
 
 .slider-image {
@@ -18,12 +19,12 @@
 .slider-text {
 		padding-left : 497px;
         height : 300px;
-		width : 100%;
 }
 
 .slider-show {
-        padding-bottom : 5px;
+        margin-bottom : 5px;
         width : 200px;
+		height: 56px;
 }
 
 .slider-show img {
