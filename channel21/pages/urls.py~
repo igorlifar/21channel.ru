@@ -1,7 +1,0 @@
-from django.conf.urls.defaults import patterns, include, url
-
-urlpatterns = patterns('pages',
-        url(r'^panel/$', 'panel.index'),
-        url(r'^panel/login/$', 'panel.index'),
-        url(r'^panel/(news|archive|shows|episodes)/', 'panel.index'),
-)

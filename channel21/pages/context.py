@@ -9,6 +9,7 @@ from mainsettings.models import MainSettings
 from urllib import unquote
 import json
 from django.http import Http404
+from mainsettings.models import MainSettings
 
 def get_panel_context(s, request):
 
@@ -25,6 +26,7 @@ def get_panel_context(s, request):
 			'anonymous': False,
 			'name': request.user.first_name + ' ' + request.user.last_name
 		}
+
 		
 	if len(s) >= 1:
 		
@@ -170,7 +172,55 @@ def get_panel_context(s, request):
 		
 	return res
 	
-def get_site_context(section, request):
+def get_site_context(s, request):
 	res = {}
+	
+		
+	ms = MainSettings.objects.all()[0]
+	res["background"] = ms.background
+	
+	if s[0] == 'index':
+		res['css'] = 'site.css'
+		res['js'] = 'site.js'
+		
+	if s[0] == 'archive':
+		if len(s) == 1 or s[1] == 'list':
+			res['css'] = 'archive-list.css'
+			res['js'] = 'archive-list.js'
+		elif s[1] == 'category':
+			res['css'] = 'archive-category.css'
+			res['js'] = 'archive-category.js'
+			
+	if s[0] == 'episode':
+		res['css'] = 'episode.css'
+		res['js'] = 'episode.js'
+		
+	if s[0] == 'schedule':
+		res['css'] = 'schedule.css'
+		res['js'] = 'episode.js'
+		
+	if s[0] == 'coverage':
+		res['css'] = 'coverage.css'
+		res['js'] = 'coverage.js'
+		
+	if s[0] == 'news':
+		if len(s) == 1 or s[1] == 'list':
+			res['css'] = 'news-list.css'
+			res['js'] = 'news-list.js'
+		elif s[1] == 'item':
+			res['css'] = 'news-item.css'
+			res['js'] = 'news-item.js'
+			
+	if s[0] == 'shows':
+		if len(s) == 1 or s[1] == 'list':
+			res['css'] = 'shows-list.css'
+			res['js'] = 'shows-list.js'
+		elif len(s) == 2:
+			res['css'] = 'shows-show.css'
+			res['js'] = 'shows-show.js'
+		elif s[2] == 'episode':
+			res['css'] = 'shows-show-episode.css'
+			res['js'] = 'shows-show-episode.js'
+	
 	
 	return res

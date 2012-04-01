@@ -1,0 +1,34 @@
+#footer dl {
+	display: inline-block;
+	float: left;
+	margin-right: 15px;
+	width: 220px;
+}
+
+#footer dt {
+	color: #CCC;
+	font-size: 13px;
+	border-bottom: 1px solid #666;
+}
+
+#footer dd {
+	display: block;
+	color: #999;
+	font-size: 11px;
+}
+
+#footer dl a {
+	display: block;
+	color: #999;
+	font-size: 11px;
+}
+
+#copyright {
+	display: block;
+	color: #999;
+	font-size: 11px;
+}
+
+#copyright dt {
+	border: 0;
+}

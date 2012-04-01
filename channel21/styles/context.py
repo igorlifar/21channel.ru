@@ -3,7 +3,8 @@ def get_panel_context(section, request):
 	
 	return res
 	
-def get_site_context(section, request):
+def get_site_context(s, request):
 	res = {}
+	
 	
 	return res

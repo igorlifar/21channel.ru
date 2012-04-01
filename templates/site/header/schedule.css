@@ -1,0 +1,68 @@
+#schedule > div {
+	float: left;
+}
+
+#schedule div {
+	height: 32px;
+}
+
+#sch-watch-next {
+	text-transform: uppercase;
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size: 18px;
+	line-height: 32px;
+	text-align: center;
+	font-weight: bold;
+	background-color: #AD0100;
+	width: 154px;
+}
+
+#sch-watch-next span {
+	color: white;
+}
+
+#sch-prev-btn {
+	background: url({{ img }}shed-prev.png) center center;
+	width: 17px;
+	cursor: pointer;
+}
+
+#sch-cont {
+	background: black;
+	width: 808px;
+	overflow: hidden;
+	font-family: sans-serif;
+	position: relative;
+}
+
+#sch-next-btn {
+	background: url({{ img }}shed-next.png) center center;
+	width: 17px;
+	cursor: pointer;
+}
+
+#sch-cont table {
+	position: absolute;
+	left: 0;
+}
+
+#sch-cont td {
+	font-size: 12px;
+	vertical-align: middle;
+	height: 32px;
+}
+
+#sch-cont td.time {
+	font-weight: bold;
+	min-width: 50px;
+	color: #AD0100;
+	text-align: center;
+}
+
+#sch-cont td.show {
+	font-size: 12px;
+	padding-right: 10px;
+	min-width: 141px;
+	border-right: 1px solid #9B9B9B;
+	color: white;
+}

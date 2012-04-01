@@ -1,0 +1,27 @@
+{% include 'css-reset.css' %}
+{% include 'css-common/wrappers.css' %}
+
+#header {
+	position: relative;
+	height: 180px;
+	margin-bottom: 10px;
+}
+
+{% include 'site/header.css' %}
+
+#content {
+	background-color: white;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+#footer {
+	background: #343434;
+	border-top: 3px solid #720303;
+	overflow: hidden;
+	font-family: Helvetica, sans-serif;
+	padding: 10px 15px 20px;
+	line-height: 20px;
+}
+
+{% include 'site/footer.css' %}

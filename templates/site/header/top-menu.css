@@ -1,0 +1,65 @@
+#top-menu > ul {
+	float: right;
+	margin-top: 7px;
+	margin-left: 50px;
+	text-transform: uppercase;
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#top-menu > ul li {
+	color: white;
+	float: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-left: 2px solid white;
+	padding-top: 3px;
+}
+
+#top-menu > ul li:first-child {
+	border: 0;
+}
+
+#top-menu li a {
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#top-menu li a:hover {
+color: #ad0100;
+      }
+
+#top-search-form {
+	float: right;
+	position: relative;
+	width: 205px;
+	margin-top: 7px;
+	height: 40px;
+}
+
+#top-search-form input {
+	border: 0;
+	background: white;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	height: 20px;
+	top: 1px;
+	position: absolute;
+	width: 169px;
+}
+
+#top-search-form button {
+	cursor: pointer;
+	background: url({{ img }}bg-search-button.png);
+	border: 0;
+	width: 24px;
+	height: 23px;
+	position: absolute;
+	left: 170px;
+}
+
+#top-search-form button:hover {
+	background-position: -24px;
+}

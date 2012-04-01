@@ -1,0 +1,16 @@
+.pull-center {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.pull-right {
+	float: right;
+}
+
+.pull-left {
+	float: left;
+}
+
+.span12 {
+	width: 996px;
+}

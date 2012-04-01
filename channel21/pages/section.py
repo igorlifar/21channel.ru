@@ -93,17 +93,74 @@ def get_panel_section(request):
 	raise Http404
 	
 def get_site_section(request):
-	path = request.path.strip('/').split('/')
+	path = []
 	
-	level1 = ["shows", "archive", "episode", "schedule"]
+	if request.path != '/':
+		path = request.path.strip('/').split('/')
+	else:
+		path = ['index']
 	
-	if len(path) == 0 or not path[0] in a:
-		path.insert(0, "index")
 		
 	if path[0] == "index":
 		if len(path) == 1:
 			return ["index"]
-		else:
+			
+	if path[0] == 'archive':
+		if len(path) == 1:
+			return ['archive', 'list']
+			
+		if len(path) == 3 and path[1] == 'category':
+			try:
+				cat = Archive.objects.get(id=int(path[2]))
+				return ['archive', 'category', path[2]]
+			except:
+				raise Http404
+			
+	if len(path) == 2 and path[0] == 'episode':
+		try:
+			ep = Episode.objects.get(id=int(path[1]))
+			return ['episode', path[1]]
+		except:
 			raise Http404
-	else:
-		raise Http404
+		
+	if len(path) == 1 and path[0] == 'schedule':
+		return ['schedule']
+		
+	if len(path) == 1 and path[0] == 'coverage':
+		return ['coverage']
+	
+	if path[0] == 'news':
+		if len(path) == 1:
+			return ['news', 'list']
+			
+		try:
+			ns = NewsItem.objects.get(id=int(path[1]))
+			return ['news', path[1]]
+		except:
+			raise Http404
+	
+	
+	if path[0] == 'shows':
+		if len(path) == 1:
+			return ["shows", "list"]
+		
+		sh = None
+		try:
+			sh = Show.objects.get(id=int(path[1]))
+		except:
+			raise Http404
+		
+		if len(path) == 2:
+			return ["shows", path[1]]
+			
+		if path[2] == 'episode':
+			ep = None
+			try:
+				ep = Episode.objects.get(show=sh, id=int(path[3]))
+			except:
+				raise Http404
+			
+			return ['shows', path[1], 'episode', path[3]]
+		
+		
+	raise Http404
