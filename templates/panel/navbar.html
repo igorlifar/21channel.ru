@@ -4,6 +4,7 @@
 			<a class="brand">21channel.ru</a>
 			{% if not user.anonymous %}
 				<ul class="nav">
+					<li{% if s.0 == 'settings' %} class="active"{% endif %}><a href="/panel/settings/">Общие найстройки</a></li>
 					<li{% if s.0 == 'episodes' %} class="active"{% endif %}><a href="/panel/episodes/">Эпизоды</a></li>
 					<li{% if s.0 == 'shows' %} class="active"{% endif %}><a href="/panel/shows/">Шоу</a></li>
 					<li{% if s.0 == 'archive' %} class="active"{% endif %}><a href="/panel/archive/">Видеоархив</a></li>

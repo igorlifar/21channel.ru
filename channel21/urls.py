@@ -9,6 +9,8 @@ urlpatterns = patterns('',
 	url(r'^panel/login/send', 'profiles.views.login_panel'),
 	url(r'^panel/logout/', 'profiles.views.logout_panel'),
 	
+	url(r'^panel/settings/edit/send/$', 'mainsettings.views.update_settings'),
+	
 	url(r'^panel/news/delete/$', 'news.views.delete_news_item'),
 	url(r'^panel/news/edit/send/$', 'news.views.update_news_item'),
 	url(r'^panel/news/add/send/$', 'news.views.create_news_item'),
@@ -26,6 +28,10 @@ urlpatterns = patterns('',
 	url(r'^panel/archive/edit/delete-episode/$', 'archive.views.delete_episode_from_archive'),
 	url(r'^panel/archive/edit/add-episode/$', 'archive.views.add_episode_to_archive'),
 	url(r'^panel/archive/add/send/$', 'archive.views.create_archive'),
+	
+	url(r'^panel/schedule/add/send/$', 'schedule.views.create_program'),
+	url(r'^panel/schedule/delete/$', 'schedule.views.delete_program'),
+	url(r'^panel/schedule/edit/send/$', 'schedule.views.update_program'),
 	
 	url(r'^styles/', include('styles.urls')),
 	url(r'^scripts/', include('scripts.urls')),

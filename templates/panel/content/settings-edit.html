@@ -1,0 +1,118 @@
+<form class="form-horizontal" action="/panel/settings/edit/send/" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<legend>Редактирование общих настроек</legend>
+	<fieldset>
+		{% csrf_token %}
+		<input type="hidden" name="redirect_good_url" value="/panel/settings/edit/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/settings/edit/">
+		<div class="control-group">
+			<label class="control-label">Шоу №1</label>
+			<div class="controls">
+				<select name="showid1">
+					<option value="-1"></option>
+					{% for show in shows %}
+						{% if fs == None %}
+							<option value="{{ show.id }}"{% if show == settings.show1 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% else %}
+							<option value="{{ show.id }}"{% if show.id == fs.values.showid1 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Шоу №2</label>
+			<div class="controls">
+				<select name="showid2">
+					<option value="-1"></option>
+					{% for show in shows %}
+						{% if fs == None %}
+							<option value="{{ show.id }}"{% if show == settings.show2 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% else %}
+							<option value="{{ show.id }}"{% if show.id == fs.values.showid2 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Шоу №3</label>
+			<div class="controls">
+				<select name="showid3">
+					<option value="-1"></option>
+					{% for show in shows %}
+						{% if fs == None %}
+							<option value="{{ show.id }}"{% if show == settings.show3 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% else %}
+							<option value="{{ show.id }}"{% if show.id == fs.values.showid3 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Шоу №4</label>
+			<div class="controls">
+				<select name="showid4">
+					<option value="-1"></option>
+					{% for show in shows %}
+						{% if fs == None %}
+							<option value="{{ show.id }}"{% if show == settings.show4 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% else %}
+							<option value="{{ show.id }}"{% if show.id == fs.values.showid4 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Шоу №5</label>
+			<div class="controls">
+				<select name="showid5">
+					<option value="-1"></option>
+					{% for show in shows %}
+						{% if fs == None %}
+							<option value="{{ show.id }}"{% if show == settings.show5 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% else %}
+							<option value="{{ show.id }}"{% if show.id == fs.values.showid5 %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Задний фон</label>
+			<div class="controls">
+				<div class="thumbnail"><img src="/media_files/{{ settings.background }}"></div>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<label class="radio"><input type="radio" name="background_change" value="no"{% if fs == None or fs.values.background_change == "no" %} checked{% endif %}>Оставить прежний</label>
+				<label class="radio"><input type="radio" name="background_change" value="delete"{% if fs.values.background_change == "delete" %} checked{% endif %}>Удалить</label>
+				<label class="radio"><input type="radio" name="background_change" value="new_background"{% if fs.values.background_change == "new_background" %} checked{% endif %}>Загрузить новый</label>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("input[name=background_change]").change(function() {
+					if ($(this).val() == "new_background") {
+						$("#new-background").fadeIn();
+					} else {
+						$("#new-background").fadeOut();
+					}
+				});
+			});
+		</script>
+		<div class="control-group {% if fs.errors.new_background %} error{% endif %}" id="new-background"{% if fs == None or not fs.values.background_change == "new_background" %} style="display: none;"{% endif %}>
+			<label class="control-label">Новый фон</label>
+			<div class="controls">
+				<input type="file" name="new_background">
+			</div>
+		</div>
+		
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Редактировать</button>
+	</div>
+</form>

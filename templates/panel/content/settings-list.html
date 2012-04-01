@@ -1,0 +1,67 @@
+<form class="form-horizontal">
+<legend>Общие настройки</legend>
+<fieldset>
+	<div class="control-group">
+		<label class="control-label" style="font-size : 18px">Шоу №1</label>
+		<label class="control-label" style="font-size : 17px">
+			{% if settings.show1 != None %}
+				{{ settings.show1.title }}
+			{% else %}
+				-
+			{% endif %}
+		</label>
+	</div>
+	<div class="control-group">
+		<label class="control-label" style="font-size : 18px">Шоу №2</label>
+		<label class="control-label" style="font-size : 17px">
+			{% if settings.show2 != None %}
+				{{ settings.show2.title }}
+			{% else %}
+				-
+			{% endif %}
+		</label>
+	</div>
+	<div class="control-group">
+		<label class="control-label" style="font-size : 18px">Шоу №3</label>
+		<label class="control-label" style="font-size : 17px">
+			{% if settings.show3 != None %}
+				{{ settings.show3.title }}
+			{% else %}
+				-
+			{% endif %}
+		</label>
+	</div>
+	<div class="control-group">
+		<label class="control-label" style="font-size : 18px">Шоу №4</label>
+		<label class="control-label" style="font-size : 17px">
+			{% if settings.show4 != None %}
+				{{ settings.show4.title }}
+			{% else %}
+				-
+			{% endif %}
+		</label>
+	</div>
+	<div class="control-group">
+		<label class="control-label" style="font-size : 18px">Шоу №5</label>
+		<label class="control-label" style="font-size : 17px">
+			{% if settings.show5 != None %}
+				{{ settings.show5.title }}
+			{% else %}
+				-
+			{% endif %}
+		</label>
+	</div>
+	<div class="control-group">
+		<label class="control-label" style="font-size : 18px">Задний фон</label>
+		<div class="controls" style="font-size : 18px">
+			<img src="/media_files/{{ settings.background }}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" style="font-size : 18px">Редактирование</label>
+		<div class="controls">
+			<a href="/panel/settings/edit/" class="btn">Редактировать</a>
+		</div>
+	</div>
+</fieldset>
+</form>

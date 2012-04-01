@@ -103,7 +103,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'channel21.urls'
 
 TEMPLATE_DIRS = (
-	"/home/gasya/Documents/21channel.ru/templates"
+	"/home/sankear/work/21channel.ru-2/21channel.ru/templates"
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -125,6 +125,8 @@ INSTALLED_APPS = (
     'shows',
     'episodes',
     'styles',
+    'schedule',
+    'mainsettings',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

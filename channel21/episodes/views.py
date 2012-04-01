@@ -17,10 +17,10 @@ def create_episode(request):
 		evaluate_char_field(request, "title", 1000, data, values, errors)
 		evaluate_char_field(request, "description", 10000, data, values, errors)
 		evaluate_char_field(request, "source", 100, data, values, errors)
-		if len(data) == 3:
+		evaluate_char_field(request, "code", 100, data, values, errors)
+		if len(data) == 4:
 			if data["source"] == "YouTube":
 				data["source_value"] = "Y"
-			evaluate_char_field(request, "code", 100, data, values, errors)
 			if len(data) == 5:
 				if "showid" in request.POST:
 					showid = int(request.POST["showid"])
@@ -28,12 +28,10 @@ def create_episode(request):
 					if shows.count() != 0:
 						data["show"] = shows[0]
 				newvideo = Video.objects.create(source = data["source_value"], code = data["code"])
-				newvideo.save()
 				if len(data) == 5:
 					episode = Episode.objects.create(title = data["title"], description = data["description"], video = newvideo)
 				else:
 					episode = Episode.objects.create(title = data["title"], description = data["description"], video = newvideo, show = data["show"])
-				episode.save()
 				return redirect(request.POST["redirect_good_url"])
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 	except:
@@ -79,7 +77,6 @@ def update_episode(request):
 						if episode.video != None:
 							episode.video.delete()
 						newvideo = Video.objects.create(source = data["source_value"], code = data["code"])
-						newvideo.save()
 						episode.video = newvideo
 						episode.title = data["title"]
 						episode.description = data["description"]

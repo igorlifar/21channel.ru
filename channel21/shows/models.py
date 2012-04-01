@@ -12,7 +12,7 @@ class Show(models.Model):
 	title = models.CharField(max_length = 1000, blank = True)
 	schedule = models.CharField(max_length = 1000, blank = True)
 	description = models.CharField(max_length = 10000, blank = True)
-	background = models.ImageField(upload_to = "shows/")
+	background = models.ImageField(upload_to = "shows/", blank = True)
 	
 	def load_image(self, img):
 		content = ContentFile(img.read())

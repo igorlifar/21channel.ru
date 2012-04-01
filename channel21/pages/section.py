@@ -3,6 +3,8 @@ from news.models import NewsItem
 from episodes.models import Episode
 from shows.models import Show
 from archive.models import Archive
+from schedule.models import Program
+from mainsettings.models import MainSettings
 
 def get_panel_section(request):
 	path = request.path.strip('/').split('/')
@@ -13,6 +15,13 @@ def get_panel_section(request):
 		
 		if path[1] == 'login':
 			return ['login']
+		
+		if path[1] == 'settings':
+			if len(path) == 2 or path[2] == 'list':
+				return ['settings', 'list']
+				
+			if path[2] == 'edit':
+				return ['settings', 'edit']
 		
 		if path[1] == 'news':
 			if len(path) == 2 or path[2] == 'list':
@@ -67,7 +76,18 @@ def get_panel_section(request):
 				
 				return ['episodes', 'edit', path[3]]
 		
+		if path[1] == 'schedule':
+			if len(path) == 2 or path[2] == 'list':
+				return ["schedule", 'list']
 				
+			if path[2] == 'add':
+				return ['schedule', 'add']
+				
+			if path[2] == 'edit':
+				if len(path) == 3 or Program.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ['schedule', 'edit', path[3]]
 			
 		
 	raise Http404

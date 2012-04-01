@@ -1,6 +1,7 @@
 from shows.models import *
 from episodes.models import *
 from utils.views import *
+from mainsettings.models import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf
@@ -22,6 +23,10 @@ def create_show(request):
 		if "background_change" in request.POST:
 			values["background_change"] = request.POST["background_change"]
 		errors["background"] = False	
+		values["illustration_change"] = "no"
+		if "illustration_change" in request.POST:
+			values["illustration_change"] = request.POST["illustration_change"]
+		errors["illustration"] = False
 		if len(data) == 3:
 			newshow = Show.objects.create(title = data["title"], schedule = data["schedule"], description = data["description"])
 			if "background" in request.FILES:
@@ -31,6 +36,16 @@ def create_show(request):
 				except:
 					newshow.delete()
 					errors["background"] = True
+					return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
+			if "illustration" in request.FILES:
+				values["illustration"] = "illustration"
+				try:
+					newshow.load_illustration(request.FILES["illustration"])
+				except:
+					if newshow.background.__nonzero__():
+						newshow.background.delete()
+					newshow.delete()
+					errors["illustration"] = True
 					return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 			return redirect(request.POST["redirect_good_url"])
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
@@ -47,8 +62,25 @@ def delete_show(request):
 				for episode in Episode.objects.filter(show = cshow):
 					episode.show = None
 					episode.save()
+				for mainsettings in MainSettings.objects.filter(show1 = cshow):
+					mainsettings.show1 = None
+					mainsettings.save()
+				for mainsettings in MainSettings.objects.filter(show2 = cshow):
+					mainsettings.show2 = None
+					mainsettings.save()
+				for mainsettings in MainSettings.objects.filter(show3 = cshow):
+					mainsettings.show3 = None
+					mainsettings.save()
+				for mainsettings in MainSettings.objects.filter(show4 = cshow):
+					mainsettings.show4 = None
+					mainsettings.save()
+				for mainsettings in MainSettings.objects.filter(show5 = cshow):
+					mainsettings.show5 = None
+					mainsettings.save()
 				if cshow.background.__nonzero__():
 					cshow.background.delete()
+				if cshow.illustration.__nonzero__():
+					cshow.illustration.delete()
 				cshow.delete()
 		return redirect(request.POST["redirect_url"])
 	except:
@@ -71,6 +103,10 @@ def update_show(request):
 				if "background_change" in request.POST:
 					values["background_change"] = request.POST["background_change"]
 				errors["new_background"] = False
+				values["illustration_change"] = "no"
+				if "illustration_change" in request.POST:
+					values["illustration_change"] = request.POST["illustration_change"]
+				errors["new_illustration"] = False
 				if len(data) == 3:
 					show.title = data["title"]
 					show.schedule = data["schedule"]
@@ -89,6 +125,19 @@ def update_show(request):
 								return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 					else:
 						errors["background_change"] = True
+					if "illustration_change" in request.POST:
+						illustration_change = request.POST["illustration_change"]
+						values["illustration_change"] = illustration_change
+						if illustration_change == "delete" and show.illustration.__nonzero__():
+							show.illustration.delete()
+						if illustration_change == "new_illustration" and "new_illustration" in request.FILES:
+							try:
+								show.load_illustration(request.FILES["new_illustration"])
+							except:
+								errors["new_illustration"] = True
+								return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
+					else:
+						errors["illustration_change"] = True
 					return redirect(request.POST["redirect_good_url"])
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"showid" : True}})))

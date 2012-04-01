@@ -1,0 +1,33 @@
+{% for day in week %}
+	<legend>{{ day.title }}</legend>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Заголовок</th>
+				<th>Описание</th>
+				<th>Время начала</th>
+				<th>Время конца</th>
+				<th>Действия</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for program in day.programs %}
+				<tr>
+					<td>{{ program.title }}</td>
+					<td>{{ program.description }}</td>
+					<td>{{ program.starttime }}</td>
+					<td>{{ program.finishtime }}</td>
+					<td style="width: 200px;">
+						<a href="/panel/schedule/edit/{{ program.id }}/" class="btn">Редактировать</a>
+						<form style="display: inline-block;" action="/panel/schedule/delete/" method="POST">
+							{% csrf_token %}
+							<input type="hidden" name="programid" value="{{ program.id }}">
+							<input type="hidden" name="redirect_url" value="/panel/schedule/list/">
+							<button type="submit" class="btn btn-danger">Удалить</button>
+						</form>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endfor %}

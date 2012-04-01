@@ -5,16 +5,16 @@
 		<input type="hidden" name="episodeid" value="{{ episode.id }}">
 		<input type="hidden" name="redirect_good_url" value="/panel/episodes/edit/{{ episode.id }}/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/episodes/edit/{{ episode.id }}/">
-		<div class="control-group">
-			<label class="control-label">Заголовок</label>
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
+			<label class="control-label{% if fs.errors.title %} error{% endif %}">Заголовок</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="title" value="{{ episode.title }}">
+				<input type="text" class="input-xlarge" name="title" value="{% if fs == None %}{{ episode.title }}{% else %}{{ fs.values.title }}{% endif %}">
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.description %} error{% endif %}">
 			<label class="control-label">Описание</label>
 			<div class="controls">
-				<textarea class="input-xlarge" name="description" style="height: 80px;">{{ episode.description }}</textarea>
+				<textarea class="input-xlarge" name="description" style="height: 80px;">{% if fs == None %}{{ episode.description }}{% else %}{{ fs.values.description }}{% endif %}</textarea>
 			</div>
 		</div>
 		
@@ -24,26 +24,35 @@
 				<select name="showid">
 					<option value="-1"></option>
 					{% for show in shows %}
-						<option value="{{ show.id }}"{% if show == episode.show %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% if fs == None %}
+							<option value="{{ show.id }}"{% if show == episode.show %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% else %}
+							<option value="{{ show.id }}"{% if show.id == fs.values.showid %} selected="selected"{% endif %}>{{ show.title }}</option>
+						{% endif %}
 					{% endfor %}
 				</select>
 			</div>
 		</div>
 		
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.source %} error{% endif %}">
 			<label class="control-label">Тип видео</label>
 			<div class="controls">
 				<select name="source">
-					<option value=""></option>
-					<option value="YouTube"{% if episode.video.source == "Y" %} selected="selected"{% endif %}>YouTube</option>
+					{% if fs == None %}
+						<option value=""></option>
+						<option value="YouTube"{% if episode.video.source == "Y" %} selected="selected"{% endif %}>YouTube</option>
+					{% else %}
+						<option value=""></option>
+						<option value="YouTube"{% if fs.values.source == "YouTube" %} selected="selected"{% endif %}>YouTube</option>
+					{% endif %}
 				</select>
 			</div>
 		</div>
 		
-		<div class="control-group">
+		<div class="control-group{% if fs.errors.code %} error{% endif %}">
 			<label class="control-label">Код видео</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" name="code" value="{{ episode.video.code }}">
+				<input type="text" class="input-xlarge" name="code" value="{% if fs == None %}{{ episode.video.code }}{% else %}{{ fs.values.code }}{% endif %}">
 			</div>
 		</div>
 		
