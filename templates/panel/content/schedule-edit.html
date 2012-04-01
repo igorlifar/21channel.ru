@@ -32,7 +32,7 @@
 		<div class="control-group{% if fs.errors.dayofweek %} error{% endif %}">
 			<label class="control-label">День недели</label>
 			<div class="controls">
-				<select name="dayofweek">
+				<select name="dayofweek" style="width : 100px;">
 					<option value="-1"></option>
 					{% if fs == None %}
 						<option value="0"{% if program.dayofweek == 0 %} selected="selected"{% endif %}>Понедельник</option>
