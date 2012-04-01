@@ -11,6 +11,30 @@
 	float: left;
 }
 
+.row {
+	overflow: hidden;
+}
+
+.row > div {
+	float: left;
+}
+
 .span12 {
+	width: 976px;
+	padding: 10px;
+}
+
+.span8 {
+	width: 644px;
+	padding: 10px;
+}
+
+.span4 {
+	width: 312px;
+	padding: 10px;
+}
+
+.span12.container {
+	padding: 0;
 	width: 996px;
 }
