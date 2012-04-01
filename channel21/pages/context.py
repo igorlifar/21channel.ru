@@ -178,6 +178,40 @@ def get_site_context(s, request):
 		
 	ms = MainSettings.objects.all()[0]
 	res["background"] = ms.background
+	shows = [
+		{
+			"title" : ms.show1.title,
+			"schedule" : ms.show1.schedule,
+			"description" : ms.show1.description,
+			"image" : "/media_files/" + ms.show1.illustration.url
+		},
+		{
+			"title" : ms.show2.title,
+			"schedule" : ms.show2.schedule,
+			"description" : ms.show2.description,
+			"image" : "/media_files/" + ms.show2.illustration.url
+		},
+		{
+			"title" : ms.show3.title,
+			"schedule" : ms.show3.schedule,
+			"description" : ms.show3.description,
+			"image" : "/media_files/" + ms.show3.illustration.url
+		},
+		{
+			"title" : ms.show4.title,
+			"schedule" : ms.show4.schedule,
+			"description" : ms.show4.description,
+			"image" : "/media_files/" + ms.show4.illustration.url
+		},
+		{
+			"title" : ms.show5.title,
+			"schedule" : ms.show5.schedule,
+			"description" : ms.show5.description,
+			"image" : "/media_files/" + ms.show5.illustration.url
+		}
+	]
+	
+	res["shows"] = json.dumps(shows)
 	
 	if s[0] == 'index':
 		res['css'] = 'site.css'

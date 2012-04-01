@@ -4,6 +4,7 @@
 			<th>Заголовок</th>
 			<th>Описание</th>
 			<th>Расписание</th>
+			<th>Иллюстрация</th>
 			<th>Задний фон</th>
 			<th>Действия</th>
 		</tr>
@@ -14,6 +15,7 @@
 				<td>{{ m.title }}</td>
 				<td>{{ m.description }}</td>
 				<td>{{ m.schedule }}</td>
+				<td style="width: 100px;"><div class="thumbnail"><img style="width: 90px;" src="/media_files/{{ m.illustration }}"></div></td>
 				<td style="width: 100px;"><div class="thumbnail"><img style="width: 90px;" src="/media_files/{{ m.background }}"></div></td>
 				<td style="width: 200px;">
 					<a href="/panel/shows/edit/{{ m.id }}/" class="btn">Редактировать</a>

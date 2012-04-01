@@ -1,7 +1,7 @@
 from django.db import models
 import StringIO
 from random import randint
-from PIL import Image
+from PIL import Image, ImageOps
 from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
@@ -19,7 +19,7 @@ class NewsItem(models.Model):
 		content = ContentFile(img.read())
 		content.seek(0)
 		current = Image.open(content)
-		current.thumbnail((300, 300), Image.ANTIALIAS)
+		current = ImageOps.fit(current, (300, 300), Image.ANTIALIAS)
 		tmp = StringIO.StringIO()
 		name = hex(randint(1, 10**50)) + ".jpg"
 		current.save(tmp, "JPEG")

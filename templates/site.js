@@ -1,1 +1,1 @@
-2
+{% include 'site/content/widgets/shows-banner.js' %}

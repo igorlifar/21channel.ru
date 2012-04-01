@@ -25,6 +25,31 @@
 		</div>
 		
 		<div class="control-group">
+			<label class="control-label">Иллюстрация</label>
+			<div class="controls">
+				<label class="radio"><input type="radio" name="illustration_change" value="no"{% if fs == None or fs.values.illustration_change == "no" %} checked{% endif %}>Не добавлять иллюстрацию</label>
+				<label class="radio"><input type="radio" name="illustration_change" value="illustration"{% if fs.values.illustration_change == "illustration" %} checked{% endif %}>Загрузить иллюстрацию</label>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("input[name=illustration_change]").change(function() {
+					if ($(this).val() == "illustration") {
+						$("#illustration").fadeIn();
+					} else {
+						$("#illustration").fadeOut();
+					}
+				});
+			});
+		</script>
+		<div class="control-group{% if fs.errors.illustration %} error{% endif %}" id="illustration"{% if fs == None or fs.values.illustration_change == "no" %} style="display: none;"{% endif %}>
+			<label class="control-label">Фото иллюстрации</label>
+			<div class="controls">
+				<input type="file" name="illustration">
+			</div>
+		</div>
+		
+		<div class="control-group">
 			<label class="control-label">Задний фон</label>
 			<div class="controls">
 				<label class="radio"><input type="radio" name="background_change" value="no"{% if fs == None or fs.values.background_change == "no" %} checked{% endif %}>Не добавлять фон</label>
@@ -33,7 +58,7 @@
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function () {
-				$("input[type=radio]").change(function() {
+				$("input[name=background_change]").change(function() {
 					if ($(this).val() == "background") {
 						$("#background").fadeIn();
 					} else {

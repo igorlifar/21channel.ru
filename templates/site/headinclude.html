@@ -1,4 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/styles/{{ css }}" />
-<script type="text/javascript" src="/scripts/{{ js }}" /></script>
+<script type="text/javascript">
+	var shows = {{ shows|safe }};
+</script>
 <script type="text/javascript" src="{{ static }}jquery.js" /></script>
+<script type="text/javascript" src="/scripts/{{ js }}" /></script>
 <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:700&amp;subset=cyrillic,latin" rel="stylesheet" type="text/css">
