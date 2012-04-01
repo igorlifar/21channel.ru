@@ -1,1 +1,15 @@
-{% include 'site/content/widgets/shows-banner.html' %}
+<div class="row">
+	<div class="span12">
+		{% include 'site/content/widgets/shows-banner.html' %}
+	</dov>
+</div>
+<div class="row">
+	{% if s.0 == 'shows' %}
+	<div class="span8">
+		1
+	</div>
+	<div class="span4">
+		2
+	</div>
+	{% endif %}
+</div>
