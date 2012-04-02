@@ -109,12 +109,13 @@ def get_site_section(request):
 		if len(path) == 1:
 			return ['archive', 'list']
 			
-		if len(path) == 3 and path[1] == 'category':
+		if len(path) == 2:
 			try:
-				cat = Archive.objects.get(id=int(path[2]))
-				return ['archive', 'category', path[2]]
+				cat = Archive.objects.get(id=int(path[1]))
+				return ['archive', path[1]]
 			except:
 				raise Http404
+
 			
 	if len(path) == 2 and path[0] == 'episode':
 		try:

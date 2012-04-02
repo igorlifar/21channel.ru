@@ -1,0 +1,19 @@
+<div id="shows">
+	<h1>Шоу</h1>
+	<ul>
+		{% for m in shows1 %}
+			<li>
+				<div class="img">
+					<img src="{{ media }}{{ m.illustration }}">
+				</div>
+				<div class="info">
+					<h3>{{ m.title }}</h3>
+					<p>{{ m.description }}</p>
+				</div>
+				<div class="view">
+					<a href="/shows/{{ m.id }}/">Подробнее</a>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

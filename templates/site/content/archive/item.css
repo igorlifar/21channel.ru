@@ -1,0 +1,29 @@
+#eps img {
+	width: 100px;
+	display: block;
+	float: left;
+}
+
+#eps li {
+	overflow: hidden;
+	padding-top: 5px;
+}
+
+#eps ul {
+	margin-top: 10px;
+}
+
+#eps div {
+	width: 500px;
+	float: left;
+	padding-left: 5px;
+}
+
+#eps h3 {
+	font-size: 20px;
+}
+
+#eps .cut {
+	text-align: right;
+	padding-top: 10px;
+}

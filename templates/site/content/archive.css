@@ -1,0 +1,5 @@
+{% if s.1 == "list" %}
+	{% include 'site/content/archive/list.css' %}
+{% else %}
+	{% include 'site/content/archive/item.css' %}
+{% endif %}

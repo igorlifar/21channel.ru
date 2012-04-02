@@ -94,5 +94,16 @@
 .video-site .cm {
 	padding-top: 5px;
 	font-size: 12px;
-	color: white;
+}
+
+
+#content a {
+	font-family: sans-serif;
+	color: rgb(149, 22, 26);
+	text-decoration: none;
+}
+
+#content a:hover {
+	color: black;
+	text-decoration: underline;
 }

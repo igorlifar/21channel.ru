@@ -1,0 +1,28 @@
+#show > img {
+	display: block;
+	float: right;
+	border: 1px solid #ccc;
+	padding: 1px;
+	width: 300px;
+}
+
+#show {
+	overflow: hidden;
+}
+
+#ep-list img {
+	width: 100px;
+	border: solid 1px #ccc;
+	padding: 1px;
+}
+
+#ep-list li {
+	font-family: sans-serif;
+	overflow: hidden;
+}
+
+#ep-list li > div {
+	width: 200px;
+	float: right;
+	
+}

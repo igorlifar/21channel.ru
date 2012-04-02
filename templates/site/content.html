@@ -1,4 +1,6 @@
-{% include 'site/content/widgets/shows-banner.html' %}
+{% if s.0 != 'shows' or s.1 == 'list' %}
+	{% include 'site/content/widgets/shows-banner.html' %}
+{% endif %}
 
 {% if s.0 == "index" %}
 	{% include 'site/content/index.html' %}
@@ -22,4 +24,8 @@
 
 {% if s.0 == "news" %}
 	{% include 'site/content/news.html' %}
+{% endif %}
+
+{% if s.0 == "episode" %}
+	{% include 'site/content/episode.html' %}
 {% endif %}

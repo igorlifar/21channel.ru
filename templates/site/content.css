@@ -23,3 +23,8 @@
 {% if s.0 == "news" %}
 	{% include 'site/content/news.css' %}
 {% endif %}
+
+
+{% if s.0 == "episode" %}
+	{% include 'site/content/episode.css' %}
+{% endif %}

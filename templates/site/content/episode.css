@@ -1,0 +1,18 @@
+#ep-sh > div {
+	overflow: hidden;
+}
+
+#ep-sh h1 {
+	margin-bottom: 10px;
+}
+
+#ep-sh p {
+	font-size: 20px;
+}
+
+#ep-sh a {
+	font-family: sans-serif;
+	color: rgb(149, 22, 26);
+	font-size: 18px;
+	text-decoration: none;
+}

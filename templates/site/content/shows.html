@@ -1,0 +1,26 @@
+
+{% if show.background %}
+<style type="text/css">
+	body {
+	background-image: url({{ media }}{{ show.background }}) !important;	
+	}
+</style>
+{% endif %}
+
+<div class="row">
+	{% if s.1 != 'list' and s.size == 2 %}
+			{% include 'site/content/shows/show.html' %}
+	{% endif %}
+	{% if s.1 == 'list' %}
+		<div class="span8">
+			{% include 'site/content/shows/list.html' %}
+		</div>
+		<div class="span4">
+		</div>
+	{% endif %}
+	
+	{% if s.size == 4 %}
+		{% include 'site/content/shows/episode.html' %}
+	{% endif %}
+	
+</div>

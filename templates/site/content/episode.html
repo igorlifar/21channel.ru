@@ -1,0 +1,9 @@
+{% load episode_extras %}
+
+<div class="span12" id="ep-sh">
+	<h1>{{ ep.title }}</h1>
+	<div>
+		{{ ep|player:'100%x600'|safe }}
+	</div>
+	<p>{{ ep.description }}</p>
+</div>

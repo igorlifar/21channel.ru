@@ -1,0 +1,23 @@
+{% load episode_extras %}
+
+<div class="row">
+	<div class="span8" id="eps">
+		<h1>{{ cat.title }}</h1>
+		
+		<ul>
+			{% for e in eps %}
+				<li>
+					<a href="{% if e.show %}/shows/{{ e.show.id }}/episode/{{ e.id }}/{% else %}/episode/{{ e.id }}/{% endif %}"><img src="{{ e|screenshot }}"></a>
+					<div>
+						<h3>{{ e.title }}</h3>
+						<p>{{ e.description }}</p>
+						<p class="cut"><a href="{% if e.show %}/shows/{{ e.show.id }}/episode/{{ e.id }}/{% else %}/episode/{{ e.id }}/{% endif %}">Просмотр</a></p>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+		
+	</div>
+	<div class="span4">
+	</div>
+</div>

@@ -1,0 +1,25 @@
+{% load episode_extras %}
+
+<div class="span12">
+<h1>{{ show.title }}</h1>
+</div>
+<div class="span8" id="show">
+	
+	<h2>{{ show.schedule }}</h2>
+	<img src="{{ media }}{{ show.illustration }}">
+	<p>{{ show.description }}</p>
+</div>
+<div class="span4">
+	<h2>Эпизоды</h2>
+	<ul id="ep-list">
+		{% for ep in eps %}
+			<li>
+				<a href="episode/{{ ep.id }}"><img src="{{ ep|screenshot }}"></a>
+				<div>
+					<h3>{{ ep.title }}</h3>
+					<p>{{ ep.description }}</p>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

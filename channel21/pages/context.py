@@ -245,15 +245,20 @@ def get_site_context(s, request):
 			res['js'] = 'archive-list.js'
 			res["archives"] = []
 			for archive in Archive.objects.all():
-				res["archives"].append({"title" : archive.title, "width" : 225 * archive.episodes.all().count(), "episodes" : archive.episodes.all()})
-				
-		elif s[1] == 'category':
+				res["archives"].append({"title" : archive.title, "width" : 225 * archive.episodes.all().count(), "id": archive.id, "episodes" : archive.episodes.all()})
+
+		else:
 			res['css'] = 'archive-category.css'
 			res['js'] = 'archive-category.js'
+			
+			res['cat'] = Archive.objects.get(id=s[1])
+			res['eps'] = res['cat'].episodes.all()
 			
 	if s[0] == 'episode':
 		res['css'] = 'episode.css'
 		res['js'] = 'episode.js'
+		
+		res['ep'] = Episode.objects.get(id=s[1])
 		
 	if s[0] == 'schedule':
 		res['css'] = 'schedule.css'
@@ -277,18 +282,34 @@ def get_site_context(s, request):
 			res['m'] = NewsItem.objects.get(id=int(s[1]))
 			
 	if s[0] == 'shows':
+		
+		try:
+			res['show'] = Show.objects.get(id=s[1])
+		except:
+			pass
+		
 		if len(s) == 1 or s[1] == 'list':
 			res['css'] = 'shows-list.css'
 			res['js'] = 'shows-list.js'
 			
-			res['shows'] = Show.objects.all()
+			res['shows1'] = Show.objects.all()
 			
 		elif len(s) == 2:
 			res['css'] = 'shows-show.css'
 			res['js'] = 'shows-show.js'
+			
+			res['show'] = Show.objects.get(id=int(s[1]))
+			
+			sh = Show.objects.get(id=int(s[1]))
+			eps = Episode.objects.filter(show=sh).all()
+			
+			res['eps'] = eps
+			
 		elif s[2] == 'episode':
 			res['css'] = 'shows-show-episode.css'
 			res['js'] = 'shows-show-episode.js'
+			
+			res['ep'] = Episode.objects.get(id=int(s[3]))
 	
 	
 	return res
