@@ -1,44 +1,21 @@
-#video-cont {
-	height : 300px;
-}
+{% include 'site/content/widgets/shows-banner.css' %}
 
-#cross-menu {
-	margin-left: 3px;
-	overflow: hidden;
-}
+{% if s.0 == "index" %}
+	{% include 'site/content/index.css' %}
+{% endif %}
 
-#cross-menu li {
-	cursor: pointer;
-	text-transform: uppercase;
-	font-family: 'PT Sans Narrow', sans-serif;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 32px;
-	text-align: center;
-	color: white;
-	float: left;
-	width: 200px;
-	height: 32px;
-	background: #a5a3a4 url("/static_files/img/cross-gray.png") left;
-	background-repeat: no-repeat;
-}
+{% if s.0 == "shows" %}
+	{% include 'site/content/shows.css' %}
+{% endif %}
 
-#cross-menu li:first-child {
-	background: #a5a3a4;
-}
+{% if s.0 == "archive" %}
+	{% include 'site/content/archive.css' %}
+{% endif %}
 
-#cross-menu li + li {
-	background-image: url("/static_files/img/cross-gray.png");
-}
+{% if s.0 == "schedule" %}
+	{% include 'site/content/schedule.css' %}
+{% endif %}
 
-#cross-menu li.active {
-	background-color: black;
-}
-
-#cross-menu li.active + li {
-	background-image: url("/static_files/img/cross-black.png");
-}
-
-#cross-menu li:last-child {
-	background-color: transparent;
-}
+{% if s.0 == "coverage" %}
+	{% include 'site/content/coverage.css' %}
+{% endif %}

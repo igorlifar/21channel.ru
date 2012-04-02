@@ -1,28 +1,21 @@
-<div class="row">
-	<div class="span12">
-		<div id="video-cont">
-			<div id="video-car">
-				{% include 'site/content/widgets/shows-banner.html' %}
-			</div>
-			<div id="video-vid"></div>
-		</div>
-	</dov>
-</div>
-<div class="row">
-	<ul id="cross-menu">
-		<li id="show-car-btn" class="active">Главные шоу</li>
-		<li id="show-car-btn2">Местные шоу</li>
-		<li id="show-video-btn">Online</li>
-		<li></li>
-	</ul>
-</div>
-<div class="row">
-	{% if s.0 == 'shows' %}
-	<div class="span8">
-		1
-	</div>
-	<div class="span4">
-		2
-	</div>
-	{% endif %}
-</div>
+{% include 'site/content/widgets/shows-banner.html' %}
+
+{% if s.0 == "index" %}
+	{% include 'site/content/index.html' %}
+{% endif %}
+
+{% if s.0 == "shows" %}
+	{% include 'site/content/shows.html' %}
+{% endif %}
+
+{% if s.0 == "archive" %}
+	{% include 'site/content/archive.html' %}
+{% endif %}
+
+{% if s.0 == "schedule" %}
+	{% include 'site/content/schedule.html' %}
+{% endif %}
+
+{% if s.0 == "coverage" %}
+	{% include 'site/content/coverage.html' %}
+{% endif %}

@@ -99,76 +99,24 @@ $(document).ready(function(){
 	
 } );
 
-function showVideo(){
-	if($("#video-cont").data("lock")){
-		return;
-	}
-	$("#video-cont").data("lock", true);
-	$("#video-car").animate({
-		opacity : 0
-	}, "slow", function(){
-		$("#video-car").css("display", "none");
-		loadVideo($("#video-vid"));
-		$("#video-cont").data("lock", false);
-	});
-}
+{% include 'site/content/widgets/shows-banner.js' %}
 
-function showContent(){
-	if($("#video-cont").data("lock")){
-		return;
-	}
-	$("#video-cont").data("lock", true);
-	loadContainer($("#video-vid"), "", function(){
-		$("#video-car").css("display", "block");
-		$("#video-car").animate({
-			opacity : 1
-		}, "slow", function(){
-			$("#video-cont").data("lock", false);
-		});
-	});
-}
+{% if s.0 == "index" %}
+	{% include 'site/content/index.js' %}
+{% endif %}
 
-var settings = {
-	urlPlayer : "/static_files/flowplayer/flowplayer-3.2.8.swf",
-	urlPlayerRTMP : "/static_files/flowplayer/flowplayer.rtmp-3.2.8.swf",
-	streams : [{url : "plus500"}, {url : "plus1000"}],
-	connectionUrl : "rtmp://83.229.210.89/PLUS21",
-	imgButton : "/static_files/flowplayer/showme.png"
-};
+{% if s.0 == "shows" %}
+	{% include 'site/content/shows.js' %}
+{% endif %}
 
-function loadContainer(container, content, callback){
-	container.animate({
-		opacity : 0	
-	}, "slow", function(){
-		if(container.data("video") == "playing"){
-	  		$f("streams", settings.urlPlayer);
-			container.data("video", "");
-		}
-		container.html(content);
-		callback();
-	});
-}
+{% if s.0 == "archive" %}
+	{% include 'site/content/archive.js' %}
+{% endif %}
 
-function loadVideo(container){
-	container.data("video", "playing");
-	container.animate({
-		opacity : 0
-	}, "fast", function(){
-		container.html('<div class="box black"><a class="player" id="streams"><img class="button" src="' + settings.imgButton + '"></a></div>');
-		$f("streams", settings.urlPlayer, {
-    	clip : {
-        provider : 'influxis',
-        streams : settings.streams
-    	},
- 			plugins : {
-        influxis : {
-            url : settings.urlPlayerRTMP,
-            netConnectionUrl : settings.connectionUrl
-        }
-    	}
-		});
-		container.animate({
-			opacity : 1
-		}, "fast");
-	});
-}
+{% if s.0 == "schedule" %}
+	{% include 'site/content/schedule.js' %}
+{% endif %}
+
+{% if s.0 == "coverage" %}
+	{% include 'site/content/coverage.js' %}
+{% endif %}
