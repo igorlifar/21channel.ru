@@ -19,3 +19,7 @@
 {% if s.0 == "coverage" %}
 	{% include 'site/content/coverage.css' %}
 {% endif %}
+
+{% if s.0 == "news" %}
+	{% include 'site/content/news.css' %}
+{% endif %}

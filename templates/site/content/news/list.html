@@ -1,0 +1,19 @@
+<div id="news">
+	<h1>Последние новости</h1>
+	<ul>
+		{% for m in news %}
+			<li>
+				<div class="img">
+					<img src="{{ media }}{{ m.image }}">
+				</div>
+				<div class="info">
+					<h3>{{ m.title }}</h3>
+					<p>{{ m.preview }}</p>
+				</div>
+				<div class="view">
+					<a href="/news/{{ m.id }}/">Подробнее</a>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

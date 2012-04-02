@@ -1,0 +1,57 @@
+#news {
+	background: rgba(29, 29, 29, 1);
+	border: 1px rgba(241, 241, 241, 1);
+	padding: 10px;
+}
+
+#news li {
+	position: relative;
+	height: 100px;
+	padding: 10px;
+	background: url("images/shows-bg.png") center center;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-bottom: 0;
+}
+
+#news li .img {
+	position: absolute;
+	left: 10px;
+}
+
+#news .img img {
+	height: 100px;
+	width: 170px;
+}
+
+#news li .info {
+	position: absolute;
+	width: 350px;
+	left: 190px;
+}
+
+#news li .info h3 {
+	color: white;
+	font-size: 28px;
+}
+
+#news li .info p {
+	color: white;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+#news li .view {
+	display: none;
+}
+
+#news1 li .view a {
+	display: block;
+	color: #AD0100;
+	font-size: 56px;
+	padding-top: 20px;
+	text-transform: uppercase;
+	font-family: 'PT Sans Narrow', sans-serif;
+	text-decoration: none;
+	text-align: center;
+	width: 280px;
+}
