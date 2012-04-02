@@ -114,7 +114,7 @@ $(document).ready(function(){
 		ptr = (ptr + 1) % list.length;
 	}
 	
-	$("#sch-cont").html(htmlcode);
+	$("#sch-cont tr").html(htmlcode);
 	
 	$(".video-site .next-btn").click(function() {
 		$(this).parent().find(".cont").slider("moveleft", "225px");
