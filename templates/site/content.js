@@ -46,26 +46,27 @@ $(document).ready(function(){
 			}
 		}
 		var schedulecode = "";
+		var cur = 0;
 		for(var j = 0; j < sz; j++){
 			if(lst[j].value >= 5 * 60){
-				var cur = j;
-				var last = 5 * 60;
-				for(var z = 0; z < sz; z++){
-					if(lst[cur].value < last){
-						lst[cur].value = lst[cur].value + 24 * 60;
-					}
-					if(lst[cur].value != last){
-						schedulecode += "<li class=\"empty\" style=\"width : " + ((lst[cur].value - last) * 4 - 1) + "px;\">-</li>";
-					}
-					schedulecode += "<li style=\"width : " + (lst[cur].len * 4 - 1) + "px;\">" + lst[cur].title + "</li>";
-					last = lst[cur].value + lst[cur].len;
-					cur = (cur + 1) % sz;
-				}
-				if(last != 29 * 60){
-					schedulecode += "<li style=\"width : " + ((29 * 60 - last) * 4 - 1) + "px;\"></li>";
-				}
+				cur = j;
 				break;
 			}
+		}
+		var last = 5 * 60;
+		for(var j = 0; j < sz; j++){
+			if(lst[cur].value < last){
+				lst[cur].value = lst[cur].value + 24 * 60;
+			}
+			if(lst[cur].value != last){
+				schedulecode += "<li class=\"empty\" style=\"width : " + ((lst[cur].value - last) * 4 - 1) + "px;\">-</li>";
+			}
+			schedulecode += "<li style=\"width : " + (lst[cur].len * 4 - 1) + "px;\">" + lst[cur].title + "</li>";
+			last = lst[cur].value + lst[cur].len;
+			cur = (cur + 1) % sz;
+		}
+		if(last != 29 * 60){
+			schedulecode += "<li style=\"width : " + ((29 * 60 - last) * 4 - 1) + "px;\"></li>";
 		}
 		$("#day" + i).append(schedulecode);
 	}
@@ -104,8 +105,6 @@ $(document).ready(function(){
 			break;
 		}
 	}
-	
-	alert(ptr);
 	
 	var htmlcode = "";
 	

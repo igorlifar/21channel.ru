@@ -22,8 +22,8 @@ class MainSettings(models.Model):
 		content.seek(0)
 		current = Image.open(content)
 		tmp = StringIO.StringIO()
-		name = hex(randint(1, 10**50)) + ".jpg"
-		current.save(tmp, "JPEG")
+		name = hex(randint(1, 10**50)) + ".png"
+		current.save(tmp, "PNG")
 		tmp.seek(0)
 		if self.background.__nonzero__():
 			self.background.delete()
