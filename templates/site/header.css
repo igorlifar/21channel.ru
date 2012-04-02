@@ -23,6 +23,8 @@
 	right: 0;
 }
 
+{% include 'site/header/top-banner.css' %}
+
 #schedule {
 	height: 32px;
 	position: absolute;
