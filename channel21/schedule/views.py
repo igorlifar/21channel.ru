@@ -40,7 +40,7 @@ def create_program(request):
 				val2 = h2 * 60 + m2
 				if val1 > val2:
 					val2 = val2 + 24 * 60
-				for t in range(val1 + 1, val2 + 1):
+				for t in range(val1 + 1, val2):
 					if t == 5 * 60 or t == 29 * 60:
 						bad = True
 				if bad:
@@ -123,7 +123,7 @@ def update_program(request):
 						val2 = h2 * 60 + m2
 						if val1 > val2:
 							val2 = val2 + 24 * 60
-						for t in range(val1 + 1, val2 + 1):
+						for t in range(val1 + 1, val2):
 							if t == 5 * 60 or t == 29 * 60:
 								bad = True
 						if bad:
