@@ -213,6 +213,28 @@ def get_site_context(s, request):
 	
 	res["shows"] = json.dumps(shows)
 	
+	programs = []
+	
+	for i in range(0, 7):
+		programs.append([])
+		for program in Program.objects.filter(dayofweek = i):
+			cur1 = program.starttime.split(":")
+			cur2 = program.finishtime.split(":")
+			h1 = int(cur1[0])
+			m1 = int(cur1[1])
+			h2 = int(cur2[0])
+			m2 = int(cur2[1])
+			if h2 * 60 + m2 < h1 * 60 + m1:
+				h2 = h2 + 24
+			programs[i].append({
+				"title" : program.title,
+				"h" : h1,
+				"m" : m1,
+				"len" : h2 * 60 + m2 - h1 * 60 - m1
+			})
+		
+	res["programs"] = json.dumps(programs)
+	
 	if s[0] == 'index':
 		res['css'] = 'site.css'
 		res['js'] = 'site.js'
