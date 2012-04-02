@@ -70,7 +70,7 @@ def get_panel_context(s, request):
 		if s[0] == 'episodes':
 			if len(s) >= 2:
 				if s[1] == 'list':
-					res["episodes"] = Episode.objects.all()
+					res["episodes"] = Episode.objects.all().order_by('-date')
 					
 				if s[1] == 'edit':
 					res["episode"] = Episode.objects.get(id = s[2])
@@ -121,7 +121,7 @@ def get_panel_context(s, request):
 					res["archive"] = Archive.objects.get(id = s[2])
 					res["episodesinarchive"] = res["archive"].episodes.all()
 					res["episodes"] = []
-					for episode in Episode.objects.all():
+					for episode in Episode.objects.all().order_by('-date'):
 						if res["episodesinarchive"].filter(id = episode.id).count() == 0:
 							res["episodes"].append(episode)
 					
@@ -250,14 +250,14 @@ def get_site_context(s, request):
 			res['js'] = 'archive-list.js'
 			res["archives"] = []
 			for archive in Archive.objects.all():
-				res["archives"].append({"title" : archive.title, "width" : 225 * archive.episodes.all().count(), "id": archive.id, "episodes" : archive.episodes.all()})
+				res["archives"].append({"title" : archive.title, "width" : 225 * archive.episodes.all().count(), "id": archive.id, "episodes" : archive.episodes.all().order_by('-date')})
 
 		else:
 			res['css'] = 'archive-category.css'
 			res['js'] = 'archive-category.js'
 			
 			res['cat'] = Archive.objects.get(id=s[1])
-			res['eps'] = res['cat'].episodes.all()
+			res['eps'] = res['cat'].episodes.all().order_by('-date')
 			
 	if s[0] == 'episode':
 		res['css'] = 'episode.css'
@@ -306,7 +306,7 @@ def get_site_context(s, request):
 			res['show'] = Show.objects.get(id=int(s[1]))
 			
 			sh = Show.objects.get(id=int(s[1]))
-			eps = Episode.objects.filter(show=sh).all()
+			eps = Episode.objects.filter(show=sh).all().order_by('-date')
 			
 			res['eps'] = eps
 			
