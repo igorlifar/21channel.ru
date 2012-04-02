@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	
+	$(".video-site .vd").each(function(){
+		fillContainer($(this), $(this).parent().find("input").val(), "200px", "120px");
+	});
+	
 	var size = 0;
 	for(var i = 0; i < 7; i++){
 		size += programs[i].length;
@@ -80,7 +84,7 @@ $(document).ready(function(){
 	
 	for(var i = 0; i < size - 1; i++){
 		for(var j = i + 1; j < size; j++){
-			if(parseInt(list[i].value) > parseInt(list[j].val)){
+			if(parseInt(list[i].value) > parseInt(list[j].value)){
 				var swp = list[i];
 				list[i] = list[j];
 				list[j] = swp;
@@ -95,11 +99,13 @@ $(document).ready(function(){
 	ptr = 0;
 	
 	for(var i = 0; i < list.length; i++){
-		if(list.value >= curtime){
+		if(list[i].value >= curtime){
 			ptr = i;
 			break;
 		}
 	}
+	
+	alert(ptr);
 	
 	var htmlcode = "";
 	
@@ -108,6 +114,8 @@ $(document).ready(function(){
 		htmlcode += "<td class=\"show\">" + list[ptr].title + "</td>";
 		ptr = (ptr + 1) % list.length;
 	}
+	
+	$("#sch-cont").html(htmlcode);
 	
 	$(".video-site .next-btn").click(function() {
 		$(this).parent().find(".cont").slider("moveleft", "225px");
