@@ -1,7 +1,7 @@
 from django.http import Http404
 
 def parse_path(request):
-	path = request.path.replace('.js', '').replace('site', 'index').strip('/').split('/')
+	path = request.path.replace('.js', '').replace('site', 'index').replace('-', '/').strip('/').split('/')
 	return path[1:len(path)+1]
 
 def get_panel_section(request):

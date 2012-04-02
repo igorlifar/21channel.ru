@@ -176,3 +176,7 @@ $(document).ready(function(){
 {% if s.0 == "coverage" %}
 	{% include 'site/content/coverage.js' %}
 {% endif %}
+
+{% if s.0 == "news" %}
+	{% include 'site/content/news.js' %}
+{% endif %}

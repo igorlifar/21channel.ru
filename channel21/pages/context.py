@@ -263,6 +263,10 @@ def get_site_context(s, request):
 		if len(s) == 1 or s[1] == 'list':
 			res['css'] = 'news-list.css'
 			res['js'] = 'news-list.js'
+			
+			res['news'] = NewsItem.objects.all().order_by('-date')
+			
+			
 		elif s[1] == 'item':
 			res['css'] = 'news-item.css'
 			res['js'] = 'news-item.js'
