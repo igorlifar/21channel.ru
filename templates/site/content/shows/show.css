@@ -5,6 +5,18 @@
 	width: 100%;
 }
 
+.show h1 {
+	font-size: 36px;
+}
+
+.show h2 {
+	background: rgb(149, 22, 26);
+	display: inline-block;
+	margin-bottom: 5px;
+	color: white;
+	padding: 5px;
+}
+
 #show > p {
 	margin-top: 10px;
 	font-style: italic;
