@@ -28,3 +28,71 @@
 
 
 {% include 'site/content.css' %}
+
+.video-site {
+	margin-top: 10px;
+	margin-left: 10px;
+	width : 956px;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.video-site h2 {
+	font-family: 'PT Sans Narrow', sans-serif;
+	text-transform: uppercase;
+	font-size: 28px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	color: white;
+}
+
+.video-site .prev-btn,
+.video-site .cont,
+.video-site .next-btn {	
+	height: 150px;
+	float: left;
+}
+
+.video-site .prev-btn {
+	padding-left : 10px;
+	width: 20px;
+	background: url("/static_files/img/shed-prev.png") center center no-repeat;
+	cursor: pointer;
+}
+
+.video-site .next-btn {
+	width: 20px;
+	background: url("/static_files/img/shed-next.png") center center no-repeat;
+	cursor: pointer;
+}
+
+.video-site .cont {
+	width: 900px;
+	overflow: hidden;
+	position: relative;
+}
+
+.video-site ul {
+	min-width : 900px;
+	position: absolute;
+	left: 0;
+}
+
+.video-site li {
+	float: left;
+	width: 215px;
+	padding-left: 10px;
+}
+
+.video-site .vd {
+	width: 200px;
+	height: 120px;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+	background-color: black;
+}
+
+.video-site .cm {
+	padding-top: 5px;
+	font-size: 12px;
+	color: white;
+}

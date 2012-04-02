@@ -1,34 +1,23 @@
-<div class="video-site" style="background : #ccc;">
-	<h2>Промо</h2>
-		<div class="prev-btn"></div>
-		<div class="cont">
-			<ul>
-				<li>
-					<div class="vd"></div>
-					<div class="cm">FAQTЫ</div>
-				</li>
-				<li>
-					<div class="vd"></div>
-					<div class="cm">FAQTЫ</div>
-				</li>
-				<li>
-					<div class="vd"></div>
-					<div class="cm">FAQTЫ</div>
-				</li>
-				<li>
-						<div class="vd"></div>
-						<div class="cm">FAQTЫ</div>
-				</li>
-				<li>
-					<div class="vd"></div>
-					<div class="cm">FAQTЫ</div>
-				</li>
-			</ul>
-		</div>
-		<div class="next-btn"></div>
-</div>
 <div class="row">
 	<div class="span12">
 		<h1>Архив видео</h1>
 	</div>
 </div>
+{% for archive in archives %}
+	<div class="video-site" style="background : #ccc;">
+		<h2>{{ archive.title }}</h2>
+			<div class="prev-btn"></div>
+			<div class="cont">
+				<ul style="width : {{ archive.width }}px;">
+					{% for episode in archive.episodes %}
+						<li>
+							<input type="hidden" value="{{ episode.video.code }}">
+							<div class="vd"></div>
+							<div class="cm">{{ episode.title }}</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="next-btn"></div>
+	</div>
+{% endfor %}

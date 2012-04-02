@@ -243,6 +243,10 @@ def get_site_context(s, request):
 		if len(s) == 1 or s[1] == 'list':
 			res['css'] = 'archive-list.css'
 			res['js'] = 'archive-list.js'
+			res["archives"] = []
+			for archive in Archive.objects.all():
+				res["archives"].append({"title" : archive.title, "width" : 225 * archive.episodes.all().count(), "episodes" : archive.episodes.all()})
+				
 		elif s[1] == 'category':
 			res['css'] = 'archive-category.css'
 			res['js'] = 'archive-category.js'
