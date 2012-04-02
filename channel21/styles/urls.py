@@ -12,5 +12,5 @@ urlpatterns = patterns('styles',
 	url(r'^shows-list.css$', 'site.index'),
 	url(r'^shows-show.css$', 'site.index'),
 	url(r'^shows-show-episode.css$', 'site.index'),
-	url(r'^shows-banner.css', 'site.index'),
+	url(r'^shows-banner.css$', 'site.index'),
 )
