@@ -2,13 +2,19 @@
 	background: rgba(29, 29, 29, 1);
 	border: 1px rgba(241, 241, 241, 1);
 	padding: 10px;
+	font-family: sans-serif;
+}
+
+#news h1 {
+	margin-bottom: 10px;
+	color: white;
 }
 
 #news li {
 	position: relative;
 	height: 100px;
 	padding: 10px;
-	background: url("images/shows-bg.png") center center;
+	background: url({{ img }}shows-bg.png) center center;
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-bottom: 0;
 }
@@ -44,7 +50,7 @@
 	display: none;
 }
 
-#news1 li .view a {
+#news li .view a {
 	display: block;
 	color: #AD0100;
 	font-size: 56px;
@@ -54,4 +60,8 @@
 	text-decoration: none;
 	text-align: center;
 	width: 280px;
+}
+
+#news li:last-child {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
