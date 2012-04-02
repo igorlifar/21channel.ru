@@ -17,6 +17,56 @@ $(document).ready(function(){
 	};
 	
 	for(var i = 0; i < 7; i++){
+		if(programs[i].length == 0){
+			$("#day" + i).append("<li style=\"width : " + (24 * 60 * 4 - 1) + "px;\"></li>");
+			continue;
+		}
+		var sz = 0;
+		var lst = new Array(programs[i].length);
+		for(var j = 0; j < programs[i].length; j++){
+			var cur = parseInt(programs[i][j].h) * 60 + parseInt(programs[i][j].m);
+			lst[sz] = {};
+			lst[sz].value = cur;
+			lst[sz].len = parseInt(programs[i][j].len)
+			lst[sz].time = gettime(programs[i][j].h) + ":" + gettime(programs[i][j].m);
+			lst[sz].title = programs[i][j].title;
+			sz = sz + 1; 
+		}
+		for(var j = 0; j < sz - 1; j++){
+			for(var z = j + 1; z < sz; z++){
+				if(lst[j].value > lst[z].value){
+					var swp = lst[j];
+					lst[j] = lst[z];
+					lst[z] = swp;
+				}
+			}
+		}
+		var schedulecode = "";
+		for(var j = 0; j < sz; j++){
+			if(lst[j].value >= 5 * 60){
+				var cur = j;
+				var last = 5 * 60;
+				for(var z = 0; z < sz; z++){
+					if(lst[cur].value < last){
+						lst[cur].value = lst[cur].value + 24 * 60;
+					}
+					if(lst[cur].value != last){
+						schedulecode += "<li class=\"empty\" style=\"width : " + ((lst[cur].value - last) * 4 - 1) + "px;\">-</li>";
+					}
+					schedulecode += "<li style=\"width : " + (lst[cur].len * 4 - 1) + "px;\">" + lst[cur].title + "</li>";
+					last = lst[cur].value + lst[cur].len;
+					cur = (cur + 1) % sz;
+				}
+				if(last != 29 * 60){
+					schedulecode += "<li style=\"width : " + ((29 * 60 - last) * 4 - 1) + "px;\"></li>";
+				}
+				break;
+			}
+		}
+		$("#day" + i).append(schedulecode);
+	}
+	
+	for(var i = 0; i < 7; i++){
 		for(var j = 0; j < programs[i].length; j++){
 			var cur = parseInt(programs[i][j].h) * 60 + parseInt(programs[i][j].m);
 			cur = cur + i * 24 * 60;
@@ -59,7 +109,7 @@ $(document).ready(function(){
 		ptr = (ptr + 1) % list.length;
 	}
 	
-	$("#sch-cont").html(htmlcode);
+	$("#sch-cont tr").html(htmlcode);
 	
 	$("#sch-prev-btn").click(function(){
 		$("#sch-cont").slider("moveright", "202px");
