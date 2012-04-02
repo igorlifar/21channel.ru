@@ -183,31 +183,36 @@ def get_site_context(s, request):
 			"title" : ms.show1.title,
 			"schedule" : ms.show1.schedule,
 			"description" : ms.show1.description,
-			"image" : "/media_files/" + ms.show1.illustration.url
+			"image" : "/media_files/" + ms.show1.illustration.url,
+			'id': ms.show1.id
 		},
 		{
 			"title" : ms.show2.title,
 			"schedule" : ms.show2.schedule,
 			"description" : ms.show2.description,
-			"image" : "/media_files/" + ms.show2.illustration.url
+			"image" : "/media_files/" + ms.show2.illustration.url,
+			'id': ms.show2.id
 		},
 		{
 			"title" : ms.show3.title,
 			"schedule" : ms.show3.schedule,
 			"description" : ms.show3.description,
-			"image" : "/media_files/" + ms.show3.illustration.url
+			"image" : "/media_files/" + ms.show3.illustration.url,
+			'id': ms.show3.id
 		},
 		{
 			"title" : ms.show4.title,
 			"schedule" : ms.show4.schedule,
 			"description" : ms.show4.description,
-			"image" : "/media_files/" + ms.show4.illustration.url
+			"image" : "/media_files/" + ms.show4.illustration.url,
+			'id': ms.show4.id
 		},
 		{
 			"title" : ms.show5.title,
 			"schedule" : ms.show5.schedule,
 			"description" : ms.show5.description,
-			"image" : "/media_files/" + ms.show5.illustration.url
+			"image" : "/media_files/" + ms.show5.illustration.url,
+			'id': ms.show5.id
 		}
 	]
 	
