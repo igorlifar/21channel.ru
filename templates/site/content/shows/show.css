@@ -1,13 +1,24 @@
 #show > img {
 	display: block;
-	float: right;
 	border: 1px solid #ccc;
 	padding: 1px;
-	width: 300px;
+	width: 100%;
+}
+
+#show > p {
+	margin-top: 10px;
+	font-style: italic;
+	padding-left: 5px;
+	border-left: 5px solid rgb(149, 22, 26);
 }
 
 #show {
 	overflow: hidden;
+}
+
+#ep-list {
+	background-color: #eee;
+	padding: 5px;
 }
 
 #ep-list img {
@@ -19,10 +30,18 @@
 #ep-list li {
 	font-family: sans-serif;
 	overflow: hidden;
+	border-bottom: 1px solid #fff;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+#ep-list li:last-child {
+	padding-bottom: 0;
+	border-bottom: 0;
 }
 
 #ep-list li > div {
-	width: 200px;
+	width: 190px;
 	float: right;
 	
 }
