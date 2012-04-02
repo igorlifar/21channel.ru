@@ -109,7 +109,13 @@ $(document).ready(function(){
 		ptr = (ptr + 1) % list.length;
 	}
 	
-	$("#sch-cont tr").html(htmlcode);
+	$(".video-site .next-btn").click(function() {
+		$(this).parent().find(".cont").slider("moveleft", "225px");
+	});
+	
+	$(".video-site .prev-btn").click(function() {
+		$(this).parent().find(".cont").slider("moveright", "225px");
+	});
 	
 	$("#sch-prev-btn").click(function(){
 		$("#sch-cont").slider("moveright", "202px");
