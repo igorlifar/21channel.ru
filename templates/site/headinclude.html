@@ -1,3 +1,13 @@
+<title>
+{% if s.0 == 'schedule' %}Программа передач - {% endif %}
+{% if s.0 == 'shows' %}
+	 {% if s.1 == 'list' %}Шоу - {% else %}{{ show.title }} - {% endif %}
+{% endif %}
+{% if s.0 == 'news' %}Новости - {% endif %}
+{% if s.0 == 'archive' %}
+	{% if s.1 == 'list' %}Видеоархив - {% else %}{{ cat.title }} - {% endif %}
+{% endif %}
+Телеканал 21+</title>
 <link rel="stylesheet" type="text/css" href="/styles/{{ css }}" />
 <link rel="stylesheet" type="text/css" href="{{ static }}flowplayer/flowstyle.css">
 <script type="text/javascript">
@@ -11,3 +21,4 @@
 <script type="text/javascript" src="{{ static }}jquery.youtube.js"></script>
 <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:700&amp;subset=cyrillic,latin" rel="stylesheet" type="text/css">
 <!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter13690423 = new Ya.Metrika({id:13690423, enableAll: true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/13690423" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+<meta name='yandex-verification' content='41cb115065c0e2e4' />
