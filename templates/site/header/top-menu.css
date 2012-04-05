@@ -1,5 +1,6 @@
 #top-menu > ul {
 	float: right;
+	padding-right: 140px;
 	margin-top: 7px;
 	text-transform: uppercase;
 	font-family: 'PT Sans Narrow', sans-serif!important;
