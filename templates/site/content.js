@@ -162,10 +162,6 @@ $(document).ready(function(){
 	
 } );
 
-console.log("12sadasdasd");
-
-{% include 'site/content/widgets/shows-banner.js' %}
-
 {% if s.0 == "index" %}
 	{% include 'site/content/index.js' %}
 {% endif %}

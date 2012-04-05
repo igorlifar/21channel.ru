@@ -1,3 +1,7 @@
+var currentSlide;
+var sliderInterval;
+var nextSlide;
+
 $(document).ready(function(){
 	
 	$("#video-cont").data("lock", false);
@@ -105,7 +109,6 @@ function loadVideo(container){
 }
 
 $(document).ready(function(){
-        
         background_color = new Array("rgb(47, 49, 56)", "rgb(40, 39, 30)", "rgb(52, 3, 54)", "rgb(16, 19, 27)", "rgb(28, 37, 38)");
         html = "";
         for(var i = 0; i < shows.length; i++){
@@ -126,25 +129,46 @@ $(document).ready(function(){
         
 		set_cont(0);
 		
-        var current = $(".slider-list").children().eq(0);
-        current.children().eq(0).css("padding-left", "0px");
-        current.children().eq(1).css("width", "102px");
+        currentSlide = $(".slider-list").children().eq(0);
+        currentSlide.children().eq(0).css("padding-left", "0px");
+        currentSlide.children().eq(1).css("width", "102px");
+		
+		nextSlide = function(){
+			var container = $(".slider-list").find("div[num=" + ((parseInt(currentSlide.attr("num")) + 1) % shows.length) + "]");
+			if(container == currentSlide){
+				return;
+			}
+			currentSlide.children().eq(0).css("padding-left", "5px");
+			currentSlide.children().eq(1).css("width", "97px");
+			currentSlide = container;
+			currentSlide.children().eq(0).css("padding-left", "0px");
+			currentSlide.children().eq(1).css("width", "102px");
+			$(".slider-content").css("background", currentSlide.children().eq(1).css("background-color") + " url(" + currentSlide.children().eq(0).attr("src") + ") no-repeat"); 
+			$(".slider-title").html(shows[currentSlide.attr("num")].title);
+			$(".show-link").attr("href", "/shows/" + shows[currentSlide.attr("num")].id + "/")
+			$(".slider-schedule").html(shows[currentSlide.attr("num")].schedule);
+			$(".slider-description").html(shows[currentSlide.attr("num")].description);
+		};
+	
+		sliderInterval = setInterval(nextSlide, 10000);
         
         $(".slider-show").mouseenter(function(){
-                var container = $(this);
-                if(container == current){
+				clearInterval(sliderInterval);
+				var container = $(this);
+                if(container == currentSlide){
                         return;
                 }
-                current.children().eq(0).css("padding-left", "5px");
-                current.children().eq(1).css("width", "97px");
-                current = container;
-                current.children().eq(0).css("padding-left", "0px");
-                current.children().eq(1).css("width", "102px");
-                $(".slider-content").css("background", current.children().eq(1).css("background-color") + " url(" + current.children().eq(0).attr("src") + ") no-repeat"); 
-                $(".slider-title").html(shows[current.attr("num")].title);
-				$(".show-link").attr("href", "/shows/" + shows[current.attr("num")].id + "/")
-                $(".slider-schedule").html(shows[current.attr("num")].schedule);
-                $(".slider-description").html(shows[current.attr("num")].description);
+                currentSlide.children().eq(0).css("padding-left", "5px");
+                currentSlide.children().eq(1).css("width", "97px");
+                currentSlide = container;
+                currentSlide.children().eq(0).css("padding-left", "0px");
+                currentSlide.children().eq(1).css("width", "102px");
+                $(".slider-content").css("background", currentSlide.children().eq(1).css("background-color") + " url(" + currentSlide.children().eq(0).attr("src") + ") no-repeat"); 
+                $(".slider-title").html(shows[currentSlide.attr("num")].title);
+				$(".show-link").attr("href", "/shows/" + shows[currentSlide.attr("num")].id + "/")
+                $(".slider-schedule").html(shows[currentSlide.attr("num")].schedule);
+                $(".slider-description").html(shows[currentSlide.attr("num")].description);
+				sliderInterval = setInterval(nextSlide, 10000);
         });
         
 });
