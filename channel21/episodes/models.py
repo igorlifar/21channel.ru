@@ -24,9 +24,16 @@ class Video(models.Model):
 		
 class Episode(models.Model):
 	
+	episodetype_choices = (
+		("I", "Issue"),
+		("E", "Episode"),
+		("S", "Story"),
+	)
+	
 	video = models.ForeignKey(Video, related_name = 'video', blank = True, null = True)
 	show = models.ForeignKey(Show, related_name = 'show', blank = True, null = True)
 	date = models.DateTimeField(auto_now = True)
+	episodetype = models.CharField(max_length = 1, choices = episodetype_choices, blank = True, default = "E")
 	title = models.CharField(max_length = 1000, blank = True)
 	description = models.CharField(max_length = 10000, blank = True)
 	
