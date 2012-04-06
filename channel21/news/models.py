@@ -4,6 +4,7 @@ from random import randint
 from PIL import Image, ImageOps
 from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
+import datetime
 
 # Create your models here.
 
@@ -12,7 +13,7 @@ class NewsItem(models.Model):
 	title = models.CharField(max_length = 1000, blank = True)
 	preview = models.CharField(max_length = 1000, blank = True)
 	text = models.CharField(max_length = 10000, blank = True)
-	date = models.DateTimeField(auto_now = True)
+	date = models.DateTimeField(default = datetime.datetime.now)
 	image = models.ImageField(upload_to = "news/", blank = True)
   
 	def load_image(self, img):
