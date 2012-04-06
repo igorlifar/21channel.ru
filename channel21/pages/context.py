@@ -418,9 +418,12 @@ def get_site_context(s, request):
 			res['show'] = Show.objects.get(id=int(s[1]))
 			
 			sh = Show.objects.get(id=int(s[1]))
-			eps = Episode.objects.filter(show=sh).all().order_by('-date')
 			
-			res['eps'] = eps
+			res["videos"] = {
+				"promo": Episode.objects.filter(show=sh, episodetype="P").order_by('-date'),
+				"issues": Episode.objects.filter(show=sh, episodetype="I").order_by('-date')[0:7],
+				"episodes": Episode.objects.filter(show=sh, episodetype="E").order_by('-date')[0:7]
+			}
 			
 		elif s[2] == 'episode':
 			res['css'] = 'shows-show-episode.css'
