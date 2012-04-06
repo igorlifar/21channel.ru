@@ -1,9 +1,9 @@
 # Create your views here.
 
-def evaluate_char_field(request, fieldname, maxlength, data, values, errors):
+def evaluate_char_field(request, fieldname, maxlength, data, values, errors, empty = False):
 	if fieldname in request.POST:
 		value = request.POST[fieldname]
-		if value.strip() == "":
+		if not empty and value.strip() == "":
 			values[fieldname] = ""
 			errors[fieldname] = True
 		else:
