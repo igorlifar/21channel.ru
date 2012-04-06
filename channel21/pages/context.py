@@ -95,7 +95,38 @@ def get_panel_context(s, request):
 		if s[0] == 'episodes':
 			if len(s) >= 2:
 				if s[1] == 'list':
-					res["episodes"] = Episode.objects.all().order_by('-date')
+					allepisodes = Episode.objects.all().order_by('-date')
+					res["episodes"] = []
+					if "page" in request.GET:
+						res["lastpage"] = int((allepisodes.count() + 24) / 25)
+						res["lastpage2"] = res["lastpage"] - 1
+						res["page"] = int(request.GET["page"])
+						if res["page"] < 1 or res["page"] > res["lastpage"]:
+							res["page"] = 1
+						res["prevpage"] = res["page"] - 1
+						res["nextpage"] = res["page"] + 1
+						size1 = 0
+						size2 = 0
+						for episode in allepisodes:
+							if size1 == (res["page"] - 1) * 25:
+								res["episodes"].append(episode)
+								size2 = size2 + 1
+								if size2 == 25:
+									break
+								continue
+							size1 = size1 + 1
+					else:
+						size = 0
+						for episode in allepisodes:
+							res["episodes"].append(episode)
+							size = size + 1
+							if size == 25:
+								break
+						res["page"] = 1
+						res["prevpage"] = 0
+						res["nextpage"] = 2
+						res["lastpage"] = int((allepisodes.count() + 24) / 25)
+						res["lastpage2"] = res["lastpage"] - 1
 					
 				if s[1] == 'edit':
 					res["episode"] = Episode.objects.get(id = s[2])

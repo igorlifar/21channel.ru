@@ -9,6 +9,29 @@
 		</tr>
 	</thead>
 	<tbody>
+		<div class="pagination">
+			<ul>
+				<li{% if page == 1 %} class="active"{% endif %}><a href="/panel/episodes/list/?page=1">1</a></li>
+				{% if prevpage > 2 %}
+					<li><a href="#">...</a></li>
+				{% endif %}
+				{%  if prevpage > 1 %}
+					<li><a href="/panel/episodes/list/?page={{ prevpage }}">{{ prevpage }}</a></li>
+				{% endif %}
+				{% if page > 1 and page < lastpage %}
+					<li class="active"><a href="#">{{ page }}</a></li>
+				{% endif %}
+				{% if nextpage < lastpage %}
+					<li><a href="/panel/episodes/list/?page={{ nextpage }}">{{ nextpage }}</a></li>
+				{% endif %}
+				{% if nextpage < lastpage2 %}
+					<li><a href="#">...</a></li>
+				{% endif %}
+				{% if lastpage > 1 %}
+					<li{% if page == lastpage %} class="active"{% endif %}><a href="/panel/episodes/list/?page={{ lastpage }}">{{ lastpage }}</a></li>
+				{% endif %}
+			</ul>
+		</div>
 		{% for m in episodes %}
 			<tr>
 				<td>{{ m.title }}</td>
