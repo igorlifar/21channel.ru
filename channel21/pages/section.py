@@ -24,6 +24,7 @@ def get_panel_section(request):
 				return ['settings', 'edit']
 		
 		if path[1] == 'news':
+		
 			if len(path) == 2 or path[2] == 'list':
 				return ['news', 'list']
 			
@@ -35,6 +36,9 @@ def get_panel_section(request):
 					raise Http404
 				
 				return ['news', 'edit', path[3]]
+				
+			if path[2] == 'delete-check':
+				return ['news', 'delete-check']
 				
 		
 		if path[1] == 'shows':
@@ -50,6 +54,9 @@ def get_panel_section(request):
 				
 				return ['shows', 'edit', path[3]]
 		
+			if path[2] == 'delete-check':
+				return ['shows', 'delete-check']
+		
 		if path[1] == 'archive':
 			if len(path) == 2 or path[2] == 'list':
 				return ['archive', 'list']
@@ -62,6 +69,9 @@ def get_panel_section(request):
 					raise Http404
 				
 				return ['archive', 'edit', path[3]]
+				
+			if path[2] == 'delete-check':
+				return ['archive', 'delete-check']
 		
 		if path[1] == 'episodes':
 			if len(path) == 2 or path[2] == 'list':
@@ -76,6 +86,9 @@ def get_panel_section(request):
 				
 				return ['episodes', 'edit', path[3]]
 		
+			if path[2] == 'delete-check':
+				return ['episodes', 'delete-check']
+		
 		if path[1] == 'schedule':
 			if len(path) == 2 or path[2] == 'list':
 				return ["schedule", 'list']
@@ -89,6 +102,8 @@ def get_panel_section(request):
 				
 				return ['schedule', 'edit', path[3]]
 			
+			if path[2] == 'delete-check':
+				return ['schedule', 'delete-check']
 		
 	raise Http404
 	

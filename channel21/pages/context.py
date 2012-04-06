@@ -6,7 +6,7 @@ from shows.models import Show
 from archive.models import Archive
 from schedule.models import Program
 from mainsettings.models import MainSettings
-from urllib import unquote
+from urllib import unquote, quote
 import json
 from django.http import Http404
 from mainsettings.models import MainSettings
@@ -47,6 +47,7 @@ def get_panel_context(s, request):
 		
 		if s[0] == 'news':
 			if len(s) >= 2:
+				
 				if s[1] == 'list':
 					res["news"] = NewsItem.objects.all()
 				
@@ -60,12 +61,36 @@ def get_panel_context(s, request):
 							raise Http404
 					
 				if s[1] == 'add':
+		
+					if "copyfrom" in request.GET:
+						newsid = int(request.GET["copyfrom"])
+						items = NewsItem.objects.filter(id = newsid)
+						if items.count() != 0:
+							item = items[0]
+							elem = {
+								"title" : item.title,
+								"preview" : item.preview,
+								"text" : item.text,
+								"image_change" : "no"
+							}
+							res["fs"] = {"errors" : {}, "values" : elem}
+					
 					if 'formstate' in request.GET:
 						try:
 							res["er"] = True
 							res["fs"] = json.loads(unquote(request.GET['formstate']))
 						except:
 							raise Http404
+			
+				if s[1] == 'delete-check':
+					
+					res["id"] = ""
+					res["redirect_url"] = ""
+					if "id" in request.GET:
+						res["id"] = request.GET["id"]
+					if "redirect_url" in request.GET:
+						res["redirect_url"] = request.GET["redirect_url"]
+			
 			
 		if s[0] == 'episodes':
 			if len(s) >= 2:
@@ -85,11 +110,43 @@ def get_panel_context(s, request):
 				if s[1] == 'add':
 					res["shows"] = Show.objects.all()
 					
+					if "copyfrom" in request.GET:
+						episodeid = int(request.GET["copyfrom"])
+						episodes = Episode.objects.filter(id = episodeid)
+						if episodes.count() != 0:
+							episode = episodes[0]
+							elem = {
+								"title" : episode.title,
+								"description" : episode.description,
+								"code" : episode.video.code
+							}
+							if episode.show != None:
+								elem.update({"showid" : episode.show.id})
+							if episode.video.source == "Y":
+								elem.update({"source" : "YouTube"})
+							if episode.episodetype == "E":
+								elem.update({"episodetype" : "Episode"})
+							if episode.episodetype == "I":
+								elem.update({"episodetype" : "Issue"})
+							if episode.episodetype == "P":
+								elem.update({"episodetype" : "Promo"})
+							res["fs"] = {"errors" : {}, "values" : elem}
+					
 					if "formstate" in request.GET:
 						try:
 							res["fs"] = json.loads(unquote(request.GET["formstate"]))
 						except:
 							raise Http404
+						
+			
+				if s[1] == 'delete-check':
+					res["episodeid"] = ""
+					res["redirect_url"] = ""
+					if "episodeid" in request.GET:
+						res["episodeid"] = request.GET["episodeid"]
+					if "redirect_url" in request.GET:
+						res["redirect_url"] = request.GET["redirect_url"]
+ 			
 		
 		if s[0] == 'shows':
 			if len(s) >= 2:
@@ -106,12 +163,37 @@ def get_panel_context(s, request):
 							raise Http404
 						
 				if s[1] == 'add':
+					
+					if "copyfrom" in request.GET:
+						showid = int(request.GET["copyfrom"])
+						shows = Show.objects.filter(id = showid)
+						if shows.count() != 0:
+							show = shows[0]
+							elem = {
+								"title" : show.title,
+								"description" : show.description,
+								"schedule" : show.schedule,
+								"background_change" : "no",
+								"illustration_change" : "no"
+							}
+							res["fs"] = {"errors" : {}, "values" : elem}
+					
 					if "formstate" in request.GET:
 						try:
 							res["fs"] = json.loads(unquote(request.GET["formstate"]))
 						except:
 							raise Http404
 					
+				if s[1] == 'delete-check':
+					
+					res["showid"] = ""
+					res["redirect_url"] = ""
+					if "showid" in request.GET:
+						res["showid"] = request.GET["showid"]
+					if "redirect_url" in request.GET:
+						res["redirect_url"] = request.GET["redirect_url"]
+				
+				
 		if s[0] == 'archive':
 			if len(s) >= 2:
 				if s[1] == 'list':
@@ -137,6 +219,14 @@ def get_panel_context(s, request):
 							res["fs"] = json.loads(unquote(request.GET["formstate"]))
 						except:
 							raise Http404
+						
+				if s[1] == 'delete-check':
+					res["archiveid"] = ""
+					res["redirect_url"] = ""
+					if "archiveid" in request.GET:
+						res["archiveid"] = request.GET["archiveid"]
+					if "redirect_url" in request.GET:
+						res["redirect_url"] = request.GET["redirect_url"]
 					
 		if s[0] == 'schedule':
 			if len(s) >= 2:
@@ -164,11 +254,33 @@ def get_panel_context(s, request):
 						
 				if s[1] == 'add':
 					
+					if "copyfrom" in request.GET:
+						programid = int(request.GET["copyfrom"])
+						programs = Program.objects.filter(id = programid)
+						if programs.count() != 0:
+							program = programs[0]
+							elem = {
+								"title" : program.title,
+								"description" : program.description,
+								"starttime" : program.starttime,
+								"finishtime" : program.finishtime,
+								"dayofweek" : program.dayofweek
+							}
+							res["fs"] = {"errors" : {}, "values" : elem}
+					
 					if "formstate" in request.GET:
 						try:
 							res["fs"] = json.loads(unquote(request.GET["formstate"]))
 						except:
 							raise Htpp404
+						
+				if s[1] == 'delete-check':
+					res["programid"] = ""
+					res["redirect_url"] = ""
+					if "programid" in request.GET:
+						res["programid"] = request.GET["programid"]
+					if "redirect_url" in request.GET:
+						res["redirect_url"] = request.GET["redirect_url"]
 		
 	return res
 	
