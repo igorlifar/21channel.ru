@@ -33,12 +33,8 @@
 				</td>
 				<td style="width: 200px;">
 					<a href="/panel/episodes/edit/{{ m.id }}/" class="btn">Редактировать</a>
-					<form style="display: inline-block;" action="/panel/episodes/delete/" method="POST">
-						{% csrf_token %}
-						<input type="hidden" name="episodeid" value="{{ m.id }}">
-						<input type="hidden" name="redirect_url" value="/panel/episodes/list/">
-						<button type="submit" class="btn btn-danger">Удалить</button>
-					</form>
+					<a href="/panel/episodes/add/?copyfrom={{ m.id }}" class="btn">Копировать</a>
+					<a href="/panel/episodes/delete-check/?episodeid={{ m.id }}&redirect_url=/panel/episodes/list/" class="btn btn-danger">Удалить</a>
 				</td>
 			</tr>
 		{% endfor %}

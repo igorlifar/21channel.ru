@@ -1,0 +1,12 @@
+<form class="form-horizontal" action="/panel/episodes/delete/" method="POST">
+{% csrf_token %}
+	<legend>Удаление эпизода</legend>
+	<fieldset>
+		<input type="hidden" name="episodeid" value="{{ episodeid }}">
+		<input type="hidden" name="redirect_url" value="{{ redirect_url }}">
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Удалить</button>
+		<a href="{{ redirect_url }}" class="btn">Отмена</a>
+	</div>
+</form>

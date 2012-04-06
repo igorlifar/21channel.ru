@@ -19,12 +19,8 @@
 				<td style="width: 100px;"><div class="thumbnail"><img style="width: 90px;" src="/media_files/{{ m.background }}"></div></td>
 				<td style="width: 200px;">
 					<a href="/panel/shows/edit/{{ m.id }}/" class="btn">Редактировать</a>
-					<form style="display: inline-block;" action="/panel/shows/delete/" method="POST">
-						{% csrf_token %}
-						<input type="hidden" name="showid" value="{{ m.id }}">
-						<input type="hidden" name="redirect_url" value="/panel/shows/list/">
-						<button type="submit" class="btn btn-danger">Удалить</button>
-					</form>
+					<a href="/panel/shows/add/?copyfrom={{ m.id }}" class="btn">Копировать</a>
+					<a href="/panel/shows/delete-check/?showid={{ m.id }}&redirect_url=/panel/shows/list/" class="btn btn-danger">Удалить</a>
 				</td>
 			</tr>
 		{% endfor %}

@@ -34,7 +34,7 @@
 				<select name="showid">
 					<option value="-1"></option>
 					{% for show in shows %}
-						<option value="{{ show.id }}">{{ show.title }}</option>
+						<option value="{{ show.id }}"{% if show.id == fs.values.showid %} selected="selected"{% endif %}>{{ show.title }}</option>
 					{% endfor %}
 				</select>
 			</div>

@@ -15,7 +15,7 @@ def create_episode(request):
 		errors = {}
 		data = {}
 		evaluate_char_field(request, "title", 1000, data, values, errors)
-		evaluate_char_field(request, "description", 10000, data, values, errors)
+		evaluate_char_field(request, "description", 10000, data, values, errors, empty = True)
 		evaluate_char_field(request, "source", 100, data, values, errors)
 		evaluate_char_field(request, "code", 100, data, values, errors)
 		evaluate_char_field(request, "episodetype", 100, data, values, errors)
@@ -71,7 +71,7 @@ def update_episode(request):
 				errors = {}
 				data = {}
 				evaluate_char_field(request, "title", 1000, data, values, errors)
-				evaluate_char_field(request, "description", 10000, data, values, errors)
+				evaluate_char_field(request, "description", 10000, data, values, errors, empty = True)
 				evaluate_char_field(request, "source", 100, data, values, errors)
 				evaluate_char_field(request, "code", 100, data, values, errors)
 				evaluate_char_field(request, "episodetype", 100, data, values, errors)

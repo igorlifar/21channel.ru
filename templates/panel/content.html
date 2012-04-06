@@ -7,6 +7,11 @@
 	{% endif %}
 {% endif %}
 {% if s.0 == 'news' %}
+	
+	{% if s.1 == 'delete-check' %}
+		{% include 'panel/content/news-delete.html' %}
+	{% endif %}
+
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/news-list.html' %}
 	{% endif %}
@@ -21,6 +26,9 @@
 {%  endif %}
 
 {% if s.0 == 'episodes' %}
+	{% if s.1 == 'delete-check' %}
+		{% include 'panel/content/episodes-delete.html' %}
+	{% endif %}
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/episodes-list.html' %}
 	{% endif %}
@@ -32,6 +40,11 @@
 	{% endif %}
 {% endif %}
 {% if s.0 == 'shows' %}
+
+	{% if s.1 == 'delete-check' %}
+		{% include 'panel/content/shows-delete.html' %}
+	{% endif %}
+
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/shows-list.html' %}
 	{% endif %}
@@ -43,6 +56,9 @@
 	{% endif %}
 {% endif %}
 {% if s.0 == 'archive' %}
+	{% if s.1 == 'delete-check' %}
+		{% include 'panel/content/archives-delete.html' %}
+	{% endif %}
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/archives-list.html' %}
 	{% endif %}
@@ -54,6 +70,9 @@
 	{% endif %}
 {% endif %}
 {% if s.0 == 'schedule' %}
+	{% if s.1 == 'delete-check' %}
+		{% include 'panel/content/schedule-delete.html' %}
+	{% endif %}
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/schedule-list.html' %}
 	{% endif %}

@@ -19,12 +19,8 @@
 					<td>{{ program.finishtime }}</td>
 					<td style="width: 200px;">
 						<a href="/panel/schedule/edit/{{ program.id }}/" class="btn">Редактировать</a>
-						<form style="display: inline-block;" action="/panel/schedule/delete/" method="POST">
-							{% csrf_token %}
-							<input type="hidden" name="programid" value="{{ program.id }}">
-							<input type="hidden" name="redirect_url" value="/panel/schedule/list/">
-							<button type="submit" class="btn btn-danger">Удалить</button>
-						</form>
+						<a href="/panel/schedule/add/?copyfrom={{ program.id }}" class="btn">Копировать</a>
+						<a href="/panel/schedule/delete-check/?programid={{ program.id }}&redirect_url=/panel/schedule/list/" class="btn btn-danger">Удалить</a>
 					</td>
 				</tr>
 			{% endfor %}
