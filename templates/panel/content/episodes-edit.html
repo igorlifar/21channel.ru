@@ -19,6 +19,22 @@
 		</div>
 		
 		<div class="control-group">
+			<label class="control-label">Тип</label>
+			<div class="controls">
+				<select name="episodetype">
+					<option value="Episode">Эпизод</option>
+					{% if fs == None %}
+						<option value="Issue"{% if episode.episodetype == "I" %} selected="selected"{% endif %}>Выпуск</option>
+						<option value="Promo"{% if episode.episodetype == "P" %} selected="selected"{% endif %}>Промо</option>
+					{% else %}
+						<option value="Issue"{% if fs.values.episodetype == "Issue" %} selected="selected"{% endif %}>Выпуск</option>
+						<option value="Promo"{% if fs.values.episodetype == "Promo" %} selected="selected"{% endif %}>Промо</option>
+					{% endif %}
+				</select>
+			</div>
+		</div>
+		
+		<div class="control-group">
 			<label class="control-label">Шоу</label>
 			<div class="controls">
 				<select name="showid">

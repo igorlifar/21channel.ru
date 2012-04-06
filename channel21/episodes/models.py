@@ -27,7 +27,7 @@ class Episode(models.Model):
 	episodetype_choices = (
 		("I", "Issue"),
 		("E", "Episode"),
-		("S", "Story"),
+		("P", "Promo"),
 	)
 	
 	video = models.ForeignKey(Video, related_name = 'video', blank = True, null = True)

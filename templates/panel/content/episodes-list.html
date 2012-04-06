@@ -3,6 +3,7 @@
 		<tr>
 			<th>Заголовок</th>
 			<th>Описание</th>
+			<th>Тип</th>
 			<th>Шоу</th>
 			<th>Действия</th>
 		</tr>
@@ -12,6 +13,17 @@
 			<tr>
 				<td>{{ m.title }}</td>
 				<td>{{ m.description }}</td>
+				<td>
+					{% if m.episodetype == "E" %}
+						Эпизод
+					{% endif %}
+					{% if m.episodetype == "I" %}
+						Выпуск
+					{% endif %}
+					{% if m.episodetype == "P" %}
+						Промо
+					{% endif %}
+				</td>
 				<td>
 					{% if m.show != None %}
 						<a href="/panel/shows/edit/{{ m.show.id }}/">{{ m.show.title }}</a>
