@@ -29,7 +29,12 @@ def get_panel_context(s, request):
 
 		
 	if len(s) >= 1:
-		
+		if s[0] == 'index':
+			res["ep_count"] = Episode.objects.all().count()
+			res["show_count"] = Show.objects.all().count()
+			res["archive_count"] = Archive.objects.all().count()
+			res["news_count"] = NewsItem.objects.all().count()
+			
 		if s[0] == 'settings':
 			if len(s) >= 2:
 				if s[1] == 'list':

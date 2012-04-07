@@ -1,3 +1,7 @@
+{% if s.0 == 'index' %}
+	{% include 'panel/content/index.html' %}
+{% endif %}
+
 {% if s.0 == 'settings' %}
 	{% if s.1 == 'list' %}
 		{% include 'panel/content/settings-list.html' %}
