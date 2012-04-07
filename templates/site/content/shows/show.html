@@ -5,20 +5,22 @@
 	<img src="{{ media }}{{ show.illustration }}">
 	<p>{{ show.description }}</p>
 	{% if videos.episodes or videos.issues %}
-		<div class="watch-list white">
-			<h2>Промо</h2>
-			<ul>
-				{% for ep in videos.promo %}
-					<li>
-						<a href="episode/{{ ep.id }}"><img src="{{ ep|screenshot }}"></a>
-						<div>
-							<h3>{{ ep.title }}</h3>
-							<p>{{ ep.description }}</p>
-						</div>
-					</li>
-				{% endfor %}
-			</ul>
-		</div>
+		{% if videos.promo %}
+			<div class="watch-list white">
+				<h2>Промо</h2>
+				<ul>
+					{% for ep in videos.promo %}
+						<li>
+							<a href="episode/{{ ep.id }}"><img src="{{ ep|screenshot }}"></a>
+							<div>
+								<h3>{{ ep.title }}</h3>
+								<p>{{ ep.description }}</p>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
 	{% endif %}
 </div>
 <div class="span6 show" style="background: #444;">
