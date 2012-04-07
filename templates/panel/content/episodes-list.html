@@ -34,7 +34,7 @@
 	<tbody>
 		{% for m in episodes %}
 			<tr>
-				<td>{{ m.title }}</td>
+				<td style="width: 150px;">{{ m.title }}</td>
 				<td>{{ m.description }}</td>
 				<td>
 					{% if m.episodetype == "E" %}
@@ -47,17 +47,17 @@
 						Промо
 					{% endif %}
 				</td>
-				<td>
+				<td style="width: 80px;">
 					{% if m.show != None %}
 						<a href="/panel/shows/edit/{{ m.show.id }}/">{{ m.show.title }}</a>
 					{% else %}
 						-
 					{% endif %}
 				</td>
-				<td style="width: 200px;">
-					<a href="/panel/episodes/edit/{{ m.id }}/" class="btn">Редактировать</a>
-					<a href="/panel/episodes/add/?copyfrom={{ m.id }}" class="btn">Копировать</a>
-					<a href="/panel/episodes/delete-check/?episodeid={{ m.id }}&redirect_url=/panel/episodes/list/" class="btn btn-danger">Удалить</a>
+				<td style="width: 120px;">
+					<a href="/panel/episodes/edit/{{ m.id }}/" class="btn" style="margin: 2px;">Редактировать</a>
+					<a href="/panel/episodes/add/?copyfrom={{ m.id }}" class="btn" style="margin: 2px;">Копировать</a>
+					<a href="/panel/episodes/delete-check/?episodeid={{ m.id }}&redirect_url=/panel/episodes/list/" class="btn btn-danger" style="margin: 2px;">Удалить</a>
 				</td>
 			</tr>
 		{% endfor %}
