@@ -169,14 +169,20 @@ def get_site_section(request):
 		if len(path) == 2:
 			return ["shows", path[1]]
 			
-		if path[2] == 'episode':
+		if path[2] == 'issues':
+			return ['shows', path[1], 'issues']
+		
+		if path[2] == 'episodes':
+			return ['shows', path[1], 'episodes']
+		
+		if path[2] == 'watch':
 			ep = None
 			try:
 				ep = Episode.objects.get(show=sh, id=int(path[3]))
 			except:
 				raise Http404
 			
-			return ['shows', path[1], 'episode', path[3]]
+			return ['shows', path[1], 'watch', path[3]]
 		
 		
 	raise Http404

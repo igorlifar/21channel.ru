@@ -1,0 +1,25 @@
+{% load episode_extras %}
+<div class="span12">
+	<h1>{{ sh.title }}: {{ sectiontitle }}</h1>
+</div>
+	<table id="episodes-list">
+		<tbody>
+			<tr>
+				{% for ep in eps %}
+					<td>
+						
+						<a href="{{ ep|link }}">
+							<img src="{{ ep|screenshot }}">
+							<div class="title">{{ ep.title }}</div>
+							<div class="legend">
+								{{ ep.description }}
+							</div>
+						</a>
+						
+					</td>
+					{% cycle '' '' '</tr><tr>' %}
+				{% endfor %}
+			</tr>
+		</tbody>
+	</table>
+</div>

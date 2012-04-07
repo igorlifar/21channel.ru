@@ -1,0 +1,90 @@
+#episodes-list {
+	width: 100%;
+}
+
+#episodes-list a {
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+
+#episodes-list img {
+	padding: 0;
+	margin: 0;
+	display: block;
+	width: 328px;
+	position: absolute;
+	top: -3px;
+	left: -3px;
+}
+
+#episodes-list td {
+	padding: 0;
+	margin: 0;
+	position: relative;
+	height: 244px;
+	overflow: hidden;
+	border: 10px solid #444;
+	width: 328px;
+}
+
+#episodes-list .legend {
+	display: none;
+	position: absolute;
+	width: 309px;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.4);
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 2px;
+}
+
+#episodes-list .title {
+	display: none;
+	position: absolute;
+	max-width: 309px;
+	padding-left: 5px;
+	padding-right: 5px;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	background-color: rgb(149, 22, 26);
+	font-family: 'PT Sans Narrow', sans-serif;
+	text-transform: uppercase;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+#episodes-list a {
+	color: white;
+}
+
+#episodes-list  a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+#episodes-list a:hover .legend {
+	display: block;
+}
+
+#episodes-list a:hover .title {
+	display: inline-block;
+}
+
+#show-bg {
+	background-color: #444;
+}
+
+#show-bg h1 {
+	background-color: rgb(149, 22, 26);
+	padding: 5px;
+	display: inline-block;
+	color: white;
+}
+
+#show-bg .span12 {
+	padding-bottom: 0;
+}

@@ -11,5 +11,7 @@ urlpatterns = patterns('scripts',
 	url(r'^news-item.js$', 'site.index'),
 	url(r'^shows-list.js$', 'site.index'),
 	url(r'^shows-show.js$', 'site.index'),
-	url(r'^shows-show-episode.js$', 'site.index'),
+	url(r'^shows-show-watch.js$', 'site.index'),
+	url(r'^shows-show-issues.js$', 'site.index'),
+	url(r'^shows-show-episodes.js$', 'site.index'),
 )

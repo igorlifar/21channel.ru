@@ -22,22 +22,29 @@
 	font-style: italic;
 	padding-left: 5px;
 	border-left: 5px solid rgb(149, 22, 26);
+	margin-bottom: 10px;
 }
 
 #show {
 	overflow: hidden;
 }
 
-#ep-list {
-	padding: 5px;
+.watch-list ul{
+	padding: 5px 5px 5px 0;
 	color: white;
 }
 
-#ep-list img {
+.watch-list img {
 	width: 100px;
 }
 
-#ep-list li {
+.watch-list li > a {
+	display: block;
+	width: 100px;
+	float: left;
+}
+
+.watch-list li {
 	font-family: sans-serif;
 	overflow: hidden;
 	border-bottom: 1px solid #333;
@@ -46,15 +53,37 @@
 	font-size: 13px;
 }
 
-#ep-list li:last-child {
+.watch-list li:last-child {
 	padding-bottom: 0;
 	border-bottom: 0;
 }
 
-#ep-list li > div {
+.watch-list li > div {
+	padding-left: 5px;
 	width: 360px;
-	float: right;
-	
+	float: left;
+}
+
+.watch-list .link {
+	text-align: right;
+}
+
+.watch-list .link a {	
+	padding: 5px;
+	color: white !important;
+}
+
+.watch-list .link a:hover {
+	text-decoration: none !important;
+}
+
+.watch-list.white p,
+.watch-list.white h3{
+	color: black;
+}
+
+.watch-list.white li {
+	border-bottom-color: #ccc;
 }
 
 #show-bg {

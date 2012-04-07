@@ -8,8 +8,6 @@
 	margin-bottom: 10px;
 }
 
-{% include 'site/header.css' %}
-
 #content {
 	background-color: white;
 	margin-bottom: 10px;
@@ -24,10 +22,6 @@
 	line-height: 20px;
 }
 
-{% include 'site/footer.css' %}
-
-
-{% include 'site/content.css' %}
 
 .video-site {
 	margin-top: 10px;
@@ -107,3 +101,11 @@
 	color: black;
 	text-decoration: underline;
 }
+
+
+{% include 'site/footer.css' %}
+
+
+{% include 'site/content.css' %}
+
+{% include 'site/header.css' %}

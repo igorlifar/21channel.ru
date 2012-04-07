@@ -4,18 +4,80 @@
 	<h2>{{ show.schedule }}</h2>
 	<img src="{{ media }}{{ show.illustration }}">
 	<p>{{ show.description }}</p>
+	{% if videos.episodes or videos.issues %}
+		<div class="watch-list white">
+			<h2>Промо</h2>
+			<ul>
+				{% for ep in videos.promo %}
+					<li>
+						<a href="episode/{{ ep.id }}"><img src="{{ ep|screenshot }}"></a>
+						<div>
+							<h3>{{ ep.title }}</h3>
+							<p>{{ ep.description }}</p>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
 </div>
 <div class="span6 show" style="background: #444;">
-	<h2>Эпизоды</h2>
-	<ul id="ep-list">
-		{% for ep in eps %}
-			<li>
-				<a href="episode/{{ ep.id }}"><img src="{{ ep|screenshot }}"></a>
-				<div>
-					<h3>{{ ep.title }}</h3>
-					<p>{{ ep.description }}</p>
+	{% if videos.episodes or videos.issues %}
+		{% if videos.issues %}
+			<div class="watch-list">
+				<h2>Выпуски</h2>
+				<ul>
+					{% for ep in videos.issues %}
+						<li>
+							<a href="{{ ep|link }}"><img src="{{ ep|screenshot }}"></a>
+							<div>
+								<h3>{{ ep.title }}</h3>
+								<p>{{ ep.description }}</p>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+				<div class="link">
+					<a href="issues/">Все выпуски..</a>
 				</div>
-			</li>
-		{% endfor %}
-	</ul>
+			</div>
+		{% endif %}
+		
+		{% if videos.episodes %}
+			<div class="watch-list">
+				<h2>Эпизоды</h2>
+				<ul>
+					{% for ep in videos.episodes %}
+						<li>
+							<a href="{{ ep|link }}"><img src="{{ ep|screenshot }}"></a>
+							<div>
+								<h3>{{ ep.title }}</h3>
+								<p>{{ ep.description }}</p>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+				<div class="link">
+					<a href="episodes/">Все эпизоды..</a>
+				</div>
+			</div>
+		{% endif %}
+	{% else %}
+		{% if videos.promo %}
+			<div class="watch-list">
+				<h2>Промо</h2>
+				<ul>
+					{% for ep in videos.promo %}
+						<li>
+							<a href="{{ ep|link }}"><img src="{{ ep|screenshot }}"></a>
+							<div>
+								<h3>{{ ep.title }}</h3>
+								<p>{{ ep.description }}</p>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+	{% endif %}
 </div>

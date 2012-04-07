@@ -11,16 +11,25 @@
 	{% if s.1 != 'list' and s.size == 2 %}
 			{% include 'site/content/shows/show.html' %}
 	{% endif %}
+	
+	{% if s.2 == 'issues' %}
+		{% include 'site/content/shows/episodes.html' %}
+	{% endif %}
+	
+	{% if s.2 == 'episodes' %}
+		{% include 'site/content/shows/episodes.html' %}
+	{% endif %}
+	
+	{% if s.2 == 'watch' %}
+		{% include 'site/content/shows/watch.html' %}
+	{% endif %}
+	
 	{% if s.1 == 'list' %}
 		<div class="span8">
 			{% include 'site/content/shows/list.html' %}
 		</div>
 		<div class="span4">
 		</div>
-	{% endif %}
-	
-	{% if s.size == 4 %}
-		{% include 'site/content/shows/episode.html' %}
 	{% endif %}
 	
 </div>

@@ -452,13 +452,31 @@ def get_site_context(s, request):
 			
 			res["videos"] = {
 				"promo": Episode.objects.filter(show=sh, episodetype="P").order_by('-date'),
-				"issues": Episode.objects.filter(show=sh, episodetype="I").order_by('-date')[0:7],
-				"episodes": Episode.objects.filter(show=sh, episodetype="E").order_by('-date')[0:7]
+				"issues": Episode.objects.filter(show=sh, episodetype="I").order_by('-date')[0:5],
+				"episodes": Episode.objects.filter(show=sh, episodetype="E").order_by('-date')[0:5]
 			}
+		
+		elif s[2] == 'episodes':
+			sh = Show.objects.get(id=int(s[1]))
+			res['css'] = 'shows-show-episodes.css'
+			res['js'] = 'shows-show-episodes.js'
 			
-		elif s[2] == 'episode':
-			res['css'] = 'shows-show-episode.css'
-			res['js'] = 'shows-show-episode.js'
+			res['eps'] = Episode.objects.filter(show=sh, episodetype="E").order_by('-date')
+			res['sh'] = sh
+			res['sectiontitle'] = u'Эпизоды'
+			
+		elif s[2] == 'issues':
+			sh = Show.objects.get(id=int(s[1]))
+			res['css'] = 'shows-show-episodes.css'
+			res['js'] = 'shows-show-episodes.js'
+			
+			res['eps'] = Episode.objects.filter(show=sh, episodetype="I").order_by('-date')
+			res['sh'] = sh
+			res['sectiontitle'] = u'Выпуски'
+			
+		elif s[2] == 'watch':
+			res['css'] = 'shows-show-watch.css'
+			res['js'] = 'shows-show-watch.js'
 			
 			res['ep'] = Episode.objects.get(id=int(s[3]))
 	
