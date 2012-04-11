@@ -2,6 +2,30 @@
 	width: 100%;
 }
 
+#episodes-list .row {
+	overflow: hidden;
+	position: relative;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+#episodes-list .row:last-child {
+	padding-bottom: 10px;
+}
+
+#episodes-list .ep {
+	float: left;
+	width: 319px;
+	height: 224px;
+	position: relative;
+	overflow: hidden;
+	margin-right: 10px;
+}
+
+#episodes-list .ep:last-child {
+	margin-right: 0;
+}
+
 #episodes-list a {
 	display: block;
 	padding: 0;
@@ -16,16 +40,6 @@
 	position: absolute;
 	top: -3px;
 	left: -3px;
-}
-
-#episodes-list td {
-	padding: 0;
-	margin: 0;
-	position: relative;
-	height: 244px;
-	overflow: hidden;
-	border: 10px solid #444;
-	width: 328px;
 }
 
 #episodes-list .legend {
