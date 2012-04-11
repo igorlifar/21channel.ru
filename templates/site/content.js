@@ -100,7 +100,7 @@ $(document).ready(function(){
 	ptr = 0;
 	
 	for(var i = 0; i < list.length; i++){
-		if(list[i].value >= curtime){
+		if(list[i].value >= curtime || list[(i + 1) % list.length].value > curtime){
 			ptr = i;
 			break;
 		}
