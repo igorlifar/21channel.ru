@@ -39,7 +39,7 @@
 }
 
 #cross-menu li.red + li {
-	background-image: url("/static_files/img/cross-red.png");
+	background-image: url("/static_files/img/cross-red.gif");
 }
 
 #cross-menu li.active {
