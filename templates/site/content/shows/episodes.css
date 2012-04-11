@@ -36,10 +36,10 @@
 	padding: 0;
 	margin: 0;
 	display: block;
-	width: 328px;
+	width: 338px;
 	position: absolute;
-	top: -3px;
-	left: -3px;
+	top: -10px;
+	left: -6px;
 }
 
 #episodes-list .legend {
