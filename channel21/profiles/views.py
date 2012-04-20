@@ -21,6 +21,14 @@ def login_panel(request):
 	except:
 		return redirect("/panel/login/?wrongdata=1")
 		
+def logout_site(request):
+	logout(request)
+	
+	try:
+		return redirect(request.POST['redirect_url'])
+	except:
+		return redirect("/")
+		
 def logout_panel(request):
 	logout(request)
 	return redirect("/panel/login/")

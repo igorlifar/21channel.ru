@@ -1,0 +1,63 @@
+#login-form {
+	overflow: hidden;
+	font-family: sans-serif;
+	margin-bottom: 10px;
+}
+
+#login-form .hint {
+	width: 70px;
+	float: left;
+}
+
+#login-form .btns {
+	width: 300px;
+	float: left;
+}
+
+#logout-form {
+	font-family: sans-serif;
+}
+
+#comments {
+	font-family: sans-serif;
+}
+
+#comments .header {
+	border-bottom: 1px solid #ddd;
+	overflow: hidden;
+}
+
+#comments .author {
+	width: 250px;
+	float: left;
+}
+
+#comments .date {
+	font-size: 10px;
+	width: 100px;
+	float: right;
+	text-align: right;
+	padding-top: 5px;
+}
+
+#comments .body {
+	border-left: 5px solid rgb(149, 22, 26);
+	margin-top: 5px;
+	margin-bottom: 20px;
+	padding-left: 5px;
+}
+
+#add-comment textarea {
+	width: 470px;
+	border: 1px solid #ccc;
+	height: 130px;
+}
+
+#add-comment button {
+	float: right;
+}
+
+#add-comment {
+	overflow: hidden;
+	margin-bottom: 10px;
+}

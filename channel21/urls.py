@@ -6,6 +6,14 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+
+	url(r'^ulogin/', include('django_ulogin.urls')),
+	
+	url(r'^profiles/logout/$', 'profiles.views.logout_site'),
+	
+	url(r'^comments/show/create/$', 'comments.views.create_show_comment'),
+	
+
 	url(r'^panel/login/send', 'profiles.views.login_panel'),
 	url(r'^panel/logout/', 'profiles.views.logout_panel'),
 	

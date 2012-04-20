@@ -1,0 +1,58 @@
+{% load ulogin_tags %}
+{% load profile_extras %}
+
+<h2>Комментарии</h2>
+
+{% if request.user.is_active %}
+	<div id="logout-form">
+		<form id="logout-form-hidden" action="/profiles/logout/" method="POST">
+			{% csrf_token %}
+			<input type="hidden" name="redirect_url" value="{{ request.path }}">
+			Вы вошли как
+			{% if ulogin_user %}
+				<a href="{{ ulogin_user.identity }}">
+			{% endif %}
+				{{ user|profile_title }}
+			{% if ulogin_user %}
+				</a>
+			{% endif %}
+			
+			<button type="submit">Выход</button>
+		</form>
+	</div>
+	<div id="add-comment">
+		<form action="/comments/show/create/" method="POST">
+			{% csrf_token %}
+			<input type="hidden" name="show" value="{{ show.id }}">
+			<input type="hidden" name="redirect_url" value="{{ request.path }}">
+			<div><textarea name="body" placeholder="Текст комментария..."></textarea></div>
+			<button type="submit">Добавить комментарий</button>
+		</form>
+	</div>
+{% else %}
+	<div id="login-form">
+		<div class="hint">Войти:</div><div class="btns">{% ulogin_widget %}</div>
+	</div>
+{% endif %}
+	<ul id="comments">
+		{% for comment in comments %}
+			<li>
+				<div class="header">
+					<div class="author">
+						{% if comment.author|profile_ulogin %}
+							<a href="{{ comment.author|profile_ulogin|ulogin_identity }}">
+						{% endif %}
+						{{ comment.author|profile_title }}
+						{% if comment.author|profile_ulogin %}
+							</a>
+						{% endif %}
+					</div>
+					<div class="date">
+						{{ comment.date|datetime }}
+					</div>
+				</div>
+				<div class="body">
+					{{ comment.body }}
+				</div></li>
+		{% endfor %}
+	</ul>

@@ -17,6 +17,9 @@ DATABASES = {
         'PASSWORD': 'test123',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'OPTIONS': {
+             "init_command": "SET foreign_key_checks = 0;",
+         },
     }
 }
 
@@ -127,7 +130,9 @@ INSTALLED_APPS = (
     'styles',
     'schedule',
     'mainsettings',
+    'comments',
     'south',
+    'django_ulogin',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -139,6 +144,18 @@ INSTALLED_APPS = (
 # the site admins on every HTTP 500 error.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+
+ULOGIN_DISPLAY = "small"
+
+ULOGIN_FIELDS = ['first_name', 'last_name']
+
+ULOGIN_OPTIONAL = ['sex', 'photo', 'bdate']
+
+ULOGIN_PROVIDERS = ["vkontakte", "facebook", "twitter", "google", "yandex", "odnoklassniki", "mailru", "openid"]
+
+ULOGIN_HIDDEN = []
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

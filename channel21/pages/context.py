@@ -10,6 +10,7 @@ from urllib import unquote, quote
 import json
 from django.http import Http404
 from mainsettings.models import MainSettings
+from comments.models import *
 
 def get_panel_context(s, request):
 
@@ -323,6 +324,14 @@ def get_panel_context(s, request):
 def get_site_context(s, request):
 	res = {}
 	
+	res['request'] = request
+	res['user'] = request.user
+	res['ulogin_user'] = None
+	
+	try:
+		res['ulogin_user'] = request.user.ulogin_users.all()[0]
+	except:
+		pass
 		
 	ms = MainSettings.objects.all()[0]
 	res["background"] = ms.background
@@ -454,6 +463,8 @@ def get_site_context(s, request):
 			res['show'] = Show.objects.get(id=int(s[1]))
 			
 			sh = Show.objects.get(id=int(s[1]))
+			
+			res['comments'] = ShowComment.objects.filter(show=sh).order_by('-date')
 			
 			res["videos"] = {
 				"promo": Episode.objects.filter(show=sh, episodetype="P").order_by('-date'),

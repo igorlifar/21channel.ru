@@ -1,4 +1,6 @@
 {% load episode_extras %}
+{% load ulogin_tags %}
+
 <div class="span6 show" id="show">
 	<h1>{{ show.title }}</h1>
 	<h2>{{ show.schedule }}</h2>
@@ -22,6 +24,7 @@
 			</div>
 		{% endif %}
 	{% endif %}
+	{% include 'site/content/shows/show/comments.html' %}
 </div>
 <div class="span6 show" style="background: #444;">
 	{% if videos.episodes or videos.issues %}

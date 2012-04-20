@@ -89,3 +89,5 @@
 #show-bg {
 	background: url({{ img }}show-eps-bg.png) repeat-y top right;
 }
+
+{% include 'site/content/shows/show/comments.css' %}
