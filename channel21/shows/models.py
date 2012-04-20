@@ -4,6 +4,7 @@ from random import randint
 from PIL import Image, ImageOps
 from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
+import datetime
 
 # Create your models here.
 
@@ -70,3 +71,27 @@ class Shot(models.Model):
 			self.shot_big.delete()
 		self.shot_big.save(name, ContentFile(tmp.read()))
 		
+		
+class MetaItem(models.Model):
+	
+	key = models.CharField(max_length = 100, blank = True)
+	value = models.CharField(max_length = 1000, blank = True)
+	show = models.ForeignKey(Show, related_name = "mshows", blank = True, null = True)
+	priority = models.IntegerField(blank = True, null = True)
+	
+	
+class Article(models.Model):
+	
+	articletype_choices = (
+		("A", "Article"),
+		("R", "Review"),
+	)
+	
+	articletype = models.CharField(max_length = 1, choices = articletype_choices, blank = True)
+	title = models.CharField(max_length = 1000, blank = True)
+	preview = models.CharField(max_length = 1000, blank = True)
+	text = models.CharField(max_length = 10000, blank = True)
+	author = models.CharField(max_length = 1000, blank = True)
+	date = models.DateTimeField(default = datetime.datetime.now)
+	show = models.ForeignKey(Show, related_name = "ashows", blank = True, null = True)
+	priority = models.IntegerField(blank = True, null = True)
