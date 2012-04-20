@@ -45,6 +45,7 @@ class Shot(models.Model):
 	shot_small = models.ImageField(upload_to = "shows/shots/", blank = True)
 	shot_big = models.ImageField(upload_to = "shows/shots/", blank = True)
 	show = models.ForeignKey(Show, related_name = "shows", blank = True, null = True)
+	priority = models.IntegerField(blank = True, null = True)
 	
 	def load_shot(self, img):
 		content = ContentFile(img.read())

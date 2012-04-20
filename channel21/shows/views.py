@@ -151,14 +151,33 @@ def create_shot(request):
 			shows = Show.objects.filter(id = showid)
 			if shows.count() != 0:
 				cshow = shows[0]
-				if "shot" in request.FILES:
-					try:
-						new_shot = Shot.objects.create(show = cshow)
-						new_shot.load_shot(request.FILES["shot"])
-						return redirect(request.POST["redirect_good_url"])
-					except:
-						return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"shot" : True}})))
+				if "priority" in request.POST:
+					cpriority = int(request.POST["priority"])
+					if "shot" in request.FILES:
+						try:
+							new_shot = Shot.objects.create(show = cshow, priority = cpriority)
+							new_shot.load_shot(request.FILES["shot"])
+							return redirect(request.POST["redirect_good_url"])
+						except:
+							return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"shot" : True}})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"showid" : True}})))
+	except:
+		return redirect("/")
+		
+def update_shot(request):
+	try:
+		if "shotid" in request.POST:
+			shotid = int(request.POST)
+			shots = Shot.objects.filter(id = shotid)
+			if shots.count() != 0:
+				shot = shots[0]
+				if "priority" in request.POST:
+					npriority = int(request.POST["priority"])
+					shot.priority = npriority
+					shot.save()
+					return redirect(request.POST["redirect_good_url"])
+				return redirect(request.POST["redirect_bad_url"] + "?formstate" + quote(json.dumps({"values" : {}, "errors" : {"priority" : True}})))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"shotid" : True}})))
 	except:
 		return redirect("/")
 		
