@@ -39,4 +39,33 @@ class Show(models.Model):
 		if self.illustration.__nonzero__():
 			self.illustration.delete()
 		self.illustration.save(name, ContentFile(tmp.read()))
+
+class Shot(models.Model):
+	
+	shot_small = models.ImageField(upload_to = "shows/shots/", blank = True)
+	shot_big = models.ImageField(upload_to = "shows/shots/", blank = True)
+	show = models.ForeignKey(Show, related_name = "shows", blank = True, null = True)
+	
+	def load_shot(self, img):
+		content = ContentFile(img.read())
+		content.seek(0)
+		current = Image.open(content)
+		current = ImageOps.fit(current, (100, 100), Image.ANTIALIAS)
+		tmp = StringIO.StringIO()
+		name = hex(randint(1, 10**50)) + ".jpg"
+		current.save(tmp, "JPEG")
+		tmp.seek(0)
+		if self.shot_small.__nonzero__():
+			self.shot_small.delete()
+		self.shot_small.save(name, ContentFile(tmp.read()))
+		content.seek(0)
+		current = Image.open(content)
+		current = ImageOps.fit(current, (400, 400), Image.ANTIALIAS)
+		tmp = StringIO.StringIO()
+		name = hex(randint(1, 10**50)) + ".jpg"
+		current.save(tmp, "JPEG")
+		tmp.seek(0)
+		if self.shot_big.__nonzero__():
+			self.shot_big.delete()
+		self.shot_big.save(name, ContentFile(tmp.read()))
 		

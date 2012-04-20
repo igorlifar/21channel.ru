@@ -143,3 +143,33 @@ def update_show(request):
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"showid" : True}})))
 	except:
 		return redirect("/")
+		
+def create_shot(request):
+	try:
+		if "showid" in request.POST:
+			showid = int(request.POST["showid"])
+			shows = Show.objects.filter(id = showid)
+			if shows.count() != 0:
+				cshow = shows[0]
+				if "shot" in request.FILES:
+					try:
+						new_shot = Shot.objects.create(show = cshow)
+						new_shot.load_shot(request.FILES["shot"])
+						return redirect(request.POST["redirect_good_url"])
+					except:
+						return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"shot" : True}})))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"showid" : True}})))
+	except:
+		return redirect("/")
+		
+def delete_shot(request):
+	try:
+		if "shotid" in request.POST:
+			shotid = int(request.POST["shotid"])
+			shots = Shot.objects.filter(id = shotid)
+			if shots.count() != 0:
+				shot = shots[0]
+				shot.delete()
+		return redirect(request.POST["redirect_url"])
+	except:
+		return redirect("/")
