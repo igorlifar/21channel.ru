@@ -1,0 +1,31 @@
+<form class="form-horizontal" action="/panel/shows/edit-meta/send/" method="POST">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Редактирование мета-тега</legend>
+		<input type="hidden" name="redirect_good_url" value="/panel/shows/edit-meta/{{ metaitem.id }}/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/shows/edit-meta/{{ metaitem.id }}/">
+		<input type="hidden" name="metaitemid" value="{{ metaitem.id }}">
+		<div class="control-group{% if fs.errors.key %} error{% endif %}">
+			<label class="control-label">Ключ</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="key" value="{% if fs == None %}{{ metaitem.key }}{% else %}{{ fs.values.key }}{% endif %}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.value %} error{% endif %}">
+			<label class="control-label">Значение</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="value" value="{% if fs == None %}{{ metaitem.value }}{% else %}{{ fs.values.value }}{% endif %}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.priority %} error{% endif %}">
+			<label class="control-label">Приоритет</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="priority" value="{% if fs == None %}{{ metaitem.priority }}{% else %}{{ fs.values.priority }}{% endif %}">
+			</div>
+		</div>
+		
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Редактировать</button>
+	</div>
+</form>

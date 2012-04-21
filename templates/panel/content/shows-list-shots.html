@@ -1,0 +1,23 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Приоритет</th>
+			<th>Кадр (маленький)</th>
+			<th>Кадр (большой)</th>
+			<th>Действия</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for m in shots %}
+			<tr>
+				<td>{{ m.priority }}</td>
+				<td style="width: 100px;"><div class="thumbnail"><img style="width: 90px;" src="/media_files/{{ m.shot_small }}"></div></td>
+				<td style="width: 100px;"><div class="thumbnail"><img style="width: 90px;" src="/media_files/{{ m.shot_big }}"></div></td>
+				<td style="width: 200px;">
+					<a href="/panel/shows/edit-shot/{{ m.id }}/" class="btn">Редактировать</a>
+					<a href="/panel/shows/delete-shot/?shotid={{ m.id }}&redirect_url=/panel/shows/list-shots/{{ show.id }}/" class="btn btn-danger">Удалить</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

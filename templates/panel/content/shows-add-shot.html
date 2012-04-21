@@ -1,0 +1,25 @@
+<form class="form-horizontal" action="/panel/shows/add-shot/send/" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Добавление кадра</legend>
+		<input type="hidden" name="redirect_good_url" value="/panel/shows/list-shots/{{ show.id }}/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/shows/add-shot/{{ show.id }}/">
+		<input type="hidden" name="showid" value="{{ show.id }}">
+		<div class="control-group{% if fs.errors.shot %} error{% endif %}">
+			<label class="control-label">Фото кадра</label>
+			<div class="controls">
+				<input type="file" name="shot">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.priority %} error{% endif %}">
+			<label class="control-label">Приоритет</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="priority" value="{{ fs.values.priority }}">
+			</div>
+		</div>
+		
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Добавить</button>
+	</div>
+</form>

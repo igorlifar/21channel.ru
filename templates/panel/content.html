@@ -45,6 +45,55 @@
 {% endif %}
 {% if s.0 == 'shows' %}
 
+	{% if s.1 == "list-meta" %}
+		{% include "panel/content/shows-list-meta.html" %}
+	{% endif %}
+	
+	{% if s.1 == "add-meta" %}
+		{% include "panel/content/shows-add-meta.html" %}
+	{% endif %}
+	
+	{% if s.1 == "edit-meta" %}
+		{% include "panel/content/shows-edit-meta.html" %}
+	{% endif %}
+	
+	{% if s.1 == "delete-meta" %}
+		{% include "panel/content/shows-delete-meta.html" %}
+	{% endif %}
+
+
+	{% if s.1 == "delete-shot" %}
+		{% include "panel/content/shows-delete-shot.html" %}
+	{% endif %}
+
+	{% if s.1 == "list-shots" %}
+		{% include "panel/content/shows-list-shots.html" %}
+	{% endif %}
+	
+	{% if s.1 == "add-shot" %}
+		{% include "panel/content/shows-add-shot.html" %}
+	{% endif %}
+	
+	{% if s.1 == "edit-shot" %}
+		{% include "panel/content/shows-edit-shot.html" %}
+	{% endif %}
+	
+	{% if s.1 == "delete-article" %}
+		{% include "panel/content/shows-delete-article.html" %}
+	{% endif %}
+	
+	{% if s.1 == "list-articles" %}
+		{% include "panel/content/shows-list-articles.html" %}
+	{% endif %}
+	
+	{% if s.1 == "add-article" %}
+		{% include "panel/content/shows-add-article.html" %}
+	{% endif %}
+	
+	{% if s.1 == "edit-article" %}
+		{% include "panel/content/shows-edit-article.html" %}
+	{% endif %}
+
 	{% if s.1 == 'delete-check' %}
 		{% include 'panel/content/shows-delete.html' %}
 	{% endif %}

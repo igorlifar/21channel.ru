@@ -1,0 +1,57 @@
+<form class="form-horizontal" action="/panel/shows/edit-article/send/" method="POST">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Редактирование рецензии или статьи</legend>
+		<input type="hidden" name="redirect_good_url" value="/panel/shows/edit-article/{{ article.id }}/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/shows/edit-article/{{ article.id }}/">
+		<input type="hidden" name="articleid" value="{{ article.id }}">
+		<div class="control-group{% if fs.errors.articletype %} error{% endif %}">
+			<label class="control-label">Тип</label>
+			<div class="controls">
+				<select name="articletype">
+					<option value="Article">Статья</option>
+					{% if fs == None %}
+						<option value="Review"{% if article.articletype == "R" %} selected="selected"{% endif %}>Рецензия</option>
+					{% else %}
+						<option value="Review"{% if fs.values.articletype == "Review" %} selected="selected"{% endif %}>Рецензия</option>
+					{% endif %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title" value="{% if fs == None %}{{ article.title }}{% else %}{{ fs.values.title }}{% endif %}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.preview %} error{% endif %}">
+			<label class="control-label">Описание</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="preview" style="height: 80px;">{% if fs == None %}{{ article.preview }}{% else %}{{ fs.values.preview }}{% endif %}</textarea>
+			</div>
+		</div>
+		
+		<div class="control-group{% if fs.errors.text %} error{% endif %}">
+			<label class="control-label">Текст</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="text" style="height : 80px;">{% if fs == None %}{{ article.text }}{% else %}{{ fs.values.text }}{% endif %}</textarea>
+			</div>
+		</div>
+		
+		<div class="control-group{% if fs.errors.author %} error{% endif %}">
+			<label class="control-label">Автор</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="author" value="{% if fs == None %}{{ article.author }}{% else %}{{ fs.values.author }}{% endif %}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.priority %} error{% endif %}">
+			<label class="control-label">Приоритет</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="priority" value="{% if fs == None %}{{ article.priority }}{% else %}{{ fs.values.priority }}{% endif %}">
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Редактировать</button>
+	</div>
+</form>

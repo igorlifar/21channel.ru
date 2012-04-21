@@ -1,0 +1,23 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Приоритет</th>
+			<th>Ключ</th>
+			<th>Значениe</th>
+			<th>Действия</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for m in metaitems %}
+			<tr>
+				<td>{{ m.priority }}</td>
+				<td>{{ m.key }}</td>
+				<td>{{ m.value }}</td>
+				<td style="width: 200px;">
+					<a href="/panel/shows/edit-meta/{{ m.id }}/" class="btn">Редактировать</a>
+					<a href="/panel/shows/delete-meta/?metaitemid={{ m.id }}&redirect_url=/panel/shows/list-meta/{{ show.id }}/" class="btn btn-danger">Удалить</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

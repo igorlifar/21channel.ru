@@ -1,7 +1,7 @@
 from django.http import Http404
 from news.models import NewsItem
 from episodes.models import Episode
-from shows.models import Show
+from shows.models import Show, Article, MetaItem, Shot
 from archive.models import Archive
 from schedule.models import Program
 from mainsettings.models import MainSettings
@@ -56,6 +56,69 @@ def get_panel_section(request):
 		
 			if path[2] == 'delete-check':
 				return ['shows', 'delete-check']
+		
+			if path[2] == 'list-shots':
+				if len(path) == 3 or Show.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ['shows', 'list-shots', path[3]]
+		
+			if path[2] == 'add-shot':
+				if len(path) == 3 or Show.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ["shows", "add-shot", path[3]]
+				
+			if path[2] == "edit-shot":
+				if len(path) == 3 or Shot.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ["shows", "edit-shot", path[3]]
+				
+			if path[2] == "delete-shot":
+				return ["shows", "delete-shot"]
+				
+			if path[2] == "list-articles":
+				if len(path) == 3 or Show.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ["shows", "list-articles", path[3]]
+				
+			if path[2] == "edit-article":
+				if len(path) == 3 or Article.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ["shows", "edit-article", path[3]]
+				
+			if path[2] == "add-article":
+				if len(path) == 3 or Show.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ["shows", "add-article", path[3]]
+		
+			if path[2] == "delete-article":
+				return ["shows", "delete-article"]
+		
+			if path[2] == "list-meta":
+				if len(path) == 3 or Show.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ["shows", "list-meta", path[3]]
+		
+			if path[2] == "add-meta":
+				if len(path) == 3 or Show.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ["shows", "add-meta", path[3]]
+		
+			if path[2] == "edit-meta":
+				if len(path) == 3 or MetaItem.objects.filter(id = path[3]).count() == 0:
+					raise Http404
+				
+				return ["shows", "edit-meta", path[3]]
+		
+			if path[2] == "delete-meta":
+				return ["shows", "delete-meta"]
 		
 		if path[1] == 'archive':
 			if len(path) == 2 or path[2] == 'list':

@@ -1,0 +1,19 @@
+<form class="form-horizontal" action="/panel/shows/edit-shot/send/" method="POST">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Редактирование кадра</legend>
+		<input type="hidden" name="redirect_good_url" value="/panel/shows/edit-shot/{{ shot.id }}/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/shows/edit-shot/{{ shot.id }}/">
+		<input type="hidden" name="shotid" value="{{ shot.id }}">
+		<div class="control-group{% if fs.errors.priority %} error{% endif %}">
+			<label class="control-label">Приоритет</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="priority" value="{% if fs == None %}{{ shot.priority }}{% else %}{{ fs.values.priority }}{% endif %}">
+			</div>
+		</div>
+		
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Редактировать</button>
+	</div>
+</form>

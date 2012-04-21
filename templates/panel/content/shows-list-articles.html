@@ -1,0 +1,29 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Приоритет</th>
+			<th>Тип</th>
+			<th>Заголовок</th>
+			<th>Описание</th>
+			<th>Текст</th>
+			<th>Автор</th>
+			<th>Действия</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for m in articles %}
+			<tr>
+				<td>{{ m.priority }}</td>
+				<td>{% if m.articletype == "A" %}Статья{% else %}Реценция{% endif %}</td>
+				<td>{{ m.title }}</td>
+				<td>{{ m.preview }}</td>
+				<td>{{ m.text }}</td>
+				<td>{{ m.author }}</td>
+				<td style="width: 200px;">
+					<a href="/panel/shows/edit-article/{{ m.id }}/" class="btn">Редактировать</a>
+					<a href="/panel/shows/delete-article/?articleid={{ m.id }}&redirect_url=/panel/shows/list-articles/{{ show.id }}/" class="btn btn-danger">Удалить</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

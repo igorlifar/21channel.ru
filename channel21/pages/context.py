@@ -2,7 +2,7 @@
 
 from news.models import NewsItem
 from episodes.models import Episode
-from shows.models import Show
+from shows.models import Show, Shot, Article, MetaItem
 from archive.models import Archive
 from schedule.models import Program
 from mainsettings.models import MainSettings
@@ -187,6 +187,100 @@ def get_panel_context(s, request):
 		
 		if s[0] == 'shows':
 			if len(s) >= 2:
+				
+				if s[1] == "list-shots":
+					res["show"] = Show.objects.get(id = s[2])
+					res["shots"] = Shot.objects.filter(show = res["show"])
+				
+				if s[1] == "add-shot":
+					res["show"] = Show.objects.get(id = s[2])
+					
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Http404
+						
+				if s[1] == "edit-shot":
+					res["shot"] = Shot.objects.get(id = s[2])
+					
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Http404
+						
+				if s[1] == "delete-shot":
+					
+					res["shotid"] = ""
+					res["redirect_url"] = ""
+					if "shotid" in request.GET:
+						res["shotid"] = request.GET["shotid"]
+					if "redirect_url" in request.GET:
+						res["redirect_url"] = request.GET["redirect_url"]
+				
+				if s[1] == "list-articles":
+					res["show"] = Show.objects.get(id = s[2])
+					res["articles"] = Article.objects.filter(show = res["show"])
+					
+				if s[1] == "add-article":
+					res["show"] = Show.objects.get(id = s[2])
+					
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Http404
+						
+				if s[1] == "edit-article":
+					res["article"] = Article.objects.get(id = s[2])
+					
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Http404
+						
+				if s[1] == "delete-article":
+					
+					res["articleid"] = ""
+					res["redirect_url"] = ""
+					if "articleid" in request.GET:
+						res["articleid"] = request.GET["articleid"]
+					if "redirect_url" in request.GET:
+						res["redirect_url"] = request.GET["redirect_url"]
+				
+				if s[1] == "list-meta":
+					res["show"] = Show.objects.get(id = s[2])
+					res["metaitems"] = MetaItem.objects.filter(show = res["show"])
+				
+				if s[1] == "add-meta":
+					res["show"] = Show.objects.get(id = s[2])
+					
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Http404
+						
+				if s[1] == "edit-meta":
+					res["metaitem"] = MetaItem.objects.get(id = s[2])
+					
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Http404
+						
+				if s[1] == "delete-meta":
+					
+					res["metaitemid"] = ""
+					res["redirect_url"] = ""
+					if "metaitemid" in request.GET:
+						res["metaitemid"] = request.GET["metaitemid"]
+					if "redirect_url" in request.GET:
+						res["redirect_url"] = request.GET["redirect_url"]
+				
 				if s[1] == 'list':
 					res["shows"] = Show.objects.all()
 					

@@ -20,6 +20,16 @@
 					</a></li>
 			{% endif %}
 		{% endif %}
-	
+		{% if s.0 == "shows" %}
+			{% if s.1 == "edit" or s.1 == "edit-shot" or s.1 == "edit-meta" or s.1 == "edit-article" or s.1 == "list-shots" or s.1 == "add-shot" or s.1 == "list-articles" or s.1 == "add-article" or s.1 == "list-meta" or s.1 == "add-meta" %}
+				<li{% if s.1 == "edit" %} class="active"{% endif %}><a href="/panel/shows/edit/{{ s.2 }}/"><i class="{% if s.1 == "edit" %}icon-white {% endif %}icon-file"></i>Редактировать шоу</a></li>
+				<li{% if s.1 == "list-shots" %} class="active"{% endif %}><a href="/panel/shows/list-shots/{{ s.2 }}/"><i class="{% if s.1 == "list-shots" %}icon-white {% endif %}icon-list"></i>Список кадров</a></li>
+				<li{% if s.1 == "add-shot" %} class="active"{% endif %}><a href="/panel/shows/add-shot/{{ s.2 }}/"><i class="{% if s.1 == "add-shot" %}icon-white {% endif %}icon-file"></i>Добавить кадр</a></li>
+				<li{% if s.1 == "list-articles" %} class="active"{% endif %}><a href="/panel/shows/list-articles/{{ s.2 }}/"><i class="{% if s.1 == "list-articles" %}icon-white {% endif %}icon-list"></i>Список рецензий и статей</a></li>
+				<li{% if s.1 == "add-article" %} class="active"{% endif %}><a href="/panel/shows/add-article/{{ s.2 }}/"><i class="{% if s.1 == "add-article" %}icon-white {% endif %}icon-file"></i>Добавить резенцию или статью</a></li>
+				<li{% if s.1 == "list-meta" %} class="active"{% endif %}><a href="/panel/shows/list-meta/{{ s.2 }}/"><i class="{% if s.1 == "list-meta" %}icon-white {% endif %}icon-list"></i>Список мета-тегов</a></li>
+				<li{% if s.1 == "add-meta" %} class="active"{% endif %}><a href="/panel/shows/add-meta/{{ s.2 }}/"><i class="{% if s.1 == "add-meta" %}icon-white {% endif %}icon-file"></i>Добавить мета-тег</a></li>
+			{% endif %}
+		{% endif %}
 	</ul>
 </div>

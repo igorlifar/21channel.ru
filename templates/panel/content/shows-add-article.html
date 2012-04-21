@@ -1,0 +1,53 @@
+<form class="form-horizontal" action="/panel/shows/add-article/send/" method="POST">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Добавление рецензии или статьи</legend>
+		<input type="hidden" name="redirect_good_url" value="/panel/shows/list-articles/{{ show.id }}/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/shows/add-article/{{ show.id }}/">
+		<input type="hidden" name="showid" value="{{ show.id }}">
+		<div class="control-group{% if fs.errors.articletype %} error{% endif %}">
+			<label class="control-label">Тип</label>
+			<div class="controls">
+				<select name="articletype">
+					<option value="Article">Статья</option>
+					<option value="Review"{% if fs.values.articletype == "Review" %} selected="selected"{% endif %}>Рецензия</option>
+				</select>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title" value="{{ fs.values.title }}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.preview %} error{% endif %}">
+			<label class="control-label">Описание</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="preview" style="height: 80px;">{{ fs.values.preview }}</textarea>
+			</div>
+		</div>
+		
+		<div class="control-group{% if fs.errors.text %} error{% endif %}">
+			<label class="control-label">Текст</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="text" style="height : 80px;">{{ fs.values.text }}</textarea>
+			</div>
+		</div>
+		
+		<div class="control-group{% if fs.errors.author %} error{% endif %}">
+			<label class="control-label">Автор</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="author" value="{{ fs.values.author }}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.priority %} error{% endif %}">
+			<label class="control-label">Приоритет</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="priority" value="{{ fs.values.priority }}">
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Добавить</button>
+	</div>
+</form>

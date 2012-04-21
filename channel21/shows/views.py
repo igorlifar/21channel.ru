@@ -151,15 +151,34 @@ def create_shot(request):
 			shows = Show.objects.filter(id = showid)
 			if shows.count() != 0:
 				cshow = shows[0]
+				values = {}
+				errors = {}
 				if "priority" in request.POST:
-					cpriority = int(request.POST["priority"])
+					try:
+						values["priority"] = int(request.POST["priority"])
+						errors["priority"] = False
+					except:
+						values["priority"] = ""
+						errors["priority"] = True
+				else:
+					values["priority"] = ""
+					errors["priority"] = True
+				print values["priority"]
+				if not errors["priority"]:
+					new_shot = Shot.objects.create(priority = values["priority"], show = cshow)
 					if "shot" in request.FILES:
 						try:
-							new_shot = Shot.objects.create(show = cshow, priority = cpriority)
 							new_shot.load_shot(request.FILES["shot"])
-							return redirect(request.POST["redirect_good_url"])
+							errors["shot"] = False
 						except:
-							return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"shot" : True}})))
+							new_shot.delete()
+							errors["shot"] = True
+					else:
+						new_shot.delete()
+						errors["shot"] = True
+				if not errors["priority"] and not errors["shot"]:
+					return redirect(request.POST["redirect_good_url"])
+				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"showid" : True}})))
 	except:
 		return redirect("/")
@@ -167,7 +186,7 @@ def create_shot(request):
 def update_shot(request):
 	try:
 		if "shotid" in request.POST:
-			shotid = int(request.POST)
+			shotid = int(request.POST["shotid"])
 			shots = Shot.objects.filter(id = shotid)
 			if shots.count() != 0:
 				shot = shots[0]
@@ -191,6 +210,10 @@ def delete_shot(request):
 			shots = Shot.objects.filter(id = shotid)
 			if shots.count() != 0:
 				shot = shots[0]
+				if shot.shot_small.__nonzero__():
+					shot.shot_small.delete()
+				if shot.shot_big.__nonzero__():
+					shot.shot_big.delete()
 				shot.delete()
 		return redirect(request.POST["redirect_url"])
 	except:
@@ -279,7 +302,7 @@ def create_article(request):
 			showid = int(request.POST["showid"])
 			shows = Show.objects.filter(id = showid)
 			if shows.count() != 0:
-				show = shows[0]
+				cshow = shows[0]
 				values = {}
 				errors = {}
 				data = {}
@@ -311,7 +334,7 @@ def create_article(request):
 					values["priority"] = ""
 					errors["priority"] = True
 				if len(data) == 6:
-					new_article = Article.objects.create(articletype = data["articletype"], title = data["title"], preview = data["preview"], text = data["text"], author = data["author"], priority = data["priority"])
+					new_article = Article.objects.create(articletype = data["articletype"], title = data["title"], preview = data["preview"], text = data["text"], author = data["author"], priority = data["priority"], show = cshow)
 					return redirect(request.POST["redirect_good_url"])
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"showid" : True}})))

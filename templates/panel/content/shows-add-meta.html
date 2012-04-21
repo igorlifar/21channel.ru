@@ -1,0 +1,31 @@
+<form class="form-horizontal" action="/panel/shows/add-meta/send/" method="POST">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Добавление мета-тега</legend>
+		<input type="hidden" name="redirect_good_url" value="/panel/shows/list-meta/{{ show.id }}/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/shows/add-meta/{{ show.id }}/">
+		<input type="hidden" name="showid" value="{{ show.id }}">
+		<div class="control-group{% if fs.errors.key %} error{% endif %}">
+			<label class="control-label">Ключ</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="key" value="{{ fs.values.key }}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.value %} error{% endif %}">
+			<label class="control-label">Значение</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="value" value="{{ fs.values.value }}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.priority %} error{% endif %}">
+			<label class="control-label">Приоритет</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="priority" value="{{ fs.values.priority }}">
+			</div>
+		</div>
+		
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Добавить</button>
+	</div>
+</form>
