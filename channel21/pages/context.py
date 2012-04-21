@@ -549,7 +549,8 @@ def get_site_context(s, request):
 			res['js'] = 'shows-list.js'
 			
 			res['shows1'] = Show.objects.all()
-			
+		
+		# Show page:
 		elif len(s) == 2:
 			res['css'] = 'shows-show.css'
 			res['js'] = 'shows-show.js'
