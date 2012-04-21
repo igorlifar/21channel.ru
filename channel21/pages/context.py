@@ -203,6 +203,7 @@ def get_panel_context(s, request):
 						
 				if s[1] == "edit-shot":
 					res["shot"] = Shot.objects.get(id = s[2])
+					res["show"] = Show.objects.get(id = res["shot"].show.id)
 					
 					if "formstate" in request.GET:
 						try:
@@ -234,6 +235,7 @@ def get_panel_context(s, request):
 						
 				if s[1] == "edit-article":
 					res["article"] = Article.objects.get(id = s[2])
+					res["show"] = Show.objects.get(id = res["article"].show.id)
 					
 					if "formstate" in request.GET:
 						try:
@@ -265,6 +267,7 @@ def get_panel_context(s, request):
 						
 				if s[1] == "edit-meta":
 					res["metaitem"] = MetaItem.objects.get(id = s[2])
+					res["show"] = Show.objects.get(id = res["metaitem"].show.id)
 					
 					if "formstate" in request.GET:
 						try:
