@@ -1,0 +1,18 @@
+{% if shots %}
+	<div id="shots">
+		<div class="imgholder">
+			<div id="shots-prev">
+			</div>
+			<div id="shots-slider">
+				<div id="shots-cont" style="width: {{ shots_width }}px;">
+					{% for shot in shots %}
+						<img src="{{ media }}{{ shot.shot_small }}">
+					{% endfor %}
+				</div>
+			</div>
+			<div id="shots-next">
+			</div>
+		</div>
+		<div class="hint">Всего кадров: {{ shots_count }}</div>
+	</div>
+{% endif %}

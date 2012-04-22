@@ -563,6 +563,12 @@ def get_site_context(s, request):
 			sh = Show.objects.get(id=int(s[1]))
 			
 			res['comments'] = ShowComment.objects.filter(show=sh).order_by('-date')
+			res['meta'] = MetaItem.objects.filter(show=sh).order_by('-priority')
+			res['shots'] = Shot.objects.filter(show=sh).order_by('-priority')
+			res['shots_count'] = Shot.objects.filter(show=sh).count()
+			res['shots_width'] = Shot.objects.filter(show=sh).count() * 109 - 5
+			res['articles'] = Article.objects.filter(show=sh, articletype='A').order_by('-priority')
+			res['reviews'] = Article.objects.filter(show=sh, articletype='R').order_by('-priority')
 			
 			res["videos"] = {
 				"promo": Episode.objects.filter(show=sh, episodetype="P").order_by('-date'),

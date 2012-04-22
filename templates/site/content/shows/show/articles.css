@@ -1,0 +1,33 @@
+#articles,
+#reviews {
+	font-family: sans-serif;
+}
+
+#articles a,
+#reviews a {
+	cursor: pointer;
+}
+
+#articles .full,
+#reviews .full {
+	display: none;
+}
+
+#articles .full,
+#articles .preview,
+#reviews .full,
+#reviews .preview {
+	padding-left: 5px;
+	border-left: 5px solid rgb(149, 22, 26);
+}
+
+#reviews li,
+#articles li {
+	margin-bottom: 10px;
+}
+
+#reviews p,
+#articles p {
+	margin-top: 5px;
+	font-size: 13px;
+}

@@ -1,0 +1,13 @@
+#show-meta {
+	overflow: hidden;
+	font-family: sans-serif;
+	font-size: 13px;
+}
+
+#show-meta li {
+	overflow: hidden;
+}
+
+#show-meta .key {
+	font-weight: bold;
+}

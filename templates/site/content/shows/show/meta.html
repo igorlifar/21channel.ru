@@ -1,0 +1,8 @@
+<ul id="show-meta">
+	{% for m in meta %}
+		<li>
+			<span class="key">{{ m.key }}</span>:
+			{{ m.value }}
+		</li>
+	{% endfor %}
+</ul>

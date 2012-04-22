@@ -1,0 +1,45 @@
+{% load shows_extras %}
+
+{% if articles %}
+	<h2>Статьи</h2>
+	<ul id="articles">
+		{% for article in articles %}
+			<li>
+				<h3>{{ article.title }}</h3>
+				<div class="preview">
+					{% for p in article.preview|paragraphize %}
+						<p>{{ p }}</p>
+					{% endfor %}
+					<p><a>Читать далее...</a></p>
+				</div>
+				<div class="full">
+					{% for p in article.text|paragraphize %}
+						<p>{{ p }}</p>
+					{% endfor %}
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+
+{% if reviews %}
+	<h2>Рецензии</h2>
+	<ul id="reviews">
+		{% for review in reviews %}
+			<li>
+				<h3>{{ review.title }}</h3>
+				<div class="preview">
+					{% for p in review.preview|paragraphize %}
+						<p>{{ p }}</p>
+					{% endfor %}
+					<p><a>Читать далее...</a></p>
+				</div>
+				<div class="full">
+					{% for p in review.text|paragraphize %}
+						<p>{{ p }}</p>
+					{% endfor %}
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

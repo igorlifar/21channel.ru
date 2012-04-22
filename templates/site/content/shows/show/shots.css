@@ -1,0 +1,57 @@
+#shots {
+	margin-top: 5px;
+	overflow: hidden;
+	margin-bottom: 10px;
+	font-family: sans-serif;
+	font-size: 13px;
+}
+
+#shots .imgholder {
+	overflow: hidden;
+}
+
+#shots-slider {
+	overflow: hidden;
+	float: left;
+	width: 431px;
+	position: relative;
+	height: 74px;
+}
+
+#shots-cont {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#shots-prev,
+#shots-next {
+	width: 21px;
+	float: left;
+	height: 74px;
+	cursor: pointer;
+}
+
+#shots-next {
+	margin-left: 1px;
+	background: url({{ img }}right-arrow.gif) center center no-repeat;
+}
+
+#shots-prev {
+	margin-right: 1px;
+	background: url({{ img }}left-arrow.gif) center center no-repeat;
+}
+
+#shots img {
+	border: 1px solid #ccc;
+	padding: 1px;
+	display: block;
+	float: left;
+	margin-right: 5px;
+	width: 100px;
+	height: 70px;
+}
+
+#shots img:last-child {
+	margin: 0;
+}

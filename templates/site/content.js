@@ -159,8 +159,6 @@ $(document).ready(function(){
 		$(this).addClass("active");
 		showContent();
 	})
-	
-} );
 
 {% if s.0 == "index" %}
 	{% include 'site/content/index.js' %}
@@ -185,3 +183,5 @@ $(document).ready(function(){
 {% if s.0 == "news" %}
 	{% include 'site/content/news.js' %}
 {% endif %}
+	
+} );

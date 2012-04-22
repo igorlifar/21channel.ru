@@ -5,7 +5,11 @@
 	<h1>{{ show.title }}</h1>
 	<h2>{{ show.schedule }}</h2>
 	<img src="{{ media }}{{ show.illustration }}">
+	{% include 'site/content/shows/show/shots.html' %}
+	{% include 'site/content/shows/show/meta.html' %}
 	<p>{{ show.description }}</p>
+	{% include 'site/content/shows/show/articles.html' %}
+	
 	{% if videos.episodes or videos.issues %}
 		{% if videos.promo %}
 			<div class="watch-list white">
