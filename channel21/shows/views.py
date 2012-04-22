@@ -163,7 +163,6 @@ def create_shot(request):
 				else:
 					values["priority"] = ""
 					errors["priority"] = True
-				print values["priority"]
 				if not errors["priority"]:
 					new_shot = Shot.objects.create(priority = values["priority"], show = cshow)
 					if "shot" in request.FILES:
