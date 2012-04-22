@@ -565,6 +565,10 @@ def get_site_context(s, request):
 			res['comments'] = ShowComment.objects.filter(show=sh).order_by('-date')
 			res['meta'] = MetaItem.objects.filter(show=sh).order_by('-priority')
 			res['shots'] = Shot.objects.filter(show=sh).order_by('-priority')
+			shotsurls = []
+			for shot in res["shots"]:
+				shotsurls.append("/media_files/" + shot.shot_big.url)
+			res["shotsurls"] = json.dumps(shotsurls)
 			res['shots_count'] = Shot.objects.filter(show=sh).count()
 			res['shots_width'] = Shot.objects.filter(show=sh).count() * 109 - 5
 			res['articles'] = Article.objects.filter(show=sh, articletype='A').order_by('-priority')

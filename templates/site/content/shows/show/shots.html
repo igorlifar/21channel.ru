@@ -1,6 +1,9 @@
 {% if shots %}
 	<div id="shots">
 		<div class="imgholder">
+			{% for shot in shots %}
+				<input type="hidden" name="{{ media }}{{ shot.shot_small }}" value="{{ media }}{{ shot.shot_big }}">
+			{% endfor %}
 			<div id="shots-prev">
 			</div>
 			<div id="shots-slider">

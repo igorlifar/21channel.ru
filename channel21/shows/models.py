@@ -52,7 +52,7 @@ class Shot(models.Model):
 		content = ContentFile(img.read())
 		content.seek(0)
 		current = Image.open(content)
-		current = ImageOps.fit(current, (100, 100), Image.ANTIALIAS)
+		current = ImageOps.fit(current, (100, 70), Image.ANTIALIAS)
 		tmp = StringIO.StringIO()
 		name = hex(randint(1, 10**50)) + ".jpg"
 		current.save(tmp, "JPEG")
@@ -62,7 +62,7 @@ class Shot(models.Model):
 		self.shot_small.save(name, ContentFile(tmp.read()))
 		content.seek(0)
 		current = Image.open(content)
-		current = ImageOps.fit(current, (400, 400), Image.ANTIALIAS)
+		current = ImageOps.fit(current, (500, 350), Image.ANTIALIAS)
 		tmp = StringIO.StringIO()
 		name = hex(randint(1, 10**50)) + ".jpg"
 		current.save(tmp, "JPEG")
