@@ -1,4 +1,12 @@
 {% if shots %}
+
+	<script type="text/javascript">
+		var shotsurls = [];
+		{% for shot in shots %}
+			shotsurls.push("{{ media }}{{ shot.shot_big.url }}");
+		{% endfor %}
+	</script>
+
 	<div id="shots">
 		<div class="imgholder">
 			{% for shot in shots %}
