@@ -3,7 +3,7 @@
 	<script type="text/javascript">
 		var shotsurls = [];
 		{% for shot in shots %}
-			shotsurls.push("{{ media }}{{ shot.shot_big.url }}");
+			shotsurls.push("{{ media }}{{ shot.shot_big }}");
 		{% endfor %}
 	</script>
 
