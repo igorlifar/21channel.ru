@@ -112,8 +112,8 @@ $(document).ready(function(){
         background_color = new Array("rgb(47, 49, 56)", "rgb(40, 39, 30)", "rgb(52, 3, 54)", "rgb(16, 19, 27)", "rgb(28, 37, 38)");
         html = "";
         for(var i = 0; i < shows.length; i++){
-                html += "<div class=\"slider-show\" num=\"" + i + "\">";
-                html += "<img src=\"" + shows[i].image + "\">";
+				html += "<div class=\"slider-show\" num=\"" + i + "\">";
+				html += "<img src=\"" + shows[i].image + "\">";
                 html += "<div class=\"slider-show-title\" style=\"background : none repeat scroll 0% 0% " + background_color[i] + ";\">" + shows[i].title + "</div>";
                 html += "</div>";
         }
@@ -124,10 +124,13 @@ $(document).ready(function(){
 			$(".slider-title").html(shows[i].title);
 			$(".slider-schedule").html(shows[i].schedule);
 			$(".slider-description").html(shows[i].description);
-			$(".show-link").attr("href", "/shows/" + shows[i].id + "/")
 		};
         
 		set_cont(0);
+		
+		$(".slider-show").click(function(){
+			window.location.href = "/shows/" + shows[$(this).attr("num")].id + "/";
+		});
 		
         currentSlide = $(".slider-list").children().eq(0);
         currentSlide.children().eq(0).css("padding-left", "0px");
@@ -145,7 +148,6 @@ $(document).ready(function(){
 			currentSlide.children().eq(1).css("width", "102px");
 			$(".slider-content").css("background", currentSlide.children().eq(1).css("background-color") + " url(" + currentSlide.children().eq(0).attr("src") + ") no-repeat"); 
 			$(".slider-title").html(shows[currentSlide.attr("num")].title);
-			$(".show-link").attr("href", "/shows/" + shows[currentSlide.attr("num")].id + "/")
 			$(".slider-schedule").html(shows[currentSlide.attr("num")].schedule);
 			$(".slider-description").html(shows[currentSlide.attr("num")].description);
 		};

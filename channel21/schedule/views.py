@@ -156,7 +156,7 @@ def update_program(request):
 								program.finishtime = data["finishtime"]
 								program.dayofweek = data["dayofweek"]
 								program.save()
-								return redirect(request.POST["redirect_good_url"])
+								return redirect(request.POST["redirect_good_url"] + "?success")
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"programid" : True}})))
 	except:

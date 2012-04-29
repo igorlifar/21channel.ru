@@ -50,7 +50,7 @@ def update_archive(request):
 				if len(data) == 1:
 					archive.title = data["title"]
 					archive.save()
-					return redirect(request.POST["redirect_good_url"])
+					return redirect(request.POST["redirect_good_url"] + "?success")
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"archiveid" : True}})))
 	except:

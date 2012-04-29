@@ -45,6 +45,9 @@ def get_panel_context(s, request):
 					res["settings"] = MainSettings.objects.get(id = 1)
 					res["shows"] = Show.objects.all()
 					
+					if "success" in request.GET:
+						res["success"] = True
+					
 					if "formstate" in request.GET:
 						try:
 							res["fs"] = json.loads(unquote(request.GET["formstate"]))
@@ -59,6 +62,9 @@ def get_panel_context(s, request):
 				
 				if s[1] == 'edit':
 					res["news_item"] = NewsItem.objects.get(id=s[2])
+					
+					if "success" in request.GET:
+						res["success"] = True
 					
 					if 'formstate' in request.GET:
 						try:
@@ -138,6 +144,9 @@ def get_panel_context(s, request):
 					res["episode"] = Episode.objects.get(id = s[2])
 					res["shows"] = Show.objects.all()
 					
+					if "success" in request.GET:
+						res["success"] = True
+					
 					if "formstate" in request.GET:
 						try:
 							res["fs"] = json.loads(unquote(request.GET["formstate"]))
@@ -205,6 +214,9 @@ def get_panel_context(s, request):
 					res["shot"] = Shot.objects.get(id = s[2])
 					res["show"] = Show.objects.get(id = res["shot"].show.id)
 					
+					if "success" in request.GET:
+						res["success"] = True
+					
 					if "formstate" in request.GET:
 						try:
 							res["fs"] = json.loads(unquote(request.GET["formstate"]))
@@ -236,6 +248,9 @@ def get_panel_context(s, request):
 				if s[1] == "edit-article":
 					res["article"] = Article.objects.get(id = s[2])
 					res["show"] = Show.objects.get(id = res["article"].show.id)
+					
+					if "success" in request.GET:
+						res["success"] = True
 					
 					if "formstate" in request.GET:
 						try:
@@ -269,6 +284,9 @@ def get_panel_context(s, request):
 					res["metaitem"] = MetaItem.objects.get(id = s[2])
 					res["show"] = Show.objects.get(id = res["metaitem"].show.id)
 					
+					if "success" in request.GET:
+						res["success"] = True
+					
 					if "formstate" in request.GET:
 						try:
 							res["fs"] = json.loads(unquote(request.GET["formstate"]))
@@ -289,6 +307,9 @@ def get_panel_context(s, request):
 					
 				if s[1] == 'edit':
 					res["show"] = Show.objects.get(id = s[2])
+					
+					if "success" in request.GET:
+						res["success"] = True
 					
 					if "formstate" in request.GET:
 						try:
@@ -341,6 +362,9 @@ def get_panel_context(s, request):
 						if res["episodesinarchive"].filter(id = episode.id).count() == 0:
 							res["episodes"].append(episode)
 					
+					if "success" in request.GET:
+						res["success"] = True
+					
 					if "formstate" in request.GET:
 						try:
 							res["fs"] = json.loads(unquote(request.GET["formstate"]))
@@ -379,6 +403,9 @@ def get_panel_context(s, request):
 						
 				if s[1] == 'edit':
 					res["program"] = Program.objects.get(id = s[2])
+					
+					if "success" in request.GET:
+						res["success"] = True
 					
 					if "formstate" in request.GET:
 						try:

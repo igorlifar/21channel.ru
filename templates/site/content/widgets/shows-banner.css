@@ -79,6 +79,7 @@
 }
 
 .slider-show {
+		cursor : pointer;
         margin-bottom : 5px;
         width : 200px;
 		height: 56px;
