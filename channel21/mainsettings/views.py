@@ -17,7 +17,6 @@ def update_settings(request):
 		errors = {}
 		data = {}
 		errors["showid1"] = False
-		values["showid1"] = ""
 		if "showid1" in request.POST:
 			try:
 				showid = int(request.POST["showid1"])
@@ -27,12 +26,10 @@ def update_settings(request):
 					shows = Show.objects.filter(id = showid)
 					if shows.count() != 0:
 						data["showid1"] = shows[0]
-						values["showid1"] = shows[0]
 				errors["showid1"] = False
 			except:
 				errors["showid1"] = True
 		errors["showid2"] = False
-		values["showid2"] = ""
 		if "showid2" in request.POST:
 			try:
 				showid = int(request.POST["showid2"])
@@ -42,12 +39,10 @@ def update_settings(request):
 					shows = Show.objects.filter(id = showid)
 					if shows.count() != 0:
 						data["showid2"] = shows[0]
-						values["showid2"] = shows[0]
 				errors["showid2"] = False
 			except:
 				errors["showid2"] = True
 		errors["showid3"] = False
-		values["showid3"] = ""
 		if "showid3" in request.POST:
 			try:
 				showid = int(request.POST["showid3"])
@@ -57,12 +52,10 @@ def update_settings(request):
 					shows = Show.objects.filter(id = showid)
 					if shows.count() != 0:
 						data["showid3"] = shows[0]
-						values["showid3"] = shows[0]
 				errors["showid3"] = False
 			except:
 				errors["showid3"] = True
 		errors["showid4"] = False
-		values["showid4"] = ""
 		if "showid4" in request.POST:
 			try:
 				showid = int(request.POST["showid4"])
@@ -72,12 +65,10 @@ def update_settings(request):
 					shows = Show.objects.filter(id = showid)
 					if shows.count() != 0:
 						data["showid4"] = shows[0]
-						values["showid4"] = shows[0]
 				errors["showid4"] = False
 			except:
 				errors["showid4"] = True
 		errors["showid5"] = False
-		values["showid5"] = ""
 		if "showid5" in request.POST:
 			try:
 				showid = int(request.POST["showid5"])
@@ -87,7 +78,6 @@ def update_settings(request):
 					shows = Show.objects.filter(id = showid)
 					if shows.count() != 0:
 						data["showid5"] = shows[0]
-						values["showid5"] = shows[0]
 				errors["showid5"] = False
 			except:
 				errors["showid5"] = True
@@ -119,6 +109,6 @@ def update_settings(request):
 		if "showid5" in data:
 			mainsettings.show5 = data["showid5"]
 		mainsettings.save()
-		return redirect(request.POST["redirect_good_url"])
+		return redirect(request.POST["redirect_good_url"] + "?success")
 	except:
 		return redirect("/")

@@ -5,6 +5,13 @@
 		<input type="hidden" name="showid" value="{{ show.id }}">
 		<input type="hidden" name="redirect_good_url" value="/panel/shows/edit/{{ show.id }}/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/shows/edit/{{ show.id }}/">
+		{% if fs != None %}
+			<div class="alert alert-error">Форма заполнена с ошибками</div>
+		{% else %}
+			{% if success %}
+				<div class="alert alert-success">Данные успешно сохранены</div>
+			{% endif %}
+		{% endif %}
 		<div class="control-group{% if fs.errors.title %} error{% endif %}">
 			<label class="control-label">Заголовок</label>
 			<div class="controls">

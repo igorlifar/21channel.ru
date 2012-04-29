@@ -138,7 +138,7 @@ def update_show(request):
 								return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 					else:
 						errors["illustration_change"] = True
-					return redirect(request.POST["redirect_good_url"])
+					return redirect(request.POST["redirect_good_url"] + "?success")
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"showid" : True}})))
 	except:
@@ -194,7 +194,7 @@ def update_shot(request):
 						npriority = int(request.POST["priority"])
 						shot.priority = npriority
 						shot.save()
-						return redirect(request.POST["redirect_good_url"])
+						return redirect(request.POST["redirect_good_url"] + "?success")
 					except:
 						return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"priority" : True}})))
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"priority" : True}})))
@@ -277,7 +277,7 @@ def update_meta_item(request):
 					metaitem.value = data["value"]
 					metaitem.priority = data["priority"]
 					metaitem.save()
-					return redirect(request.POST["redirect_good_url"])
+					return redirect(request.POST["redirect_good_url"] + "?success")
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"metaitemid" : True}})))
 	except:
@@ -385,7 +385,7 @@ def update_article(request):
 					article.author = data["author"]
 					article.priority = data["priority"]
 					article.save()
-					return redirect(request.POST["redirect_good_url"])
+					return redirect(request.POST["redirect_good_url"] + "?success")
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"articleid" : True}})))
 	except:

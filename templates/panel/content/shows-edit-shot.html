@@ -5,6 +5,13 @@
 		<input type="hidden" name="redirect_good_url" value="/panel/shows/edit-shot/{{ shot.id }}/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/shows/edit-shot/{{ shot.id }}/">
 		<input type="hidden" name="shotid" value="{{ shot.id }}">
+		{% if fs != None %}
+			<div class="alert alert-error">Форма заполнена с ошибками</div>
+		{% else %}
+			{% if success %}
+				<div class="alert alert-success">Данные успешно сохранены</div>
+			{% endif %}
+		{% endif %}
 		<div class="control-group{% if fs.errors.priority %} error{% endif %}">
 			<label class="control-label">Приоритет</label>
 			<div class="controls">

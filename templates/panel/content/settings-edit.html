@@ -5,6 +5,13 @@
 		{% csrf_token %}
 		<input type="hidden" name="redirect_good_url" value="/panel/settings/edit/">
 		<input type="hidden" name="redirect_bad_url" value="/panel/settings/edit/">
+		{% if fs != None %}
+			<div class="alert alert-error">Форма заполнена с ошибками</div>
+		{% else %}
+			{% if success %}
+				<div class="alert alert-success">Данные успешно сохранены</div>
+			{% endif %}
+		{% endif %}
 		<div class="control-group">
 			<label class="control-label">Шоу №1</label>
 			<div class="controls">
