@@ -124,6 +124,7 @@ $(document).ready(function(){
 			$(".slider-title").html(shows[i].title);
 			$(".slider-schedule").html(shows[i].schedule);
 			$(".slider-description").html(shows[i].description);
+			$(".slider-link").attr("href", "/shows/" + shows[i].id + "/");
 		};
         
 		set_cont(0);
@@ -150,6 +151,7 @@ $(document).ready(function(){
 			$(".slider-title").html(shows[currentSlide.attr("num")].title);
 			$(".slider-schedule").html(shows[currentSlide.attr("num")].schedule);
 			$(".slider-description").html(shows[currentSlide.attr("num")].description);
+			$(".slider-link").attr("href", "/shows/" + shows[currentSlide.attr("num")].id + "/");
 		};
 	
 		sliderInterval = setInterval(nextSlide, 10000);
