@@ -8,8 +8,10 @@
 {% endif %}
 
 <div class="row" id="show-bg">
-	{% if s.1 != 'list' and s.size == 2 %}
+	{% if s.1 != 'list' %}
+		{% if s.2 == 'promo' or s.size == 2 %}
 			{% include 'site/content/shows/show.html' %}
+		{% endif %}
 	{% endif %}
 	
 	{% if s.2 == 'issues' %}

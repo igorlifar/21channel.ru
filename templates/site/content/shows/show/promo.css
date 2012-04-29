@@ -1,0 +1,41 @@
+#episode .bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 100;
+}
+
+#episode .wrapp {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#episode .cont {
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	padding: 10px;
+	background-color: #444;
+	z-index: 200;
+}
+
+#episode h1 {
+	margin-bottom: 5px;
+	background-color: #95161A;
+	padding: 5px;
+	display: inline-block;
+	color: white;
+	font-size: 28px;
+}
+
+#episode p {
+	font-family: sans-serif;
+	color: white;
+}

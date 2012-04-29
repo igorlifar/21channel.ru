@@ -102,3 +102,5 @@
 #show-bg .span12 {
 	padding-bottom: 0;
 }
+
+{% include 'site/content/shows/episodes/watch.css' %}

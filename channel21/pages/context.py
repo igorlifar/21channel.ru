@@ -554,7 +554,7 @@ def get_site_context(s, request):
 			res['shows1'] = Show.objects.all()
 		
 		# Show page:
-		elif len(s) == 2:
+		elif len(s) == 2 or s[2] == 'promo':
 			res['css'] = 'shows-show.css'
 			res['js'] = 'shows-show.js'
 			
@@ -575,6 +575,9 @@ def get_site_context(s, request):
 				"issues": Episode.objects.filter(show=sh, episodetype="I").order_by('-date')[0:5],
 				"episodes": Episode.objects.filter(show=sh, episodetype="E").order_by('-date')[0:5]
 			}
+			
+			if len(s) > 2:
+				res['video'] = Episode.objects.get(id=int(s[4]), episodetype='P', show=sh)
 		
 		elif s[2] == 'episodes':
 			sh = Show.objects.get(id=int(s[1]))
@@ -585,6 +588,9 @@ def get_site_context(s, request):
 			res['sh'] = sh
 			res['sectiontitle'] = u'Эпизоды'
 			
+			if len(s) == 5:
+				res['video'] = Episode.objects.get(show=sh, episodetype='E', id=int(s[4]))
+			
 		elif s[2] == 'issues':
 			sh = Show.objects.get(id=int(s[1]))
 			res['css'] = 'shows-show-episodes.css'
@@ -593,6 +599,9 @@ def get_site_context(s, request):
 			res['eps'] = Episode.objects.filter(show=sh, episodetype="I").order_by('-date')
 			res['sh'] = sh
 			res['sectiontitle'] = u'Выпуски'
+			
+			if len(s) == 5:
+				res['video'] = Episode.objects.get(show=sh, episodetype='I', id=int(s[4]))
 			
 		elif s[2] == 'watch':
 			res['css'] = 'shows-show-watch.css'

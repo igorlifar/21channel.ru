@@ -2,6 +2,7 @@
 {% load ulogin_tags %}
 
 <div class="span6 show" id="show">
+	{% include 'site/content/shows/show/promo.html' %}
 	<h1>{{ show.title }}</h1>
 	<h2>{{ show.schedule }}</h2>
 	<img src="{{ media }}{{ show.illustration }}">

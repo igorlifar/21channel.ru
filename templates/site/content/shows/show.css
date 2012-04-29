@@ -95,3 +95,4 @@
 {% include 'site/content/shows/show/meta.css' %}
 {% include 'site/content/shows/show/shots.css' %}
 {% include 'site/content/shows/show/articles.css' %}
+{% include 'site/content/shows/show/promo.css' %}
