@@ -18,6 +18,11 @@
 				container.css("position", "relative");
 				container.css("overflow", "hidden");
 				container.css("height", settings.height);
+				container.css("-moz-user-select", "none");
+				container.css("-khtml-user-select", "none");
+				container.css("-webkit-user-select", "none");
+				container.css("-o-user-select", "none");
+				container.css("user-select", "none");
 				container.html("<div class=\"scroll-body\" style=\"position : absolute; width : " + (parseInt(settings.width) - parseInt(settings.widthScroll)) + "px; margin-right : " + settings.widthScroll + ";\">" + html + "</div><div class=\"scroll-column\" style=\"position : absolute; right : 0px; width : " + settings.widthScroll + "; height : " + settings.height + ";\"><div class=\"scroll-up\">&nbsp;</div><div class=\"scroll-go\" style=\"position : relative;\"><div style=\"position : absolute; width : " + settings.widthScroll + "; height : " + settings.heightScroll + ";\" class=\"scroll-control\">&nbsp;</div></div><div class=\"scroll-down\">&nbsp;</div></div>");
 				container.children().eq(1).children().eq(1).css("height", parseInt(settings.height) - 2 * $(".scroll-up").outerHeight());
 				container.data("active", false);
@@ -30,7 +35,7 @@
 				container.children().eq(1).children().eq(1).mousemove(function(cursor){
 					var scroll = $(this).children().eq(0);
 					if(!scroll.data("active")){
-						return false;
+						return;
 					}
 					var y = cursor.pageY - $(this).offset().top - Math.floor(parseInt(settings.heightScroll) / 2);
 					y = Math.max(y, 0);
@@ -39,7 +44,6 @@
 					var percent = y / (parseInt(settings.height) - 2 * $(".scroll-up").outerHeight() - parseInt(settings.heightScroll));
 					var container = $(this).parent().parent().children().eq(0);
 					container.css("margin-top", -Math.floor(percent * Math.max(container.outerHeight() - parseInt(settings.height), 0)));
-					return false;
 				});
 				container.children().eq(1).children().eq(2).click(function(){
 					var container = $(this).parent().parent().children().eq(0);
