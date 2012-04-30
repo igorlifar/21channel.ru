@@ -169,7 +169,7 @@ $(document).ready(function(){
                 currentSlide.children().eq(1).css("width", "102px");
                 $(".slider-content").css("background", currentSlide.children().eq(1).css("background-color") + " url(" + currentSlide.children().eq(0).attr("src") + ") no-repeat"); 
                 $(".slider-title").html(shows[currentSlide.attr("num")].title);
-				$(".show-link").attr("href", "/shows/" + shows[currentSlide.attr("num")].id + "/")
+				$(".slider-link").attr("href", "/shows/" + shows[currentSlide.attr("num")].id + "/")
                 $(".slider-schedule").html(shows[currentSlide.attr("num")].schedule);
                 $(".slider-description").html(shows[currentSlide.attr("num")].description);
 				sliderInterval = setInterval(nextSlide, 10000);
