@@ -1,3 +1,17 @@
+.scroll-column {
+	background-color: rgb(55, 55, 55);
+	width: 15px;
+}
+
+.scroll-control {
+	background-color: rgb(112, 112, 112);
+}
+
+.scroll-up,
+.scroll-down {
+	background-color: #333;
+}
+
 #show > img {
 	display: block;
 	border: 1px solid #ccc;
@@ -33,6 +47,7 @@
 .watch-list ul{
 	padding: 5px 5px 5px 0;
 	color: white;
+	background-color: #333;
 }
 
 .watch-list img {
@@ -61,7 +76,7 @@
 
 .watch-list li > div {
 	padding-left: 5px;
-	width: 360px;
+	width: 340px;
 	float: left;
 }
 
