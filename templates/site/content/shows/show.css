@@ -7,9 +7,14 @@
 	background-color: rgb(112, 112, 112);
 }
 
-.scroll-up,
+.scroll-up {
+	background: #333 url({{ img }}arrow-up-small.gif) no-repeat center center;
+	cursor: pointer;
+}
+
 .scroll-down {
-	background-color: #333;
+	background: #333 url({{ img }}arrow-down-small.gif) no-repeat center center;
+	cursor: pointer;
 }
 
 #show > img {
@@ -63,7 +68,7 @@
 .watch-list li {
 	font-family: sans-serif;
 	overflow: hidden;
-	border-bottom: 1px solid #333;
+	border-bottom: 1px solid #555;
 	padding-top: 3px;
 	padding-bottom: 3px;
 	font-size: 13px;
