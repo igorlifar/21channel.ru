@@ -15,6 +15,8 @@
 {% endif %}
 
 
-{% if s.1 != 'list' and s.size == 2 %}
-	{% include 'site/content/shows/show.js' %}
+{% if s.1 != 'list' %}
+	{% if s.2 == 'promo' or s.size == 2 %}
+		{% include 'site/content/shows/show.js' %}
+	{% endif %}
 {% endif %}

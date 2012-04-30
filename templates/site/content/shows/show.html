@@ -2,6 +2,7 @@
 {% load ulogin_tags %}
 
 <div class="span6 show" id="show">
+	{% include 'site/content/shows/show/promo.html' %}
 	<h1>{{ show.title }}</h1>
 	<h2>{{ show.schedule }}</h2>
 	<img src="{{ media }}{{ show.illustration }}">
@@ -9,15 +10,17 @@
 	{% include 'site/content/shows/show/meta.html' %}
 	<p>{{ show.description }}</p>
 	{% include 'site/content/shows/show/articles.html' %}
-	
-	{% if videos.episodes or videos.issues %}
-		{% if videos.promo %}
-			<div class="watch-list white">
-				<h2>Промо</h2>
+	{% include 'site/content/shows/show/comments.html' %}
+</div>
+<div class="span6 show" style="background: #444;">
+	{% if videos.promo %}
+		<div class="watch-list">
+			<h2>Промо</h2>
+			<div class="episodes-list-scroll">
 				<ul>
 					{% for ep in videos.promo %}
 						<li>
-							<a href="episode/{{ ep.id }}"><img src="{{ ep|screenshot }}"></a>
+							<a href="{{ ep|link }}"><img src="{{ ep|screenshot }}"></a>
 							<div>
 								<h3>{{ ep.title }}</h3>
 								<p>{{ ep.description }}</p>
@@ -25,16 +28,13 @@
 						</li>
 					{% endfor %}
 				</ul>
-			</div>
-		{% endif %}
+			</dvi>
+		</div>
 	{% endif %}
-	{% include 'site/content/shows/show/comments.html' %}
-</div>
-<div class="span6 show" style="background: #444;">
-	{% if videos.episodes or videos.issues %}
-		{% if videos.issues %}
-			<div class="watch-list">
-				<h2>Выпуски</h2>
+	{% if videos.issues %}
+		<div class="watch-list">
+			<h2>Выпуски</h2>
+			<div class="episodes-list-scroll">
 				<ul>
 					{% for ep in videos.issues %}
 						<li>
@@ -46,15 +46,17 @@
 						</li>
 					{% endfor %}
 				</ul>
-				<div class="link">
-					<a href="issues/">Все выпуски..</a>
-				</div>
 			</div>
-		{% endif %}
-		
-		{% if videos.episodes %}
-			<div class="watch-list">
-				<h2>Эпизоды</h2>
+			<div class="link">
+				<a href="issues/">Все выпуски..</a>
+			</div>
+		</div>
+	{% endif %}
+	
+	{% if videos.episodes %}
+		<div class="watch-list">
+			<h2>Эпизоды</h2>
+			<div class="episodes-list-scroll">
 				<ul>
 					{% for ep in videos.episodes %}
 						<li>
@@ -66,27 +68,10 @@
 						</li>
 					{% endfor %}
 				</ul>
-				<div class="link">
-					<a href="episodes/">Все эпизоды..</a>
-				</div>
 			</div>
-		{% endif %}
-	{% else %}
-		{% if videos.promo %}
-			<div class="watch-list">
-				<h2>Промо</h2>
-				<ul>
-					{% for ep in videos.promo %}
-						<li>
-							<a href="{{ ep|link }}"><img src="{{ ep|screenshot }}"></a>
-							<div>
-								<h3>{{ ep.title }}</h3>
-								<p>{{ ep.description }}</p>
-							</div>
-						</li>
-					{% endfor %}
-				</ul>
+			<div class="link">
+				<a href="episodes/">Все эпизоды..</a>
 			</div>
-		{% endif %}
+		</div>
 	{% endif %}
 </div>

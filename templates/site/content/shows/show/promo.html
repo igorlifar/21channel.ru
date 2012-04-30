@@ -1,0 +1,16 @@
+{% load episode_extras %}
+{% if video %}
+	<div id="episode">
+		<div class="bg">
+		</div>
+		<div class="wrapp">
+			<div class="cont">
+				<input type="hidden" id="episode-backlink" value="{{ video|backlink }}">
+				<h1>{{ video.title }}</h1>
+				<div>{{ video|player:'100%x300'|safe }}</div>
+				<p>{{ video.description }}</p>
+			</div>
+		</div>
+	</div>
+
+{% endif %}

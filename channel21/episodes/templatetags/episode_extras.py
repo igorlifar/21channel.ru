@@ -15,6 +15,21 @@ def player(value, arg):
 @register.filter
 def link(value):
 	if not value.show == None:
-		return "/shows/" + str(value.show.id) + "/watch/" + str(value.id) + "/"
+		if value.episodetype == 'I':
+			return "/shows/" + str(value.show.id) + "/issues/watch/" + str(value.id) + "/"
+		if value.episodetype == 'E':
+			return "/shows/" + str(value.show.id) + "/episodes/watch/" + str(value.id) + "/"
+		return "/shows/" + str(value.show.id) + "/promo/watch/" + str(value.id) + "/"
 	else:
 		return "/episode/" + str(value.id) + "/"
+
+@register.filter
+def backlink(value):
+	if not value.show == None:
+		if value.episodetype == 'I':
+			return "/shows/" + str(value.show.id) + "/issues/"
+		if value.episodetype == 'E':
+			return "/shows/" + str(value.show.id) + "/episodes/"
+		if value.episodetype == 'P':
+			return "/shows/" + str(value.show.id) + "/"
+	return "/"

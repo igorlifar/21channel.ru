@@ -232,11 +232,35 @@ def get_site_section(request):
 		if len(path) == 2:
 			return ["shows", path[1]]
 			
+		if len(path) == 5 and path[2] == 'promo' and path[3] == 'watch':
+			try:
+				vd = Episode.objects.get(show=sh, id=int(path[4]), episodetype='P')
+				return ["shows", path[1], "promo", "watch", path[4]]
+			except:
+				raise Http404
+			
 		if path[2] == 'issues':
-			return ['shows', path[1], 'issues']
+			if len(path) == 3:
+				return ['shows', path[1], 'issues']
+				
+			if len(path) == 5 and path[3] == 'watch':
+				try:
+					vd = Episode.objects.get(show=sh, id=int(path[4]), episodetype="I")
+					return ["shows", path[1], "issues", "watch", path[4]]
+				except:
+					raise Http404
 		
 		if path[2] == 'episodes':
-			return ['shows', path[1], 'episodes']
+			if len(path) == 3:
+				return ['shows', path[1], 'episodes']
+				
+			if len(path) == 5 and path[3] == 'watch':
+				try:
+					vd = Episode.objects.get(show=sh, id=int(path[4]), episodetype="E")
+					return ["shows", path[1], "episodes", "watch", path[4]]
+				except:
+					raise Http404
+		
 		
 		if path[2] == 'watch':
 			ep = None
