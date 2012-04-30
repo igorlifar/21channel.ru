@@ -30,7 +30,7 @@
 				container.children().eq(1).children().eq(1).mousemove(function(cursor){
 					var scroll = $(this).children().eq(0);
 					if(!scroll.data("active")){
-						return;
+						return false;
 					}
 					var y = cursor.pageY - $(this).offset().top - Math.floor(parseInt(settings.heightScroll) / 2);
 					y = Math.max(y, 0);
@@ -39,6 +39,7 @@
 					var percent = y / (parseInt(settings.height) - 2 * $(".scroll-up").outerHeight() - parseInt(settings.heightScroll));
 					var container = $(this).parent().parent().children().eq(0);
 					container.css("margin-top", -Math.floor(percent * Math.max(container.outerHeight() - parseInt(settings.height), 0)));
+					return false;
 				});
 				container.children().eq(1).children().eq(2).click(function(){
 					var container = $(this).parent().parent().children().eq(0);
