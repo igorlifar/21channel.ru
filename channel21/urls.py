@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from settings import rel
 
 # Uncomment the next two lines to enable the admin:
 
@@ -53,8 +54,8 @@ urlpatterns = patterns('',
 	url(r'^styles/', include('styles.urls')),
 	url(r'^scripts/', include('scripts.urls')),
     
-	url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': '/home/gasya/Documents/21channel.ru/static/' }),
-	url(r'^media_files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/home/gasya/Documents/21channel.ru/media/' }),
+	url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': rel('static/') }),
+	url(r'^media_files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': rel('media/') }),
     
 	url(r'^django-admin/', include(admin.site.urls)),
 	url(r'', include('pages.urls')),

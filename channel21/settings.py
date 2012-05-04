@@ -1,3 +1,9 @@
+from local_settings import root_dir, default_db
+
+
+def rel(path):
+    return root_dir + path
+
 # Django settings for channel21 project.
 
 DEBUG = True
@@ -10,17 +16,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '21ch',                      # Or path to database file if using sqlite3.
-        'USER': '21ch',                      # Not used with sqlite3.
-        'PASSWORD': 'test123',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-        'OPTIONS': {
-             "init_command": "SET foreign_key_checks = 0;",
-         },
-    }
+    'default': default_db,
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -106,7 +102,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'channel21.urls'
 
 TEMPLATE_DIRS = (
-	"/home/gasya/Documents/21channel.ru/templates"
+	rel('templates')
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
