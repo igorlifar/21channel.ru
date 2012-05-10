@@ -11,14 +11,14 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '21ch',                      # Or path to database file if using sqlite3.
         'USER': '21ch',                      # Not used with sqlite3.
         'PASSWORD': 'test123',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
         'OPTIONS': {
-             "init_command": "SET foreign_key_checks = 0;",
+             #"init_command": "SET foreign_key_checks = 0;",
          },
     }
 }
@@ -48,7 +48,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/gasya/Documents/21channel.ru/media/'
+MEDIA_ROOT = '/home/sankear/work/21channel.ru/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -106,7 +106,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'channel21.urls'
 
 TEMPLATE_DIRS = (
-	"/home/gasya/Documents/21channel.ru/templates"
+	"/home/sankear/work/21channel.ru/templates"
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -131,7 +131,7 @@ INSTALLED_APPS = (
     'schedule',
     'mainsettings',
     'comments',
-    'south',
+    #'south',
     'django_ulogin',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
