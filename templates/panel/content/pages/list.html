@@ -1,0 +1,24 @@
+{% for category in categories %}
+<h2>{{ category.title }}</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Заголовок</th>
+				<th>Приоритет<th>
+				<th>Действия</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for page in category.pages.objects %}
+				<tr>
+					<td>{{ page.title }}</td>
+					<td>{{ page.priority }}</td>
+					<td>
+						<a href="/panel/pages/edit/{{ page.id }}/" class="btn" style="margin: 2px;">Редактировать</a>
+						<a href="/panel/pages/delete-check/?episodeid={{ page.id }}&redirect_url=/panel/pages/list/" class="btn btn-danger" style="margin: 2px;">Удалить</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endfor %}
