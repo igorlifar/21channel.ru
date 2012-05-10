@@ -170,7 +170,7 @@ def get_panel_section(request):
 				return ['schedule', 'delete-check']
 
 		if path[1] == 'pages':
-			if len(path) == 2:
+			if len(path) == 2 or path[2] == 'list':
 				return ['pages', 'list']
 
 			if path[2] == 'add':
