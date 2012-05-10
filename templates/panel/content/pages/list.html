@@ -1,3 +1,5 @@
+{% load staticpages_extras %}
+
 {% for category in categories %}
 <h2>{{ category.title }}</h2>
 	<table class="table table-striped">
@@ -9,7 +11,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for page in category.pages.objects %}
+			{% for page in category|pages %}
 				<tr>
 					<td>{{ page.title }}</td>
 					<td>{{ page.priority }}</td>
@@ -20,5 +22,6 @@
 				</tr>
 			{% endfor %}
 		</tbody>
+
 	</table>
 {% endfor %}
