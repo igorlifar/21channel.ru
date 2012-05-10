@@ -11,6 +11,7 @@ import json
 from django.http import Http404
 from mainsettings.models import MainSettings
 from comments.models import *
+from staticpages.models import Category, Page
 
 def get_panel_context(s, request):
 
@@ -442,7 +443,12 @@ def get_panel_context(s, request):
 						res["programid"] = request.GET["programid"]
 					if "redirect_url" in request.GET:
 						res["redirect_url"] = request.GET["redirect_url"]
-		
+		if s[0] == 'pages':
+			if s[1] == 'list' or s[1] == 'add':
+				res['categories'] = Category.objects.all().order_by('-priority')
+			if s[1] == 'edit':
+				res['page'] = Page.objects.get(id = s[2])
+
 	return res
 	
 def get_site_context(s, request):
