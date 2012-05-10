@@ -108,6 +108,7 @@
 		{% include 'panel/content/shows-add.html' %}
 	{% endif %}
 {% endif %}
+
 {% if s.0 == 'archive' %}
 	{% if s.1 == 'delete-check' %}
 		{% include 'panel/content/archives-delete.html' %}
@@ -122,6 +123,7 @@
 		{% include 'panel/content/archives-add.html' %}
 	{% endif %}
 {% endif %}
+
 {% if s.0 == 'schedule' %}
 	{% if s.1 == 'delete-check' %}
 		{% include 'panel/content/schedule-delete.html' %}
@@ -134,5 +136,20 @@
 	{% endif %}
 	{% if s.1 == 'edit' %}
 		{% include 'panel/content/schedule-edit.html' %}
+	{% endif %}
+{% endif %}
+
+{% if s.0 == 'pages' %}
+	{% if s.1 == 'delete-check' %}
+		{% include 'panel/content/pages/delete.html' %}
+	{% endif %}
+	{% if s.1 == 'list' %}
+		{% include 'panel/content/pages/list.html' %}
+	{% endif %}
+	{% if s.1 == 'add' %}
+		{% include 'panel/content/pages/add.html' %}
+	{% endif %}
+	{% if s.1 == 'edit' %}
+		{% include 'panel/content/pages/edit.html' %}
 	{% endif %}
 {% endif %}
