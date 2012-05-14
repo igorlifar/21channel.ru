@@ -1,0 +1,25 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Приоритет</th>
+			<th>Категория</th>
+			<th>Заголовок</th>
+			<th>Текст страницы</th>
+			<th>Действия</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for m in pages %}
+			<tr>
+				<td>{{ m.priority }}</td>
+				<td>{{ m.category.title }}</td>
+				<td>{{ m.title }}</td>
+				<td>{{ m.body }}</td>
+				<td style="width: 200px;">
+					<a href="/panel/pages/edit/{{ m.id }}/" class="btn">Редактировать</a>
+					<a href="/panel/pages/delete-check/?pageid={{ m.id }}&redirect_url=/panel/pages/list/" class="btn btn-danger">Удалить</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

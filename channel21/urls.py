@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from settings import rel
 
 # Uncomment the next two lines to enable the admin:
 
@@ -50,11 +51,15 @@ urlpatterns = patterns('',
 	url(r'^panel/schedule/delete/$', 'schedule.views.delete_program'),
 	url(r'^panel/schedule/edit/send/$', 'schedule.views.update_program'),
 	
+	url(r'^panel/pages/add/send/$', 'staticpages.views.create_page'),
+	url(r'^panel/pages/delete/$', 'staticpages.views.delete_page'),
+	url(r'^panel/pages/edit/send/$', 'staticpages.views.update_page'),
+	
 	url(r'^styles/', include('styles.urls')),
 	url(r'^scripts/', include('scripts.urls')),
     
-	url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': '/home/sankear/work/21channel.ru/static/' }),
-	url(r'^media_files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/home/sankear/work/21channel.ru/media/' }),
+	url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': rel('static/') }),
+	url(r'^media_files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': rel('media/') }),
     
 	url(r'^django-admin/', include(admin.site.urls)),
 	url(r'', include('pages.urls')),

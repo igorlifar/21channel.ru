@@ -76,5 +76,18 @@
 			<li class="active">Редактировать программу</li>
 		{% endif %}
 	{% endif %}
+
+	{% if s.0 == 'pages' %}
+		<li><a href="/panel/pages/">Страницы</a> <span class="divider">/</span></li>
+		{% if s.1 == 'list' %}
+			<li class="active">Список страниц</li>
+		{% endif %}
+		{% if s.1 == 'add' %}
+			<li class="active">Добавить страницу</li>
+		{% endif %}
+		{% if s.1 == 'edit' %}
+			<li class="active">Редактировать страницу</li>
+		{% endif %}
+	{% endif %}
 	
 </ul>

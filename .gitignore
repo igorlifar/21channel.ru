@@ -3,3 +3,4 @@
 *migrations*
 media/*
 *.sql
+*local_settings.py

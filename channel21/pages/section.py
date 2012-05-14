@@ -5,6 +5,7 @@ from shows.models import Show, Article, MetaItem, Shot
 from archive.models import Archive
 from schedule.models import Program
 from mainsettings.models import MainSettings
+from staticpages.models import Category, Page
 
 def get_panel_section(request):
 	path = request.path.strip('/').split('/')
@@ -167,6 +168,19 @@ def get_panel_section(request):
 			
 			if path[2] == 'delete-check':
 				return ['schedule', 'delete-check']
+
+		if path[1] == 'pages':
+			if len(path) == 2 or path[2] == 'list':
+				return ['pages', 'list']
+
+			if path[2] == 'add':
+				return ['pages', 'add']
+
+			if path[2] == 'edit' and Page.objects.filter(id = path[3]).count() != 0:
+				return ['pages', 'edit', path[3]]
+				
+			if path[2] == 'delete-check':
+				return ['pages', 'delete-check']
 		
 	raise Http404
 	

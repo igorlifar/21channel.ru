@@ -11,6 +11,7 @@ import json
 from django.http import Http404
 from mainsettings.models import MainSettings
 from comments.models import *
+from staticpages.models import Category, Page
 
 def get_panel_context(s, request):
 
@@ -442,7 +443,44 @@ def get_panel_context(s, request):
 						res["programid"] = request.GET["programid"]
 					if "redirect_url" in request.GET:
 						res["redirect_url"] = request.GET["redirect_url"]
-		
+						
+		if s[0] == 'pages':
+			
+			if s[1] == 'list':
+				res["pages"] = Page.objects.all()
+				
+			if s[1] == 'add' or s[1] == 'edit':
+				res["categories"] = Category.objects.all().order_by("-priority")
+				
+			if s[1] == 'add':
+				
+				if "formstate" in request.GET:
+					try:
+						res["fs"] = json.loads(unquote(request.GET["formstate"]))
+					except:
+						raise Http404
+					
+			if s[1] == 'edit':
+				
+				res["page"] = Page.objects.get(id = s[2])
+				
+				if "success" in request.GET:
+					res["success"] = True
+					
+				if "formstate" in request.GET:
+					try:
+						res["fs"] = json.loads(unquote(request.GET["formstate"]))
+					except:
+						raise Http404
+					
+			if s[1] == 'delete-check':
+				res["pageid"] = ""
+				res["redirect_url"] = ""
+				if "pageid" in request.GET:
+					res["pageid"] = request.GET["pageid"]
+				if "redirect_url" in request.GET:
+					res["redirect_url"] = request.GET["redirect_url"]
+			
 	return res
 	
 def get_site_context(s, request):

@@ -1,0 +1,40 @@
+<form class="form-horizontal" action="/panel/pages/add/send/" method="POST">
+{% csrf_token %}
+	<legend>Добавление страницы</legend>
+	<fieldset>
+		<input type="hidden" name="redirect_good_url" value="/panel/pages/list/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/pages/add/">
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title" value="{{ fs.values.title }}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.body %} error{% endif %}">
+			<label class="control-label">Текст страницы</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="body" style="height:190px;">{{ fs.values.body }}</textarea>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.category %} error{% endif %}">
+			<label class="control-label">Категория</label>
+			<div class="controls">
+				<select name="category">
+					<option value="-1"></option>
+					{% for category in categories %}
+						<option value="{{ category.id }}"{% if fs.values.category == category %} selected="selected"{% endif %}>{{ category.title }}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.priority %} error{% endif %}">
+			<label class="control-label">Приоритет</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="priority" value="{{ fs.values.priority }}">
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Добавить</button>
+	</div>
+</form>

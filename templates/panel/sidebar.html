@@ -2,7 +2,7 @@
 	<ul class="nav nav-list">
 		<li class="nav-header">Действия</li>
 		
-		{% if s.0 == "news" or s.0 == 'episodes' or s.0 == 'archive' or s.0 == 'shows' or s.0 == 'schedule' %}
+		{% if s.0 == "news" or s.0 == 'episodes' or s.0 == 'archive' or s.0 == 'shows' or s.0 == 'schedule' or s.0 == 'pages' %}
 			{% if s.1 == "list" or s.1 == 'add'%}
 				<li{% if s.1 == 'list' %} class="active" {% endif %}><a href="/panel/{{ s.0 }}/list/"><i class="{% if s.1 == 'list' %}icon-white {% endif %}icon-list"></i>Список
 					{% if s.0 == 'news' %}новостей{% endif %}
@@ -10,6 +10,7 @@
 					{% if s.0 == 'shows' %}шоу{% endif %}
 					{% if s.0 == 'episodes' %}эпизодов{% endif %}
 					{% if s.0 == 'schedule' %}программ{% endif %}
+					{% if s.0 == 'pages' %}страниц{% endif %}
 					</a></li>
 				<li{% if s.1 == 'add' %} class="active" {% endif %}><a href="/panel/{{ s.0 }}/add/"><i class="{% if s.1 == 'add' %}icon-white {% endif %}icon-file"></i>Добавить
 					{% if s.0 == 'news' %}новость{% endif %}
@@ -17,6 +18,7 @@
 					{% if s.0 == 'shows' %}шоу{% endif %}
 					{% if s.0 == 'episodes' %}эпизод{% endif %}
 					{% if s.0 == 'schedule' %}программу{% endif %}
+					{% if s.0 == 'schedule' %}страницу{% endif %}
 					</a></li>
 			{% endif %}
 		{% endif %}

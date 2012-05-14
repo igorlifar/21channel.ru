@@ -1,0 +1,53 @@
+{{ fs.values.category }}
+<form class="form-horizontal" action="/panel/pages/edit/send/" method="POST">
+{% csrf_token %}
+	<legend>Редактирование страницы</legend>
+	<fieldset>
+		<input type="hidden" name="pageid" value="{{ page.id }}">
+		<input type="hidden" name="redirect_good_url" value="/panel/pages/edit/{{ page.id }}/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/pages/edit/{{ page.id }}/">
+		{% if fs != None %}
+			<div class="alert alert-error">Форма заполнена с ошибками</div>
+		{% else %}
+			{% if success %}
+				<div class="alert alert-success">Данные успешно сохранены</div>
+			{% endif %}
+		{% endif %}
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title" value="{% if fs == None %}{{ page.title }}{% else %}{{ fs.values.title }}{% endif %}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.body %} error{% endif %}">
+			<label class="control-label">Текст страницы</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="body" style="height:190px;">{% if fs == None %}{{ page.body }}{% else %}{{ fs.values.body }}{% endif %}</textarea>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.category %} error{% endif %}">
+			<label class="control-label">Категория</label>
+			<div class="controls">
+				<select name="category">
+					<option value="-1"></option>
+					{% for category in categories %}
+						{% if fs == None %}
+							<option value="{{ category.id }}"{% if page.category == category %} selected="selected"{% endif %}>{{ category.title }}</option>
+						{% else %}
+							<option value="{{ category.id }}"{% if fs.values.category == category.id %} selected="selected"{% endif %}>{{ category.title }}</option>	
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.priority %} error{% endif %}">
+			<label class="control-label">Приоритет</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="priority" value="{% if fs == None %}{{ page.priority }}{% else %}{{ fs.values.priority }}{% endif %}">
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Редактировать</button>
+	</div>
+</form>
