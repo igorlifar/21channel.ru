@@ -3,7 +3,7 @@
 		<li class="nav-header">Действия</li>
 		
 		{% if s.0 == "news" or s.0 == 'episodes' or s.0 == 'archive' or s.0 == 'shows' or s.0 == 'schedule' or s.0 == 'pages' %}
-			{% if s.1 == "list" or s.1 == 'add'%}
+			{% if s.1 == "list" or s.1 == 'add' or s.1 == 'edit'%}
 				<li{% if s.1 == 'list' %} class="active" {% endif %}><a href="/panel/{{ s.0 }}/list/"><i class="{% if s.1 == 'list' %}icon-white {% endif %}icon-list"></i>Список
 					{% if s.0 == 'news' %}новостей{% endif %}
 					{% if s.0 == 'archive' %}категорий{% endif %}
@@ -18,7 +18,7 @@
 					{% if s.0 == 'shows' %}шоу{% endif %}
 					{% if s.0 == 'episodes' %}эпизод{% endif %}
 					{% if s.0 == 'schedule' %}программу{% endif %}
-					{% if s.0 == 'schedule' %}страницу{% endif %}
+					{% if s.0 == 'pages' %}страницу{% endif %}
 					</a></li>
 			{% endif %}
 		{% endif %}

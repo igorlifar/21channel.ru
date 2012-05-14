@@ -28,3 +28,7 @@
 {% if s.0 == "episode" %}
 	{% include 'site/content/episode.css' %}
 {% endif %}
+
+{% if s.0 == 'page' %}
+	{% include 'site/content/page.css' %}
+{% endif %}

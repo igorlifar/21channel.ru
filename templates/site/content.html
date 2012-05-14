@@ -1,5 +1,7 @@
-{% if s.0 != 'shows' or s.1 == 'list' %}
+{% if s.0 != 'shows' or s.1 == 'list'%}
+{% if s.0 != 'pages' %}
 	{% include 'site/content/widgets/shows-banner.html' %}
+{% endif %}
 {% endif %}
 
 {% if s.0 == "index" %}
@@ -28,4 +30,8 @@
 
 {% if s.0 == "episode" %}
 	{% include 'site/content/episode.html' %}
+{% endif %}
+
+{% if s.0 == 'pages' %}
+	{% include 'site/content/page.html' %}
 {% endif %}

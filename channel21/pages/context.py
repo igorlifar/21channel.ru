@@ -447,7 +447,7 @@ def get_panel_context(s, request):
 		if s[0] == 'pages':
 			
 			if s[1] == 'list':
-				res["pages"] = Page.objects.all()
+				res["categories"] = Category.objects.all().order_by("-priority")
 				
 			if s[1] == 'add' or s[1] == 'edit':
 				res["categories"] = Category.objects.all().order_by("-priority")
@@ -489,6 +489,8 @@ def get_site_context(s, request):
 	res['request'] = request
 	res['user'] = request.user
 	res['ulogin_user'] = None
+
+	res['footer_cats'] = Category.objects.all().order_by("-priority")[:3]
 	
 	try:
 		res['ulogin_user'] = request.user.ulogin_users.all()[0]
@@ -673,6 +675,11 @@ def get_site_context(s, request):
 			res['js'] = 'shows-show-watch.js'
 			
 			res['ep'] = Episode.objects.get(id=int(s[3]))
+
+	if s[0] == 'pages':
+		res['page'] = Page.objects.get(id=s[1])
+		res['css'] = 'page.css'
+		res['js'] = 'page.js'
 	
 	
 	return res

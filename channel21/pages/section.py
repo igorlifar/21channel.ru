@@ -284,6 +284,14 @@ def get_site_section(request):
 				raise Http404
 			
 			return ['shows', path[1], 'watch', path[3]]
+
+	if path[0] == 'pages':
+		try:
+			page = Page.objects.get(id=path[1])
+		except:
+			raise Http404
+
+		return ['pages', path[1]]
 		
 		
 	raise Http404
