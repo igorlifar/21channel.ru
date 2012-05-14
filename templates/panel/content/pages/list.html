@@ -1,25 +1,27 @@
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Приоритет</th>
-			<th>Категория</th>
-			<th>Заголовок</th>
-			<th>Текст страницы</th>
-			<th>Действия</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for m in pages %}
+{% load staticpages_extras %}
+
+{% for category in categories %}
+<h2>{{ category.title }}</h2>
+	<table class="table table-striped">
+		<thead>
 			<tr>
-				<td>{{ m.priority }}</td>
-				<td>{{ m.category.title }}</td>
-				<td>{{ m.title }}</td>
-				<td>{{ m.body }}</td>
-				<td style="width: 200px;">
-					<a href="/panel/pages/edit/{{ m.id }}/" class="btn">Редактировать</a>
-					<a href="/panel/pages/delete-check/?pageid={{ m.id }}&redirect_url=/panel/pages/list/" class="btn btn-danger">Удалить</a>
-				</td>
+				<th>Заголовок</th>
+				<th>Приоритет<th>
+				<th>Действия</th>
 			</tr>
-		{% endfor %}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			{% for page in category|pages %}
+				<tr>
+					<td>{{ page.title }}</td>
+					<td>{{ page.priority }}</td>
+					<td>
+						<a href="/panel/pages/edit/{{ page.id }}/" class="btn" style="margin: 2px;">Редактировать</a>
+						<a href="/panel/pages/delete-check/?pageid={{ page.id }}&redirect_url=/panel/pages/list/" class="btn btn-danger" style="margin: 2px;">Удалить</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+
+	</table>
+{% endfor %}
