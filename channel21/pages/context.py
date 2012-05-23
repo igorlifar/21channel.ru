@@ -12,6 +12,7 @@ from django.http import Http404
 from mainsettings.models import MainSettings
 from comments.models import *
 from staticpages.models import Category, Page
+from profiling import profile
 
 def get_panel_context(s, request):
 
@@ -483,6 +484,9 @@ def get_panel_context(s, request):
 			
 	return res
 	
+
+
+@profile('get_site_context')
 def get_site_context(s, request):
 	res = {}
 	
@@ -652,7 +656,6 @@ def get_site_context(s, request):
 			res['js'] = 'shows-show-episodes.js'
 			
 			res['eps'] = Episode.objects.filter(show=sh, episodetype="E").order_by('-date')
-			res['sh'] = sh
 			res['sectiontitle'] = u'Эпизоды'
 			
 			if len(s) == 5:
@@ -664,7 +667,6 @@ def get_site_context(s, request):
 			res['js'] = 'shows-show-episodes.js'
 			
 			res['eps'] = Episode.objects.filter(show=sh, episodetype="I").order_by('-date')
-			res['sh'] = sh
 			res['sectiontitle'] = u'Выпуски'
 			
 			if len(s) == 5:

@@ -11,3 +11,13 @@ default_db = {
 		"init_command": "SET foreign_key_checks = 0;"
 	}
 }
+
+default_cache = {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'OPTIONS': {
+            'MAX_ENTRIES': 5000,
+            'KEY_PREFIX': '21channel',
+            'TIMEOUT': 60*60
+        }
+    }

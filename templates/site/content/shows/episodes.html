@@ -1,8 +1,12 @@
 {% load episode_extras %}
+{% load cache %}
+
 {% include 'site/content/shows/episodes/watch.html' %}
 
+
+{% cache 300 show.id s %}
 <div class="span12">
-	<h1>{{ sh.title }}: {{ sectiontitle }}</h1>
+	<h1>{{ show.title }}: {{ sectiontitle }}</h1>
 </div>
 <div id="episodes-list">
 	<div class="row">
@@ -20,3 +24,4 @@
 		{% endfor %}
 	</div>
 </div>
+{% endcache %}

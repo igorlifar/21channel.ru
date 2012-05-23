@@ -1,8 +1,10 @@
-from local_settings import root_dir, default_db
+from local_settings import root_dir, default_db, default_cache
 
 
 def rel(path):
     return root_dir + path
+
+PROFILE_LOG_BASE = rel('profiling/')
 
 # Django settings for channel21 project.
 
@@ -17,6 +19,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': default_db
+}
+
+CACHES = {
+    'default': default_cache
 }
 
 # Local time zone for this installation. Choices can be found here:

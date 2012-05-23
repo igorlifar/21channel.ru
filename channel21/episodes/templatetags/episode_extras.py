@@ -3,25 +3,18 @@ from django import template
 register = template.Library()
 
 @register.filter
-def screenshot(value):
-	return value.video.get_screen_shot()
+def screenshot(episode):
+	return episode.get_screenshot()
 
 @register.filter
-def player(value, arg):
+def player(episode, arg):
 	dim = arg.split('x')
 	
-	return value.video.get_player(dim[0], dim[1])
+	return episode.get_video().get_player(dim[0], dim[1])
 	
 @register.filter
-def link(value):
-	if not value.show == None:
-		if value.episodetype == 'I':
-			return "/shows/" + str(value.show.id) + "/issues/watch/" + str(value.id) + "/"
-		if value.episodetype == 'E':
-			return "/shows/" + str(value.show.id) + "/episodes/watch/" + str(value.id) + "/"
-		return "/shows/" + str(value.show.id) + "/promo/watch/" + str(value.id) + "/"
-	else:
-		return "/episode/" + str(value.id) + "/"
+def link(episode):
+	return episode.get_link()
 
 @register.filter
 def backlink(value):
