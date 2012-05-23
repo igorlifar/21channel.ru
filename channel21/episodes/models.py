@@ -3,7 +3,6 @@ from shows.models import *
 import datetime
 from django.core.cache import cache
 from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 # Create your models here.
 
@@ -89,18 +88,21 @@ class Episode(models.Model):
 
 		return link
 
-@receiver(post_save, sender=Video)
 def video_cache_post_save(sender, **kwargs):
     video = kwargs['instance']
     for episode in video.video.all():
     	episode.clear_cache()
 
+post_save.connect(video_cache_post_save, sender=Video, dispatch_uid="video_cache_post_save")
+
+
     
-@receiver(post_save, sender=Episode)
 def episode_cache_post_save(sender, **kwargs):
     episode = kwargs['instance']
     episode.clear_cache()
 
+
+post_save.connect(episode_cache_post_save, sender=Episode, dispatch_uid="episode_cache_post_save")
 
 
 
