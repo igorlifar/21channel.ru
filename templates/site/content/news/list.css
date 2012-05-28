@@ -46,6 +46,12 @@
 	margin-top: 5px;
 }
 
+#news li .view {
+	position : absolute;
+	right : 0px;
+	bottom : 0px;
+}
+
 #news li .view a {
 	display: block;
 	color: #AD0100;
@@ -54,7 +60,6 @@
 	text-transform: uppercase;
 	font-family: 'PT Sans Narrow', sans-serif;
 	text-decoration: none;
-	width: 280px;
 }
 
 #news li:last-child {
