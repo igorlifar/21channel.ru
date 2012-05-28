@@ -1,5 +1,47 @@
+{% load episode_extras %}
+
 <div class="row">
+	
 	<div class="span12" id="page">
 		{{ page.title }}
 	</div>
+	
+	<div class="span6" style="width : 465px; margin-bottom : 10px; margin-left : 8px; margin-right : 5px; background: #444;">
+		<div class="watch-list">
+			<h2>Последние новости</h2>
+			<div class="episodes-list-scroll">
+				<ul>
+					{% for n in lastnews %}
+						<li>
+							<a href="/news/{{ n.id }}"><img src="{{ media }}{{ n.image }}"></a>
+							<div>
+								<h3>{{ n.title }}</h3>
+								<p>{{ n.preview }}</p>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="span6" style="width : 465px; margin-left : 5px; background : #444;">
+		<div class="watch-list">
+			<h2>Последние видео</h2>
+			<div class="episodes-list-scroll">
+				<ul>
+					{% for ep in lastepisodes %}
+						<li>
+							<a href="{{ ep|link }}"><img src="{{ ep|screenshot }}"></a>
+							<div>
+								<h3>{{ ep.title }}</h3>
+								<p>{{ ep.description }}</p>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+	
 </div>

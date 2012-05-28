@@ -46,19 +46,14 @@
 	margin-top: 5px;
 }
 
-#news li .view {
-	display: none;
-}
-
 #news li .view a {
 	display: block;
 	color: #AD0100;
-	font-size: 56px;
-	padding-top: 20px;
+	font-size: 20px;
+	padding-top : 10px;
 	text-transform: uppercase;
 	font-family: 'PT Sans Narrow', sans-serif;
 	text-decoration: none;
-	text-align: center;
 	width: 280px;
 }
 
