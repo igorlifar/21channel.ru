@@ -569,6 +569,9 @@ def get_site_context(s, request):
 		res['css'] = 'site.css'
 		res['js'] = 'site.js'
 		
+		res["lastepisodes"] = Episode.objects.order_by('-date')[:20]
+		res["lastnews"] = NewsItem.objects.order_by('-date')[:20]
+		
 	if s[0] == 'archive':
 		if len(s) == 1 or s[1] == 'list':
 			res['css'] = 'archive-list.css'
