@@ -697,43 +697,51 @@ def get_site_context(s, request):
 	
 	ls = LocalSettings.objects.get(region = request.location)
 	
-	localshows = [
-		{
-			"title" : ls.show1.title,
-			"schedule" : ls.show1.schedule,
-			"description" : ls.show1.description,
-			"image" : "/media_files/" + ls.show1.illustration.url,
-			'id': ls.show1.id
-		},
-		{
-			"title" : ls.show2.title,
-			"schedule" : ls.show2.schedule,
-			"description" : ls.show2.description,
-			"image" : "/media_files/" + ls.show2.illustration.url,
-			'id': ls.show2.id
-		},
-		{
-			"title" : ls.show3.title,
-			"schedule" : ls.show3.schedule,
-			"description" : ls.show3.description,
-			"image" : "/media_files/" + ls.show3.illustration.url,
-			'id': ls.show3.id
-		},
-		{
-			"title" : ls.show4.title,
-			"schedule" : ls.show4.schedule,
-			"description" : ls.show4.description,
-			"image" : "/media_files/" + ls.show4.illustration.url,
-			'id': ls.show4.id
-		},
-		{
-			"title" : ls.show5.title,
-			"schedule" : ls.show5.schedule,
-			"description" : ls.show5.description,
-			"image" : "/media_files/" + ls.show5.illustration.url,
-			'id': ls.show5.id
-		}	
-	]
+	localshows = []
+	
+	if request.location.is_default:
+		localshows = shows
+	else:
+		if ls.show1 != None:
+			localshows.append({
+				"title" : ls.show1.title,
+				"schedule" : ls.show1.schedule,
+				"description" : ls.show1.description,
+				"image" : "/media_files/" + ls.show1.illustration.url,
+				'id': ls.show1.id
+			})
+		if ls.show2 != None:
+			localshows.append({
+				"title" : ls.show2.title,
+				"schedule" : ls.show2.schedule,
+				"description" : ls.show2.description,
+				"image" : "/media_files/" + ls.show2.illustration.url,
+				'id': ls.show2.id
+			})
+		if ls.show3 != None:
+			localshows.append({
+				"title" : ls.show3.title,
+				"schedule" : ls.show3.schedule,
+				"description" : ls.show3.description,
+				"image" : "/media_files/" + ls.show3.illustration.url,
+				'id': ls.show3.id
+			})
+		if ls.show4 != None:
+			localshows.append({
+				"title" : ls.show4.title,
+				"schedule" : ls.show4.schedule,
+				"description" : ls.show4.description,
+				"image" : "/media_files/" + ls.show4.illustration.url,
+				'id': ls.show4.id
+			})
+		if ls.show5 != None:
+			localshows.append({
+				"title" : ls.show5.title,
+				"schedule" : ls.show5.schedule,
+				"description" : ls.show5.description,
+				"image" : "/media_files/" + ls.show5.illustration.url,
+				'id': ls.show5.id
+			})
 	
 	res["shows"] = json.dumps(shows)
 	res["localshows"] = json.dumps(localshows)
