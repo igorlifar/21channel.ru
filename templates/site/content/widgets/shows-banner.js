@@ -1,6 +1,7 @@
 var currentSlide;
 var sliderInterval;
 var nextSlide;
+var shows;
 
 $(document).ready(function(){
 	
@@ -20,7 +21,7 @@ $(document).ready(function(){
 		}
 		$("#cross-menu li").removeClass("active");
 		$(this).addClass("active");
-		showContent();
+		showContent(false);
 	})
 	
 	$("#show-car-btn2").click(function() {
@@ -29,7 +30,7 @@ $(document).ready(function(){
 		}
 		$("#cross-menu li").removeClass("active");
 		$(this).addClass("active");
-		showContent();
+		showContent(true);
 	})
 	
 } );
@@ -48,11 +49,54 @@ function showVideo(){
 	});
 }
 
-function showContent(){
+function showContent(local){
 	if($("#video-cont").data("lock")){
 		return;
 	}
 	$("#video-cont").data("lock", true);
+	if(local){
+		shows = local_shows;
+	}
+	else{
+		shows = default_shows;
+	}
+	html = "";
+	for(var i = 0; i < shows.length; i++){
+			html += "<div class=\"slider-show\" num=\"" + i + "\">";
+			html += "<img src=\"" + shows[i].image + "\">";
+			html += "<div class=\"slider-show-title\" style=\"background : none repeat scroll 0% 0% " + background_color[i] + ";\">" + shows[i].title + "</div>";
+			html += "</div>";
+	}
+	
+	set_cont(0);
+	
+	currentSlide = $(".slider-list").children().eq(0);
+	currentSlide.children().eq(0).css("padding-left", "0px");
+	currentSlide.children().eq(1).css("width", "102px");
+	
+	$(".slider-show").click(function(){
+		window.location.href = "/shows/" + shows[$(this).attr("num")].id + "/";
+	});
+	
+	$(".slider-show").mouseenter(function(){
+			clearInterval(sliderInterval);
+			var container = $(this);
+			if(container == currentSlide){
+					return;
+			}
+			currentSlide.children().eq(0).css("padding-left", "5px");
+			currentSlide.children().eq(1).css("width", "97px");
+			currentSlide = container;
+			currentSlide.children().eq(0).css("padding-left", "0px");
+			currentSlide.children().eq(1).css("width", "102px");
+			$(".slider-content").css("background", currentSlide.children().eq(1).css("background-color") + " url(" + currentSlide.children().eq(0).attr("src") + ") no-repeat"); 
+			$(".slider-title").html(shows[currentSlide.attr("num")].title);
+			$(".slider-link").attr("href", "/shows/" + shows[currentSlide.attr("num")].id + "/")
+			$(".slider-schedule").html(shows[currentSlide.attr("num")].schedule);
+			$(".slider-description").html(shows[currentSlide.attr("num")].description);
+			sliderInterval = setInterval(nextSlide, 10000);
+	});
+	
 	loadContainer($("#video-vid"), "", function(){
 		$("#video-car").css("display", "block");
 		$("#video-car").animate({
@@ -108,24 +152,33 @@ function loadVideo(container){
 	});
 }
 
+var background_color;
+
+var set_cont = function(i) {
+	$(".slider-list").html(html);
+	$(".slider-content").css("background", background_color[i] + " url(" + shows[i].image + ") no-repeat");
+	$(".slider-title").html(shows[i].title);
+	$(".slider-schedule").html(shows[i].schedule);
+	$(".slider-description").html(shows[i].description);
+	$(".slider-link").attr("href", "/shows/" + shows[i].id + "/");
+};
+
 $(document).ready(function(){
+		
+		$("#change-location").click(function(){
+			$("#location-form").submit();
+		});
+	
+		shows = default_shows;
         background_color = new Array("rgb(47, 49, 56)", "rgb(40, 39, 30)", "rgb(52, 3, 54)", "rgb(16, 19, 27)", "rgb(28, 37, 38)");
-        html = "";
+        
+		html = "";
         for(var i = 0; i < shows.length; i++){
 				html += "<div class=\"slider-show\" num=\"" + i + "\">";
 				html += "<img src=\"" + shows[i].image + "\">";
                 html += "<div class=\"slider-show-title\" style=\"background : none repeat scroll 0% 0% " + background_color[i] + ";\">" + shows[i].title + "</div>";
                 html += "</div>";
-        }
-        
-        var set_cont = function(i) {
-			$(".slider-list").html(html);
-			$(".slider-content").css("background", background_color[i] + " url(" + shows[i].image + ") no-repeat");
-			$(".slider-title").html(shows[i].title);
-			$(".slider-schedule").html(shows[i].schedule);
-			$(".slider-description").html(shows[i].description);
-			$(".slider-link").attr("href", "/shows/" + shows[i].id + "/");
-		};
+		}
         
 		set_cont(0);
 		

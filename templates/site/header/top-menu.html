@@ -1,6 +1,16 @@
-<div id="top-search-form">
-	<input type="text" placeholder="Поиск по сайту...">
-	<button></button>
+{% load url from future %}
+
+<div id="top-location-form">
+	<form id="location-form" action="{% url 'geoip_change_location' %}" method="POST">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ pageurl }}">
+		<select name="location_id">
+			{% for r in regions %}
+				<option value="{{ r.id }}"{% if r.id == region.id %} selected="selected"{% endif %}>{{ r.name }}</option>
+			{% endfor %}
+		</select>
+		<div id="change-location">Изменить</div>
+	</form>
 </div>
 
 <ul>

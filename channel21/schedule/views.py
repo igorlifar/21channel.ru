@@ -47,7 +47,7 @@ def create_program(request):
 					errors["starttime"] = True
 					errors["finishtime"] = True
 				else:
-					for program in Program.objects.filter(dayofweek = data["dayofweek"]):
+					for program in Program.objects.filter(dayofweek = data["dayofweek"], region = None):
 						time3 = program.starttime.split(":")
 						time4 = program.finishtime.split(":")
 						h3 = int(time3[0])
@@ -71,6 +71,89 @@ def create_program(request):
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 	except:
 		return redirect("/")
+
+def create_localprogram(request):
+	try:
+		values = {}
+		errors = {}
+		data = {}
+		evaluate_integer_field(request, "dayofweek", 0, 6, data, values, errors)
+		evaluate_char_field(request, "title", 1000, data, values, errors)
+		evaluate_char_field(request, "description", 10000, data, values, errors)
+		evaluate_char_field(request, "starttime", 100, data, values, errors)
+		evaluate_char_field(request, "finishtime", 100, data, values, errors)
+		if "regionid" in request.POST:
+			try:
+				regionid = int(request.POST["regionid"])
+				regions = geoLocation.objects.filter(id = regionid)
+				if regions.count() != 0:
+					data["region"] = regions[0]
+					values["regionid"] = regionid
+					errors["regionid"] = False
+				else:
+					values["regionid"] = ""
+					errors["regionid"] = True
+			except:
+				values["regionid"] = ""
+				errors["regionid"] = True
+		else:
+			values["regionid"] = ""
+			errors["regionid"] = True
+		if len(data) == 6:
+			time1 = data["starttime"].split(":")
+			if len(time1) != 2:
+				errors["starttime"] = True
+			time2 = data["finishtime"].split(":")
+			if len(time2) != 2:
+				errors["finishtime"] = True
+			if len(time1) == 2 and len(time2) == 2:
+				bad = False
+				try:
+					h1 = int(time1[0])
+					m1 = int(time1[1])
+					h2 = int(time2[0])
+					m2 = int(time2[1])
+				except:
+					bad = True
+					h1 = 0
+					m1 = 0
+					h2 = 0
+					m2 = 0
+				val1 = h1 * 60 + m1
+				val2 = h2 * 60 + m2
+				if val1 > val2:
+					val2 = val2 + 24 * 60
+				for t in range(val1 + 1, val2):
+					if t == 5 * 60 or t == 29 * 60:
+						bad = True
+				if bad:
+					errors["starttime"] = True
+					errors["finishtime"] = True
+				else:
+					for program in Program.objects.filter(dayofweek = data["dayofweek"], region = data["region"]):
+						time3 = program.starttime.split(":")
+						time4 = program.finishtime.split(":")
+						h3 = int(time3[0])
+						m3 = int(time3[1])
+						h4 = int(time4[0])
+						m4 = int(time4[1])
+						val3 = h3 * 60 + m3
+						val4 = h4 * 60 + m4
+						if val3 > val4:
+							val4 = val4 + 24 * 60
+						l = max(val1, val3)
+						r = min(val2, val4)
+						if l < r:
+							bad = True
+					if bad:
+						errors["starttime"] = True
+						errors["finishtime"] = True
+					else:
+						newprogram = Program.objects.create(title = data["title"], description = data["description"], dayofweek = data["dayofweek"], starttime = data["starttime"], finishtime = data["finishtime"], region = data["region"])
+						return redirect(request.POST["redirect_good_url"])
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
+	except:
+		return redirect("/")
 		
 def delete_program(request):
 	try:
@@ -89,7 +172,7 @@ def update_program(request):
 		if "programid" in request.POST:
 			programid = int(request.POST["programid"])
 			programs = Program.objects.filter(id = programid)
-			if programs.count() != 0:
+			if programs.count() != 0 and programs[0].region == None:
 				program = programs[0]
 				values = {}
 				errors = {}
@@ -130,7 +213,7 @@ def update_program(request):
 							errors["starttime"] = True
 							errors["finishtime"] = True
 						else:
-							for cprogram in Program.objects.filter(dayofweek = data["dayofweek"]):
+							for cprogram in Program.objects.filter(dayofweek = data["dayofweek"], region = None):
 								if cprogram.id != program.id:
 									time3 = program.starttime.split(":")
 									time4 = program.finishtime.split(":")
@@ -160,4 +243,101 @@ def update_program(request):
 				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
 		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"programid" : True}})))
 	except:
-		return redirect("/")	
+		return redirect("/")
+		
+def update_localprogram(request):
+	try:
+		if "programid" in request.POST:
+			programid = int(request.POST["programid"])
+			programs = Program.objects.filter(id = programid)
+			if programs.count() != 0 and programs[0].region != None:
+				program = programs[0]
+				values = {}
+				errors = {}
+				data = {}
+				evaluate_integer_field(request, "dayofweek", 0, 6, data, values, errors)
+				evaluate_char_field(request, "title", 1000, data, values, errors)
+				evaluate_char_field(request, "description", 10000, data, values, errors)
+				evaluate_char_field(request, "starttime", 100, data, values, errors)
+				evaluate_char_field(request, "finishtime", 100, data, values, errors)
+				if "regionid" in request.POST:
+					try:
+						regionid = int(request.POST["regionid"])
+						regions = geoLocation.objects.filter(id = regionid)
+						if regions.count() != 0:
+							data["region"] = regions[0]
+							print data["region"].region.name
+							values["regionid"] = regionid
+							errors["regionid"] = False
+						else:
+							values["regionid"] = ""
+							errors["regionid"] = False
+					except:
+						values["regionid"] = ""
+						errors["regionid"] = True
+				else:
+					values["regionid"] = ""
+					errors["regionid"] = True
+				if len(data) == 6:
+					time1 = data["starttime"].split(":")
+					if len(time1) != 2:
+						errors["starttime"] = True
+					time2 = data["finishtime"].split(":")
+					if len(time2) != 2:
+						errors["finishtime"] = True
+					if len(time1) == 2 and len(time2) == 2:
+						bad = False
+						try:
+							h1 = int(time1[0])
+							m1 = int(time1[1])
+							h2 = int(time2[0])
+							m2 = int(time2[1])
+						except:
+							bad = True
+							h1 = 0
+							m1 = 0
+							h2 = 0
+							m2 = 0
+						val1 = h1 * 60 + m1
+						val2 = h2 * 60 + m2
+						if val1 > val2:
+							val2 = val2 + 24 * 60
+						for t in range(val1 + 1, val2):
+							if t == 5 * 60 or t == 29 * 60:
+								bad = True
+						if bad:
+							errors["starttime"] = True
+							errors["finishtime"] = True
+						else:
+							for cprogram in Program.objects.filter(dayofweek = data["dayofweek"], region = data["region"]):
+								if cprogram.id != program.id:
+									time3 = program.starttime.split(":")
+									time4 = program.finishtime.split(":")
+									h3 = int(time3[0])
+									m3 = int(time3[1])
+									h4 = int(time4[0])
+									m4 = int(time4[1])
+									val3 = h3 * 60 + m3
+									val4 = h4 * 60 + m4
+									if val3 > val4:
+										val4 = val4 + 24 * 60
+									l = max(val1, val3)
+									r = min(val2, val4)
+									if l < r:
+										bad = True
+							if bad:
+								errors["starttime"] = True
+								errors["finishtime"] = True
+							else:
+								program.title = data["title"]
+								program.description = data["description"]
+								program.starttime = data["starttime"]
+								program.finishtime = data["finishtime"]
+								program.dayofweek = data["dayofweek"]
+								program.region = data["region"]
+								program.save()
+								return redirect(request.POST["redirect_good_url"] + "?success")
+				return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : values, "errors" : errors})))
+		return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"values" : {}, "errors" : {"programid" : True}})))
+	except:
+		return redirect("/")

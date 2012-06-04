@@ -77,6 +77,21 @@ def delete_show(request):
 				for mainsettings in MainSettings.objects.filter(show5 = cshow):
 					mainsettings.show5 = None
 					mainsettings.save()
+				for localsettings in LocalSettings.objects.filter(show1 = cshow):
+					localsettings.show1 = None
+					localsettings.save()
+				for localsettings in LocalSettings.objects.filter(show2 = cshow):
+					localsettings.show2 = None
+					localsettings.save()
+				for localsettings in LocalSettings.objects.filter(show3 = cshow):
+					localsettings.show3 = None
+					localsettings.save()
+				for localsettings in LocalSettings.objects.filter(show4 = cshow):
+					localsettings.show4 = None
+					localsettings.save()
+				for localsettings in LocalSettings.objects.filter(show5 = cshow):
+					localsettings.show5 = None
+					localsettings.save()
 				if cshow.background.__nonzero__():
 					cshow.background.delete()
 				if cshow.illustration.__nonzero__():

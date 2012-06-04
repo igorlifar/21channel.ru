@@ -6,6 +6,7 @@ from archive.models import Archive
 from schedule.models import Program
 from mainsettings.models import MainSettings
 from staticpages.models import Category, Page
+from geolocation.models import geoLocation
 
 def get_panel_section(request):
 	path = request.path.strip('/').split('/')
@@ -23,6 +24,9 @@ def get_panel_section(request):
 				
 			if path[2] == 'edit':
 				return ['settings', 'edit']
+				
+			if path[2] == 'edit-local':
+				return ['settings', 'edit-local']
 		
 		if path[1] == 'news':
 		
@@ -161,7 +165,11 @@ def get_panel_section(request):
 				return ['schedule', 'add']
 				
 			if path[2] == 'edit':
-				if len(path) == 3 or Program.objects.filter(id = path[3]).count() == 0:
+				if len(path) == 3:
+					raise Http404
+				
+				programs = Program.objects.filter(id = path[3])
+				if programs.count() == 0 or programs[0].region != None:
 					raise Http404
 				
 				return ['schedule', 'edit', path[3]]
@@ -169,6 +177,22 @@ def get_panel_section(request):
 			if path[2] == 'delete-check':
 				return ['schedule', 'delete-check']
 
+			if path[2] == 'local':
+				return ['schedule', 'local']
+				
+			if path[2] == 'local-add':
+				return ['schedule', 'local-add']
+				
+			if path[2] == 'local-edit':
+				if len(path) == 3:
+					raise Http404
+				
+				programs = Program.objects.filter(id = path[3])
+				if programs.count() == 0 or programs[0].region == None:
+					raise Http404
+				
+				return ['schedule', 'local-edit', path[3]]
+				
 		if path[1] == 'pages':
 			if len(path) == 2 or path[2] == 'list':
 				return ['pages', 'list']
@@ -182,6 +206,16 @@ def get_panel_section(request):
 			if path[2] == 'delete-check':
 				return ['pages', 'delete-check']
 		
+		if path[1] == 'regions':
+			if len(path) == 2 or path[2] == 'list':
+				return ['regions', 'list']
+			
+			if path[2] == 'add':
+				return ['regions', 'add']
+				
+			if path[2] == 'delete-check':
+				return ['regions', 'delete-check']
+				
 	raise Http404
 	
 def get_site_section(request):

@@ -1,0 +1,61 @@
+<form class="form-horizontal" action="/panel/schedule/local-add/send/" method="POST">
+{% csrf_token %}
+	<legend>Добавление программы</legend>
+	<fieldset>
+		<input type="hidden" name="redirect_good_url" value="/panel/schedule/local/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/schedule/local-add/">
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title" value="{{ fs.values.title }}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.description %} error{% endif %}">
+			<label class="control-label">Описание</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="description" style="height: 80px;">{{ fs.values.description }}</textarea>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.starttime %} error{% endif %}">
+			<label class="control-label">Время начала</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="starttime" value="{{ fs.values.starttime }}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.finishtime %} error{% endif %}">
+			<label class="control-label">Время конца</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="finishtime" value="{{ fs.values.finishtime }}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.dayofweek %} error{% endif %}">
+			<label class="control-label">День недели</label>
+			<div class="controls">
+				<select name="dayofweek">
+					<option value="-1"></option>
+					<option value="0"{% if fs.values.dayofweek == 0 %} selected="selected"{% endif %}>Понедельник</option>
+					<option value="1"{% if fs.values.dayofweek == 1 %} selected="selected"{% endif %}>Вторник</option>
+					<option value="2"{% if fs.values.dayofweek == 2 %} selected="selected"{% endif %}>Среда</option>
+					<option value="3"{% if fs.values.dayofweek == 3 %} selected="selected"{% endif %}>Четверг</option>
+					<option value="4"{% if fs.values.dayofweek == 4 %} selected="selected"{% endif %}>Пятница</option>
+					<option value="5"{% if fs.values.dayofweek == 5 %} selected="selected"{% endif %}>Суббота</option>
+					<option value="6"{% if fs.values.dayofweek == 6 %} selected="selected"{% endif %}>Воскресенье</option>
+				</select>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.regionid %} error{% endif %}">
+			<label class="control-label">Регион</label>
+			<div class="controls">
+				<select name="regionid">
+					<option value="-1"></option>
+					{% for r in regions %}
+						<option value="{{ r.id }}"{% if r.id == fs.values.regionid %} selected="selected"{% endif %}>{{ r.name }}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Добавить</button>
+	</div>
+</form>

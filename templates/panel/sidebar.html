@@ -2,8 +2,8 @@
 	<ul class="nav nav-list">
 		<li class="nav-header">Действия</li>
 		
-		{% if s.0 == "news" or s.0 == 'episodes' or s.0 == 'archive' or s.0 == 'shows' or s.0 == 'schedule' or s.0 == 'pages' %}
-			{% if s.1 == "list" or s.1 == 'add' or s.1 == 'edit'%}
+		{% if s.0 == "news" or s.0 == 'episodes' or s.0 == 'archive' or s.0 == 'shows' or s.0 == 'schedule' or s.0 == 'pages' or s.0 == 'regions' %}
+			{% if s.1 == "list" or s.1 == 'add' or s.1 == 'edit' or s.1 == "local" %}
 				<li{% if s.1 == 'list' %} class="active" {% endif %}><a href="/panel/{{ s.0 }}/list/"><i class="{% if s.1 == 'list' %}icon-white {% endif %}icon-list"></i>Список
 					{% if s.0 == 'news' %}новостей{% endif %}
 					{% if s.0 == 'archive' %}категорий{% endif %}
@@ -11,6 +11,7 @@
 					{% if s.0 == 'episodes' %}эпизодов{% endif %}
 					{% if s.0 == 'schedule' %}программ{% endif %}
 					{% if s.0 == 'pages' %}страниц{% endif %}
+					{% if s.0 == 'regions' %}регионов{% endif %}
 					</a></li>
 				<li{% if s.1 == 'add' %} class="active" {% endif %}><a href="/panel/{{ s.0 }}/add/"><i class="{% if s.1 == 'add' %}icon-white {% endif %}icon-file"></i>Добавить
 					{% if s.0 == 'news' %}новость{% endif %}
@@ -19,8 +20,13 @@
 					{% if s.0 == 'episodes' %}эпизод{% endif %}
 					{% if s.0 == 'schedule' %}программу{% endif %}
 					{% if s.0 == 'pages' %}страницу{% endif %}
+					{% if s.0 == 'regions' %}регион{% endif %}
 					</a></li>
 			{% endif %}
+		{% endif %}
+		{% if s.0 == "schedule" %}
+			<li{%  if s.1 == "local" %} class="active" {% endif %}><a href="/panel/{{ s.0 }}/local/"><i class="{% if s.1 == "local" %}icon-white {% endif %}icon-list"></i>Список программ для регионов</a></li>
+			<li{% if s.1 == "local-add" %} class="active" {% endif %}><a href="/panel/{{ s.0 }}/local-add/"><i class="{% if s.1 == "local-add" %}icon-white {% endif %}icon-file"></i>Добавить программу для региона</a></li>
 		{% endif %}
 		{% if s.0 == "shows" %}
 			{% if s.1 == "edit" or s.1 == "edit-shot" or s.1 == "edit-meta" or s.1 == "edit-article" or s.1 == "list-shots" or s.1 == "add-shot" or s.1 == "list-articles" or s.1 == "add-article" or s.1 == "list-meta" or s.1 == "add-meta" %}

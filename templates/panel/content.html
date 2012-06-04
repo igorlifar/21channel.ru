@@ -1,3 +1,4 @@
+
 {% if s.0 == 'index' %}
 	{% include 'panel/content/index.html' %}
 {% endif %}
@@ -8,6 +9,9 @@
 	{% endif %}
 	{% if s.1 == 'edit' %}
 		{% include 'panel/content/settings-edit.html' %}
+	{% endif %}
+	{% if s.1 == 'edit-local' %}
+		{% include 'panel/content/settings-edit-local.html' %}
 	{% endif %}
 {% endif %}
 {% if s.0 == 'news' %}
@@ -137,6 +141,15 @@
 	{% if s.1 == 'edit' %}
 		{% include 'panel/content/schedule-edit.html' %}
 	{% endif %}
+	{% if s.1 == 'local' %}
+		{% include 'panel/content/schedule-local.html' %}
+	{% endif %}
+	{% if s.1 == 'local-add' %}
+		{% include 'panel/content/schedule-local-add.html' %}
+	{% endif %}
+	{% if s.1 == 'local-edit' %}
+		{% include 'panel/content/schedule-local-edit.html' %}
+	{% endif %}
 {% endif %}
 
 {% if s.0 == 'pages' %}
@@ -151,5 +164,17 @@
 	{% endif %}
 	{% if s.1 == 'edit' %}
 		{% include 'panel/content/pages/edit.html' %}
+	{% endif %}
+{% endif %}
+
+{% if s.0 == 'regions' %}
+	{% if s.1 == 'delete-check' %}
+		{% include 'panel/content/regions-delete.html' %}
+	{% endif %}
+	{% if s.1 == 'list' %}
+		{% include 'panel/content/regions-list.html' %}
+	{% endif %}
+	{% if s.1 == 'add' %}
+		{% include 'panel/content/regions-add.html' %}
 	{% endif %}
 {% endif %}

@@ -1,0 +1,117 @@
+{% if region == None %}
+	<form class="form-horizontal" action="/panel/settings/edit-local/" method="GET">
+		<legend>Выберите регион</legend>
+		<fieldset>
+			<div class="control-group">
+				<label class="control-label">Регион</label>
+				<div class="controls">
+					<select name="regionid">
+						<option value="-1"></option>
+						{% for r in regions %}
+							<option value="{{ r.id }}">{{ r.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Выбрать</button>
+		</div>
+	</form>
+{% else %}
+	<form class="form-horizontal" action="/panel/settings/edit-local/send/" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<legend>Местные шоу для {{ region.name }}</legend>
+		<fieldset>
+			{% csrf_token %}
+			<input type="hidden" name="redirect_good_url" value="/panel/settings/edit-local/">
+			<input type="hidden" name="redirect_bad_url" value="/panel/settings/edit-local/">
+			<input type="hidden" name="regionid" value="{{ region.id }}">
+			{% if fs != None %}
+				<div class="alert alert-error">Форма заполнена с ошибками</div>
+			{% else %}
+				{% if success %}
+					<div class="alert alert-success">Данные успешно сохранены</div>
+				{% endif %}
+			{% endif %}
+			<div class="control-group">
+				<label class="control-label">Шоу №1</label>
+				<div class="controls">
+					<select name="showid1">
+						<option value="-1"></option>
+						{% for show in shows %}
+							{% if fs == None %}
+								<option value="{{ show.id }}"{% if show == region.show1 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% else %}
+								<option value="{{ show.id }}"{% if show.id == fs.values.showid1 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Шоу №2</label>
+				<div class="controls">
+					<select name="showid2">
+						<option value="-1"></option>
+						{% for show in shows %}
+							{% if fs == None %}
+								<option value="{{ show.id }}"{% if show == region.show2 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% else %}
+								<option value="{{ show.id }}"{% if show.id == fs.values.showid2 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Шоу №3</label>
+				<div class="controls">
+					<select name="showid3">
+						<option value="-1"></option>
+						{% for show in shows %}
+							{% if fs == None %}
+								<option value="{{ show.id }}"{% if show == region.show3 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% else %}
+								<option value="{{ show.id }}"{% if show.id == fs.values.showid3 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Шоу №4</label>
+				<div class="controls">
+					<select name="showid4">
+						<option value="-1"></option>
+						{% for show in shows %}
+							{% if fs == None %}
+								<option value="{{ show.id }}"{% if show == region.show4 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% else %}
+								<option value="{{ show.id }}"{% if show.id == fs.values.showid4 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Шоу №5</label>
+				<div class="controls">
+					<select name="showid5">
+						<option value="-1"></option>
+						{% for show in shows %}
+							{% if fs == None %}
+								<option value="{{ show.id }}"{% if show == region.show5 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% else %}
+								<option value="{{ show.id }}"{% if show.id == fs.values.showid5 %} selected="selected"{% endif %}>{{ show.title }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Редактировать</button>
+		</div>
+	</form>
+{% endif %}

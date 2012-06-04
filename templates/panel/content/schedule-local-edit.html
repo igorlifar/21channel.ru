@@ -1,0 +1,83 @@
+<form class="form-horizontal" action="/panel/schedule/local-edit/send/" method="POST">
+{% csrf_token %}
+	<legend>Редактирование программы</legend>
+	<fieldset>
+		<input type="hidden" name="programid" value="{{ program.id }}">
+		<input type="hidden" name="redirect_good_url" value="/panel/schedule/local-edit/{{ program.id }}/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/schedule/local-edit/{{ program.id }}/">
+		{% if fs != None %}
+			<div class="alert alert-error">Форма заполнена с ошибками</div>
+		{% else %}
+			{% if success %}
+				<div class="alert alert-success">Данные успешно сохранены</div>
+			{% endif %}
+		{% endif %}
+		<div class="control-group{% if fs.errors.title %} error{% endif %}">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="title" value="{% if fs == None %}{{ program.title }}{% else %}{{ fs.values.title }}{% endif %}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.description %} error{% endif %}">
+			<label class="control-label">Описание</label>
+			<div class="controls">
+				<textarea class="input-xlarge" name="description" style="height: 80px;">{% if fs == None %}{{ program.description }}{% else %}{{ fs.values.description }}{% endif %}</textarea>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.starttime %} error{% endif %}">
+			<label class="control-label">Время начала</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="starttime" value="{% if fs == None %}{{ program.starttime }}{% else %}{{ fs.values.starttime }}{% endif %}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.finishtime %} error{% endif %}">
+			<label class="control-label">Время конца</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" name="finishtime" value="{% if fs == None %}{{ program.finishtime }}{% else %}{{ fs.values.finishtime }}{% endif %}">
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.dayofweek %} error{% endif %}">
+			<label class="control-label">День недели</label>
+			<div class="controls">
+				<select name="dayofweek" style="width : 100px;">
+					<option value="-1"></option>
+					{% if fs == None %}
+						<option value="0"{% if program.dayofweek == 0 %} selected="selected"{% endif %}>Понедельник</option>
+						<option value="1"{% if program.dayofweek == 1 %} selected="selected"{% endif %}>Вторник</option>
+						<option value="2"{% if program.dayofweek == 2 %} selected="selected"{% endif %}>Среда</option>
+						<option value="3"{% if program.dayofweek == 3 %} selected="selected"{% endif %}>Четверг</option>
+						<option value="4"{% if program.dayofweek == 4 %} selected="selected"{% endif %}>Пятница</option>
+						<option value="5"{% if program.dayofweek == 5 %} selected="selected"{% endif %}>Суббота</option>
+						<option value="6"{% if program.dayofweek == 6 %} selected="selected"{% endif %}>Воскресенье</option>
+					{% else %}
+						<option value="0"{% if fs.values.dayofweek == 0 %} selected="selected"{% endif %}>Понедельник</option>
+						<option value="1"{% if fs.values.dayofweek == 1 %} selected="selected"{% endif %}>Вторник</option>
+						<option value="2"{% if fs.values.dayofweek == 2 %} selected="selected"{% endif %}>Среда</option>
+						<option value="3"{% if fs.values.dayofweek == 3 %} selected="selected"{% endif %}>Четверг</option>
+						<option value="4"{% if fs.values.dayofweek == 4 %} selected="selected"{% endif %}>Пятница</option>
+						<option value="5"{% if fs.values.dayofweek == 5 %} selected="selected"{% endif %}>Суббота</option>
+						<option value="6"{% if fs.values.dayofweek == 6 %} selected="selected"{% endif %}>Воскресенье</option>
+					{% endif %}
+				</select>
+			</div>
+		</div>
+		<div class="control-group{% if fs.errors.regionid %} error{% endif %}">
+			<label class="control-label">Регион</label>
+			<div class="controls">
+				<select name="regionid">
+					<option value="-1"></option>
+					{% for r in regions %}
+						{% if fs == None %}
+							<option value="{{ r.id }}"{% if program.region.id == r.id %} selected="selected"{% endif %}>{{ r.name }}</option>
+						{% else %}
+							<option value="{{ r.id }}"{% if fs.values.regionid == r.id %} selected="selected"{% endif %}>{{ r.name }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Редактировать</button>
+	</div>
+</form>

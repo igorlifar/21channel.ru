@@ -12,7 +12,8 @@
 <link rel="stylesheet" type="text/css" href="{{ static }}flowplayer/flowstyle.css">
 <link rel="stylesheet" type="text/css" href="{{ static }}gallery.css">
 <script type="text/javascript">
-	var shows = {{ shows|safe }};
+	var default_shows = {{ shows|safe }};
+	var local_shows = {{ localshows|safe }};
 	var programs = {{ programs|safe }};
 	
 	// Google Analytics

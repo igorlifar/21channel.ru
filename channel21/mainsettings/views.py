@@ -112,3 +112,99 @@ def update_settings(request):
 		return redirect(request.POST["redirect_good_url"] + "?success")
 	except:
 		return redirect("/")
+		
+		
+def update_localsettings(request):
+	
+	try:
+		if "regionid" in request.POST:
+			regionid = int(request.POST["regionid"])
+			regions = geoLocation.objects.filter(id = regionid)
+			if regions.count() != 0:
+				region = regions[0]
+				localsettings = LocalSettings.objects.get(region = region)
+				values = {}
+				errors = {}
+				data = {}
+				errors["showid1"] = False
+				if "showid1" in request.POST:
+					try:
+						showid = int(request.POST["showid1"])
+						if showid == -1:
+							data["showid1"] = None
+						else:
+							shows = Show.objects.filter(id = showid)
+							if shows.count() != 0:
+								data["showid1"] = shows[0]
+						errors["showid1"] = False
+					except:
+						errors["showid1"] = True
+				errors["showid2"] = False
+				if "showid2" in request.POST:
+					try:
+						showid = int(request.POST["showid2"])
+						if showid == -1:
+							data["showid2"] = None
+						else:
+							shows = Show.objects.filter(id = showid)
+							if shows.count() != 0:
+								data["showid2"] = shows[0]
+						errors["showid2"] = False
+					except:
+						errors["showid2"] = True
+				errors["showid3"] = False
+				if "showid3" in request.POST:
+					try:
+						showid = int(request.POST["showid3"])
+						if showid == -1:
+							data["showid3"] = None
+						else:
+							shows = Show.objects.filter(id = showid)
+							if shows.count() != 0:
+								data["showid3"] = shows[0]
+						errors["showid3"] = False
+					except:
+						errors["showid3"] = True
+				errors["showid4"] = False
+				if "showid4" in request.POST:
+					try:
+						showid = int(request.POST["showid4"])
+						if showid == -1:
+							data["showid4"] = None
+						else:
+							shows = Show.objects.filter(id = showid)
+							if shows.count() != 0:
+								data["showid4"] = shows[0]
+						errors["showid4"] = False
+					except:
+						errors["showid4"] = True
+				errors["showid5"] = False
+				if "showid5" in request.POST:
+					try:
+						showid = int(request.POST["showid5"])
+						if showid == -1:
+							data["showid5"] = None
+						else:
+							shows = Show.objects.filter(id = showid)
+							if shows.count() != 0:
+								data["showid5"] = shows[0]
+						errors["showid5"] = False
+					except:
+						errors["showid5"] = True
+				if "showid1" in data:
+					localsettings.show1 = data["showid1"]
+				if "showid2" in data:
+					localsettings.show2 = data["showid2"]
+				if "showid3" in data:
+					localsettings.show3 = data["showid3"]
+				if "showid4" in data:
+					localsettings.show4 = data["showid4"]
+				if "showid5" in data:
+					localsettings.show5 = data["showid5"]
+				localsettings.save()
+				return redirect(request.POST["redirect_good_url"] + "?regionid=" + str(regionid) + "&success")
+		else:
+			return redirect(request.POST["redirect_bad_url"] + "?formstate=" + quote(json.dumps({"errors" : {"regionid" : True}, "values" : {}})))
+	except:
+		return redirect("/")
+		

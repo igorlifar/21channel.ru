@@ -5,7 +5,7 @@ from episodes.models import Episode
 from shows.models import Show, Shot, Article, MetaItem
 from archive.models import Archive
 from schedule.models import Program
-from mainsettings.models import MainSettings
+from mainsettings.models import MainSettings, LocalSettings
 from urllib import unquote, quote
 import json
 from django.http import Http404
@@ -13,11 +13,14 @@ from mainsettings.models import MainSettings
 from comments.models import *
 from staticpages.models import Category, Page
 from profiling import profile
+from geolocation.models import *
+from django_geoip.models import *
+from django_geoip.views import *
 
 def get_panel_context(s, request):
 
 	res = {
-		"static": "/static_files/"
+		"static": "/static_files/",
 	}
 	
 	if request.user.is_anonymous():
@@ -56,6 +59,41 @@ def get_panel_context(s, request):
 						except:
 							raise Http404
 		
+				if s[1] == 'edit-local':
+					if "regionid" in request.GET:
+						try:
+							region = geoLocation.objects.get(id = request.GET["regionid"])
+							lsettings = LocalSettings.objects.get(region = region)
+							res["region"] = {
+								"id" : region.id,
+								"name" : region.region.name,
+								"show1" : lsettings.show1,
+								"show2" : lsettings.show2,
+								"show3" : lsettings.show3,
+								"show4" : lsettings.show4,
+								"show5" : lsettings.show5,
+							}
+						except:
+							res["region"] = None
+					regions = geoLocation.objects.all()
+					res["regions"] = []
+					for r in regions:
+						current = {
+							"id" : r.id,
+							"name" : r.region.name
+						}
+						res["regions"].append(current)
+					res["shows"] = Show.objects.all()
+					
+					if "success" in request.GET:
+						res["success"] = True
+						
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Http404
+			
 		if s[0] == 'news':
 			if len(s) >= 2:
 				
@@ -401,7 +439,73 @@ def get_panel_context(s, request):
 						{"id" : 6, "title" : u"Воскресенье"}
 					]
 					for day in res["week"]:
-						day["programs"] = Program.objects.filter(dayofweek = day["id"])
+						day["programs"] = Program.objects.filter(dayofweek = day["id"], region = None)
+						
+				if s[1] == 'local':
+					res["week"] = [
+						{"id" : 0, "title" : u"Понедельник"}, 
+						{"id" : 1, "title" : u"Вторник"}, 
+						{"id" : 2, "title" : u"Среда"},
+						{"id" : 3, "title" : u"Четверг"},
+						{"id" : 4, "title" : u"Пятница"},
+						{"id" : 5, "title" : u"Суббота"},
+						{"id" : 6, "title" : u"Воскресенье"}
+					]
+					if "regionid" in request.GET:
+						try:
+							region = geoLocation.objects.get(id = request.GET["regionid"])
+							res["region"] = {
+								"id" : region.id,
+								"name" : region.region.name
+							}
+							for day in res["week"]:
+								day["programs"] = Program.objects.filter(dayofweek = day["id"], region = region)
+						except:
+							res["region"] = None
+						
+					res["regions"] = []
+					for r in geoLocation.objects.all():
+						current = {
+							"id" : r.id,
+							"name" : r.region.name
+						}
+						res["regions"].append(current)
+						
+				if s[1] == 'local-add':
+					
+					res["regions"] = []
+					for r in geoLocation.objects.all():
+						current = {
+							"id" : r.id,
+							"name" : r.region.name
+						}
+						res["regions"].append(current)
+					
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Htpp404
+						
+				if s[1] == 'local-edit':
+					res["program"] = Program.objects.get(id = s[2])
+					
+					res["regions"] = []
+					for r in geoLocation.objects.all():
+						current = {
+							"id" : r.id,
+							"name" : r.region.name
+						}
+						res["regions"].append(current)
+					
+					if "success" in request.GET:
+						res["success"] = True
+						
+					if "formstate" in request.GET:
+						try:
+							res["fs"] = json.loads(unquote(request.GET["formstate"]))
+						except:
+							raise Http404
 						
 				if s[1] == 'edit':
 					res["program"] = Program.objects.get(id = s[2])
@@ -444,7 +548,7 @@ def get_panel_context(s, request):
 						res["programid"] = request.GET["programid"]
 					if "redirect_url" in request.GET:
 						res["redirect_url"] = request.GET["redirect_url"]
-						
+					
 		if s[0] == 'pages':
 			
 			if s[1] == 'list':
@@ -482,12 +586,50 @@ def get_panel_context(s, request):
 				if "redirect_url" in request.GET:
 					res["redirect_url"] = request.GET["redirect_url"]
 			
+		if s[0] == 'regions':
+			
+			if s[1] == 'list':
+				res["regions"] = []
+				for r in geoLocation.objects.all():
+					current = {
+						"id" : r.id,
+						"name" : r.region.name,
+						"is_default" : r.is_default
+					}
+					res["regions"].append(current)
+					
+			if s[1] == 'add':
+				res["allregions"] = []
+				for r in Region.objects.all():
+					if geoLocation.objects.filter(region = r).count() != 0:
+						continue
+					current = {
+						"id" : r.id,
+						"name" : r.name
+					}
+					res["allregions"].append(current)
+			
+				if "formstate" in request.GET:
+					try:
+						res["fs"] = json.loads(unquote(request.GET["formstate"]))
+					except:
+						raise Http404
+			
+			if s[1] == 'delete-check':
+				res["regionid"] = ""
+				res["redirect_url"] = ""
+				if "regionid" in request.GET:
+					res["regionid"] = request.GET["regionid"]
+				if "redirect_url" in request.GET:
+					res["redirect_url"] = request.GET["redirect_url"]
+			
 	return res
 	
 
 
 @profile('get_site_context')
 def get_site_context(s, request):
+	
 	res = {}
 	
 	res['request'] = request
@@ -502,6 +644,18 @@ def get_site_context(s, request):
 		pass
 		
 	ms = MainSettings.objects.all()[0]
+	res["regions"] = []
+	for r in geoLocation.objects.all():
+		current = {
+			"id" : r.id,
+			"name" : r.region.name
+		}
+		res["regions"].append(current)
+	res["region"] = {
+		"id" : request.location.id,
+		"name" : request.location.region.name
+	}
+	res["pageurl"] = request.path
 	res["background"] = ms.background
 	shows = [
 		{
@@ -541,13 +695,59 @@ def get_site_context(s, request):
 		}
 	]
 	
+	ls = LocalSettings.objects.get(region = request.location)
+	
+	localshows = [
+		{
+			"title" : ls.show1.title,
+			"schedule" : ls.show1.schedule,
+			"description" : ls.show1.description,
+			"image" : "/media_files/" + ls.show1.illustration.url,
+			'id': ls.show1.id
+		},
+		{
+			"title" : ls.show2.title,
+			"schedule" : ls.show2.schedule,
+			"description" : ls.show2.description,
+			"image" : "/media_files/" + ls.show2.illustration.url,
+			'id': ls.show2.id
+		},
+		{
+			"title" : ls.show3.title,
+			"schedule" : ls.show3.schedule,
+			"description" : ls.show3.description,
+			"image" : "/media_files/" + ls.show3.illustration.url,
+			'id': ls.show3.id
+		},
+		{
+			"title" : ls.show4.title,
+			"schedule" : ls.show4.schedule,
+			"description" : ls.show4.description,
+			"image" : "/media_files/" + ls.show4.illustration.url,
+			'id': ls.show4.id
+		},
+		{
+			"title" : ls.show5.title,
+			"schedule" : ls.show5.schedule,
+			"description" : ls.show5.description,
+			"image" : "/media_files/" + ls.show5.illustration.url,
+			'id': ls.show5.id
+		}	
+	]
+	
 	res["shows"] = json.dumps(shows)
+	res["localshows"] = json.dumps(localshows)
 	
 	programs = []
 	
 	for i in range(0, 7):
 		programs.append([])
-		for program in Program.objects.filter(dayofweek = i):
+		lst = []
+		if request.location.is_default:
+			lst = Program.objects.filter(dayofweek = i, region = None)
+		else:
+			lst = Program.objects.filter(dayofweek = i, region = request.location)
+		for program in lst:
 			cur1 = program.starttime.split(":")
 			cur2 = program.finishtime.split(":")
 			h1 = int(cur1[0])
@@ -688,3 +888,4 @@ def get_site_context(s, request):
 	
 	
 	return res
+	

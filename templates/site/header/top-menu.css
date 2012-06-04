@@ -28,10 +28,10 @@
 }
 
 #top-menu li a:hover {
-color: #ad0100;
-      }
+	color: #ad0100;
+}
 
-#top-search-form {
+#top-location-form {
 	float: right;
 	position: relative;
 	width: 200px;
@@ -39,27 +39,18 @@ color: #ad0100;
 	height: 40px;
 }
 
-#top-search-form input {
-	border: 0;
-	background: white;
-	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px;
-	height: 20px;
-	top: 1px;
-	position: absolute;
-	width: 169px;
+#top-location-form select {
+	border-radius : 0px;
+	float : left;
+	width : 120px;
 }
 
-#top-search-form button {
-	cursor: pointer;
-	background: url({{ img }}bg-search-button.png);
-	border: 0;
-	width: 24px;
-	height: 23px;
-	position: absolute;
-	left: 170px;
-}
-
-#top-search-form button:hover {
-	background-position: -24px;
+#change-location {
+	cursor : pointer;
+	float : right;
+	font-family: 'PT Sans Narrow', sans-serif!important;
+	font-weight : bold;
+	color : #FFFFFF;
+	margin-right : 10px;
+	margin-top : 3px;
 }

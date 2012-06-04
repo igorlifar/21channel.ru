@@ -1,0 +1,20 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Регион</th>
+			<th>По умолчанию</th>
+			<th>Действия</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for r in regions %}
+			<tr>
+				<td>{{ r.name }}</td>
+				<td>{% if r.is_default %}Да{% endif %}</td>
+				<td style="width: 200px;">
+					<a href="/panel/regions/delete-check/?regionid={{ r.id }}&redirect_url=/panel/regions/list/" class="btn btn-danger">Удалить</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

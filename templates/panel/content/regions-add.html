@@ -1,0 +1,22 @@
+<form class="form-horizontal" action="/panel/regions/add/send/" method="POST">
+{% csrf_token %}
+	<legend>Добавление региона</legend>
+	<fieldset>
+		<input type="hidden" name="redirect_good_url" value="/panel/regions/list/">
+		<input type="hidden" name="redirect_bad_url" value="/panel/regions/add/">
+		<div class="control-group{% if fs.errors.regionid %} error{% endif %}">
+			<label class="control-label">Заголовок</label>
+			<div class="controls">
+				<select name="regionid">
+					<option value="-1"></option>
+					{% for r in allregions %}
+						<option value="{{ r.id }}"{% if fs != None and fs.values.regionid == r.id %} selected="selected"{% endif %}>{{ r.name }}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Добавить</button>
+	</div>
+</form>

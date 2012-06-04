@@ -10,7 +10,8 @@
 					<li{% if s.0 == 'archive' %} class="active"{% endif %}><a href="/panel/archive/">Видеоархив</a></li>
 					<li{% if s.0 == 'news' %} class="active"{% endif %}><a href="/panel/news/">Новости</a></li>
 					<li{% if s.0 == 'schedule' %} class="active"{% endif %}><a href="/panel/schedule/">Расписание</a></li>
-					<li{% if s.0 == 'pages' %} class="pages"{% endif %}><a href="/panel/pages/">Страницы</a></li>
+					<li{% if s.0 == 'pages' %} class="active"{% endif %}><a href="/panel/pages/">Страницы</a></li>
+					<li{% if s.0 == 'regions' %} class="active"{% endif %}><a href="/panel/regions/">Регионы</a></li>
 				</ul>
 				<ul class="nav pull-right">
 					<li><a href="/panel/logout/">Выход ({{ user.name }})</a></li>
