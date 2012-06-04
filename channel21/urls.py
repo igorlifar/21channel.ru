@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 	url(r'^panel/logout/', 'profiles.views.logout_panel'),
 	
 	url(r'^panel/settings/edit/send/$', 'mainsettings.views.update_settings'),
+	url(r'^panel/settings/edit-local/send/$', 'mainsettings.views.update_localsettings'),
 	
 	url(r'^panel/news/delete/$', 'news.views.delete_news_item'),
 	url(r'^panel/news/edit/send/$', 'news.views.update_news_item'),
@@ -50,16 +51,23 @@ urlpatterns = patterns('',
 	url(r'^panel/schedule/add/send/$', 'schedule.views.create_program'),
 	url(r'^panel/schedule/delete/$', 'schedule.views.delete_program'),
 	url(r'^panel/schedule/edit/send/$', 'schedule.views.update_program'),
+	url(r'^panel/schedule/local-add/send/$', 'schedule.views.create_localprogram'),
+	url(r'^panel/schedule/local-edit/send/$', 'schedule.views.update_localprogram'),
 	
 	url(r'^panel/pages/add/send/$', 'staticpages.views.create_page'),
 	url(r'^panel/pages/delete/$', 'staticpages.views.delete_page'),
 	url(r'^panel/pages/edit/send/$', 'staticpages.views.update_page'),
+	
+	url(r'^panel/regions/add/send/$', 'geolocation.views.add_location'),
+	url(r'^panel/regions/delete/$', 'geolocation.views.delete_location'),
 	
 	url(r'^styles/', include('styles.urls')),
 	url(r'^scripts/', include('scripts.urls')),
     
 	url(r'^static_files/(?P<path>.*)$',  'django.views.static.serve', {'document_root': rel('static/') }),
 	url(r'^media_files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': rel('media/') }),
+    
+    url(r'^geoip/', include('django_geoip.urls')),
     
 	url(r'^django-admin/', include(admin.site.urls)),
 	url(r'', include('pages.urls')),
