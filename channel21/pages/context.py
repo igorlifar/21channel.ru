@@ -657,43 +657,52 @@ def get_site_context(s, request):
 	}
 	res["pageurl"] = request.path
 	res["background"] = ms.background
-	shows = [
-		{
+	shows = []
+	if ms.show1 != None:
+		current = {
 			"title" : ms.show1.title,
 			"schedule" : ms.show1.schedule,
 			"description" : ms.show1.description,
-			"image" : "/media_files/" + ms.show1.illustration.url,
+			"image" : ms.show1.illustration.url,
 			'id': ms.show1.id
-		},
-		{
+		}
+		shows.append(current)
+	if ms.show2 != None:
+		current = {
 			"title" : ms.show2.title,
 			"schedule" : ms.show2.schedule,
 			"description" : ms.show2.description,
-			"image" : "/media_files/" + ms.show2.illustration.url,
+			"image" : ms.show2.illustration.url,
 			'id': ms.show2.id
-		},
-		{
+		}
+		shows.append(current)
+	if ms.show3 != None:
+		current = {
 			"title" : ms.show3.title,
 			"schedule" : ms.show3.schedule,
 			"description" : ms.show3.description,
-			"image" : "/media_files/" + ms.show3.illustration.url,
+			"image" : ms.show3.illustration.url,
 			'id': ms.show3.id
-		},
-		{
+		}
+		shows.append(current)
+	if ms.show4 != None:
+		current = {
 			"title" : ms.show4.title,
 			"schedule" : ms.show4.schedule,
 			"description" : ms.show4.description,
-			"image" : "/media_files/" + ms.show4.illustration.url,
+			"image" : ms.show4.illustration.url,
 			'id': ms.show4.id
-		},
-		{
+		}
+		shows.append(current)
+	if ms.show5 != None:
+		current = {
 			"title" : ms.show5.title,
 			"schedule" : ms.show5.schedule,
 			"description" : ms.show5.description,
-			"image" : "/media_files/" + ms.show5.illustration.url,
+			"image" : ms.show5.illustration.url,
 			'id': ms.show5.id
 		}
-	]
+		shows.append(current)
 	
 	ls = LocalSettings.objects.get(region = request.location)
 	
@@ -707,7 +716,7 @@ def get_site_context(s, request):
 				"title" : ls.show1.title,
 				"schedule" : ls.show1.schedule,
 				"description" : ls.show1.description,
-				"image" : "/media_files/" + ls.show1.illustration.url,
+				"image" : ls.show1.illustration.url,
 				'id': ls.show1.id
 			})
 		if ls.show2 != None:
@@ -715,7 +724,7 @@ def get_site_context(s, request):
 				"title" : ls.show2.title,
 				"schedule" : ls.show2.schedule,
 				"description" : ls.show2.description,
-				"image" : "/media_files/" + ls.show2.illustration.url,
+				"image" : ls.show2.illustration.url,
 				'id': ls.show2.id
 			})
 		if ls.show3 != None:
@@ -723,7 +732,7 @@ def get_site_context(s, request):
 				"title" : ls.show3.title,
 				"schedule" : ls.show3.schedule,
 				"description" : ls.show3.description,
-				"image" : "/media_files/" + ls.show3.illustration.url,
+				"image" : ls.show3.illustration.url,
 				'id': ls.show3.id
 			})
 		if ls.show4 != None:
@@ -731,7 +740,7 @@ def get_site_context(s, request):
 				"title" : ls.show4.title,
 				"schedule" : ls.show4.schedule,
 				"description" : ls.show4.description,
-				"image" : "/media_files/" + ls.show4.illustration.url,
+				"image" : ls.show4.illustration.url,
 				'id': ls.show4.id
 			})
 		if ls.show5 != None:
@@ -739,7 +748,7 @@ def get_site_context(s, request):
 				"title" : ls.show5.title,
 				"schedule" : ls.show5.schedule,
 				"description" : ls.show5.description,
-				"image" : "/media_files/" + ls.show5.illustration.url,
+				"image" : ls.show5.illustration.url,
 				'id': ls.show5.id
 			})
 	
